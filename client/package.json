@@ -2,6 +2,7 @@
   "name": "project_chat_application",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "firebase": "^7.17.2",
     "query-string": "^6.13.1",
