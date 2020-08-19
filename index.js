@@ -3,6 +3,8 @@ const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
 const app = express();
+const mongoose = require("mongoose");
+const Room = require("./models/roomModel");
 
 //added by Chris
 
@@ -21,6 +23,13 @@ const app = express();
 // });
 
 //end
+
+//Mongoose connections
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly",
+{useNewUrlParser: true, useUnifiedTopology: true});
+
+
+
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
