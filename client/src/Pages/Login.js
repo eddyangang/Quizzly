@@ -54,7 +54,7 @@ Password
 <button type="submit">Log in</button>
 </form> */}
               <br />
-              <a href="/signup">Create a new Account</a>
+              <center><a href="/signup">Create a new Account</a></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
           </div>
