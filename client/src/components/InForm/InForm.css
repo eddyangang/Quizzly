@@ -1,0 +1,29 @@
+label {
+    color: rgba(157, 157, 157, 0.866);
+    font-size: large;
+}
+
+.container, containter-fluid {
+    position: relative;
+}
+
+.form-control {
+    color: rgb(0, 0, 0);
+    border-bottom: 1px solid rgba(172, 109, 75, 0.674);
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    background-color: #ffffff;
+    text-shadow: blueviolet;
+    background-clip: padding-box;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #000000;
+    border-color: #ffffff;
+}
+
+button:hover {
+    background-color: rgba(172, 109, 75, 0.674) !important;
+    transition-duration: .7s;
+}
