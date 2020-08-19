@@ -3,7 +3,6 @@ import { withRouter } from "react-router";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { firebase , uiConfig} from "../firebaseConfig"
-import Navbar from "../components/Navbar/Navbar";
 import InForm from "../components/InForm/InForm";
 // import { auth } from "firebase";
 // import Home from "./Home";
@@ -36,7 +35,6 @@ const SignUp = ({ history }) => {
   return (
 
     <div>
-      <Navbar />
       <div className="container-fluid mt-5">
         <div className="row">
           <div className="col-lg-3"></div>
