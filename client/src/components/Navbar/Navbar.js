@@ -1,6 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 
+<<<<<<< HEAD
 const Navbar = () =>{
     return(
 <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -26,6 +27,18 @@ const Navbar = () =>{
   </div>
 </nav>
     )
+=======
+const Navbar = (props) => {
+  return (
+    <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand">LOGO</a>
+    <form class="form-inline">
+      {/* <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> */}
+      <button class="btn btn-outline-success mr-sm-2 my-2 my-sm-0" type="submit" onClick={props.onClick}>Log Out</button>
+    </form>
+  </nav>
+  )
+>>>>>>> 4b98287190af47669261c60ca787d91296c25990
 }
 
 export default Navbar;
