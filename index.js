@@ -2,12 +2,31 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
+const app = express();
+
+//added by Chris
+
+// const path = require("path");
+// const PORT = process.env.PORT || 3001;
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+// }
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
+// app.listen(PORT, () => {
+//   console.log(`🌎 ==> API server now on port ${PORT}!`);
+// });
+
+//end
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
 const router = require('./router');
 
-const app = express();
+
 const server = http.createServer(app);
 const io = socketio(server);
 
