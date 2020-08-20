@@ -4,6 +4,7 @@ import { firebase, uiConfig } from "../firebaseConfig"
 import { AuthContext } from "../utils/AuthContext.js";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import InForm from "../components/InForm/InForm";
+import './Signup.css';
 
 const Login = ({ history }) => {
   const handleLogin = useCallback(
@@ -40,7 +41,7 @@ const Login = ({ history }) => {
             <div className="jumbotron">
 
 
-              <h1 className="text-center">Log in</h1>
+              <h1 className="text-center">Log In</h1>
               <InForm onSubmit={handleLogin} />
               {/* <form onSubmit={handleLogin}>
 <label>
@@ -54,7 +55,7 @@ Password
 <button type="submit">Log in</button>
 </form> */}
               <br />
-              <a href="/signup">Create a new Account</a>
+              <center><a href="/signup">Create A New Account</a></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
           </div>

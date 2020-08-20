@@ -4,6 +4,8 @@ import { withRouter } from "react-router";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { firebase , uiConfig} from "../firebaseConfig"
 import InForm from "../components/InForm/InForm";
+import './Signup.css';
+
 // import { auth } from "firebase";
 // import Home from "./Home";
 // import Login from "./Login";
@@ -32,6 +34,8 @@ const SignUp = ({ history }) => {
     }
   }, [history]);
 
+
+
   return (
 
     <div>
@@ -42,10 +46,10 @@ const SignUp = ({ history }) => {
             <div className="jumbotron">
 
 
-              <h1 className="text-center">Sign up</h1>
+              <h1>Sign Up</h1>
               <InForm onSubmit={handleSignUp} />
               <br />
-              <a href="/login">Already Have an Account?</a>
+              <center><a href="/login">Already Have An Account?</a></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
           </div>

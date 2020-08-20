@@ -14,7 +14,7 @@ const WordBankContainer = () => {
               Word
             </th>
             <th className="text-center" scope="col-md-4">
-              Defination
+              Definition
             </th>
           </tr>
         </thead>

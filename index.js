@@ -66,6 +66,13 @@ io.on('connect', (socket) => {
     callback();
   });
 
+  socket.on("startGame", callback => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit('startGame', { user: user.name, text: `${user.name} started the game` });
+
+    callback()
+  })
+
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);
 
