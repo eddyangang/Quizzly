@@ -2,11 +2,11 @@ import React from "react";
 
 const WordBankContainer = () => {
   return (
-    <div className="card border-dark mb-3 .text-nowrap table-responsive" style={{ width: "40rem", margin:"10px",padding:"10px"}}>
+    <div className="card border-dark mb-3 text-nowrap table-responsive" style={{ width: "40rem", margin:"10px",padding:"10px"}}>
       <h2>Word Bank</h2>
       <table className="table table-bordered table-fixed">
         <thead>
-          <tr className="table-dark table-info">
+          <tr className="table-dark">
             <th className="text-center " scope="col-md-4">
               Subject
             </th>
@@ -20,9 +20,14 @@ const WordBankContainer = () => {
         </thead>
         <tbody>
           <tr className=  "table-info">
-            <td className="border-dark mb-3">dfgfghfghfghfgh</td>
-            <td className="border-dark mb-3">dfgdfgdfgdfgdfgdfgdfgfghfghfghfgh</td>
-            <td className="border-dark mb-3">adddefinationdfgdfgdfgdfgdfgdfgdfgdfgfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfg</td>
+            <td className=" mb-3">dfgfghfghfghfgh</td>
+            <td className="mb-3">dfgdfgdfgdfgdfgdfgdfgfghfghfghfgh</td>
+            <td className="mb-3">adddefinationdfgdfgdfgdfgdfgdfgdfgdfgfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfg</td>
+          </tr>
+          <tr className=  "table-info">
+            <td className=" mb-3">dfgfghfghfghfgh</td>
+            <td className="mb-3">dfgdfgdfgdfgdfgdfgdfgfghfghfghfgh</td>
+            <td className="mb-3">adddefinationdfgdfgdfgdfgdfgdfgdfgdfgfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfg</td>
           </tr>
         </tbody>
       </table>
