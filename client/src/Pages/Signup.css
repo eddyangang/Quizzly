@@ -14,10 +14,10 @@ html, body {
     background-size:100% 100%;
   }
 
-.jumbotron {
-background-color: white;
-opacity: 92%;
-border: 6px solid rgb(172, 109, 75);
+ .jumbotron {
+    background-color: white;
+    opacity: 92%;
+    border: 6px solid rgb(172, 109, 75);  
   }
 
 a {

@@ -17,16 +17,10 @@ const Home = () => {
       <Navbar onClick={logout} />
       <div className="container-fluid mt-5">
         <div className="row">
-          <div className="col-lg-3"></div>
-          <div className="col-lg-6">
-
-            <h1 className="text-center">Home Page</h1>
             <Router>
               <Route exact path="/" component={Join} />
               <Route path="/room" component={Room} />
             </Router>
-          </div>
-          <div className="col-lg-3"></div>
         </div>
       </div>
     </>
