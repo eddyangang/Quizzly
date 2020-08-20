@@ -1,0 +1,30 @@
+h1 {
+    color: #000000;
+    text-align: center;
+}
+
+html, body {
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background-image: url("https://www.examenoverzicht.nl/pub/media/wysiwyg/Lege_flashcard.jpg");
+    background-attachment: fixed;
+    image-orientation: inherit;
+    background-size:100% 100%;
+  }
+
+.jumbotron {
+background-color: white;
+opacity: 92%;
+border: 6px solid rgb(172, 109, 75);
+  }
+
+a {
+  color: rgb(255, 153, 0);
+}
+
+a:hover {
+  color: rgba(157, 157, 157, 0.866);
+  transition-duration: 1s;
+}
