@@ -25,7 +25,7 @@ const AddWordContainer = () => {
   };
 
   return (
-    <div className="card border-dark mb-3" style={{margin:"10px", width: "40rem", padding:"10px"}}>
+    <div className="card border-dark mb-3" style={{margin:"10px", width: "100rem", padding:"10px"}}>
 <form>
   <div className="form-row">
     <div className="form-group col-md-6">

@@ -4,9 +4,13 @@ import SettingsContainer from "../SettingsContainer/SettingsContainer"
 
 const Room = ({ location }) => {
     return (
-       <div>
-        <SettingsContainer/>   
-        <Chat location = { location }/>
+       <div className="row">
+           <div className="col-md-6">
+                <SettingsContainer/>   
+            </div>
+            <div className="col-md-6">
+                <Chat location = { location }/>
+            </div>
        </div>
     );
 }

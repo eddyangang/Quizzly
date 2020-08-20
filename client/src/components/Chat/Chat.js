@@ -7,7 +7,7 @@ import Messages from "../Messages/Messages";
 import InfoBar from "../InfoBar/InfoBar";
 import Input from "../Input/Input";
 
-import "./Chat.css";
+ import "./Chat.css";
 
 let socket;
 
@@ -54,20 +54,23 @@ const Chat = ({ location }) => {
   };
 
   return (
-    <div className="outerContainer">
-        <div className="container m-2">
+    <div  className="outerContainer">
+      <div className="m-1">
+          <TextContainer users={users} />
+        </div>
+        <div className ="container m-1">
+          
           <InfoBar room={room} />
           <Messages messages={messages} name={name} />
-          <Input
+          <Input 
             message={message}
             setMessage={setMessage}
             sendMessage={sendMessage}
           />
         </div>
-        <div className="container m-2">
-          <TextContainer users={users} />
-        </div>
+        
     </div>
+    
   );
 };
 

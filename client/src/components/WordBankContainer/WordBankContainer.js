@@ -2,7 +2,7 @@ import React from "react";
 
 const WordBankContainer = () => {
   return (
-    <div className="card border-dark mb-3 text-nowrap table-responsive" style={{ width: "40rem", margin:"10px",padding:"10px"}}>
+    <div className="card border-dark mb-3 text-nowrap table-responsive" style={{ width: "100rem", margin:"10px",padding:"10px"}}>
       <h2>Word Bank</h2>
       <table className="table table-bordered table-fixed">
         <thead>
