@@ -1,27 +1,24 @@
 const mongoose = require("mongoose");
-const db = require("../models");
-
+const Room = require("../models/roomModel");
+const User = require("../UserClass")
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-const roomSeed = [{
+const data = {
   hostId: "1",
   roomName: "Terror Dome"
-}];
+}
 
-db.Room.remove({})
-  .then(() => db.Room.collection.insertMany(roomSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+const newUser = new User("eddy", "myRoom", "myid")
+const room = new Room(data)
+room.makeHost("eddy123345")
+room.addUser(newUser)
 
-console.log("hello");
-db.Room.makeHost("abc").then(data => console.log(data))
+
+Room.insertMany(room).then(data => console.log(data)).catch(err => {
+  console.error(err);
+  process.exit(1);
+})
