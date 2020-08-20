@@ -1,24 +1,27 @@
 const mongoose = require("mongoose");
-const db = require("../models/roomModel");
+const db = require("../models");
 
-// This file empties the Posts collection and inserts the books below
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
-const roomSeed = [
-  {
-    hostId: "1",
-    roomName: "Terror Dome"
-  }
-];
+const roomSeed = [{
+  hostId: "1",
+  roomName: "Terror Dome"
+}];
 
-// db.Books.remove({})
-//   .then(() => db.Books.collection.insertMany(bookSeed))
-//   .then(data => {
-//     console.log(data.result.n + " records inserted!");
-//     process.exit(0);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   });
+db.Room.remove({})
+  .then(() => db.Room.collection.insertMany(roomSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+
+console.log("hello");
+db.Room.makeHost("abc").then(data => console.log(data))
