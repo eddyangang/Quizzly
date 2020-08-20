@@ -18,7 +18,7 @@ export default function SignIn() {
           <input type="name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Room Name" onChange={(event) => setName(event.target.value)}/>
         </div>
         <div className="form-group">
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Room Number" onChange={(event) => setRoom(event.target.value)} />
+          <input type="name" className="form-control" id="exampleInputPassword1" placeholder="Room Number" onChange={(event) => setRoom(event.target.value)} />
         </div>
         <Link onClick={e => (!name || !room) ? e.preventDefault() : null} to={`/room?name=${name}&room=${room}`}>
         <center><button type="submit" className="btn purple">Create</button></center>
