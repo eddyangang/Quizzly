@@ -9,14 +9,14 @@ const getList = (users) => {
     return users.map((user) => (
       <li key={user.name} className="activeItem">
         <img className="p-1" alt="Online Icon" src={onlineIcon} />
-        <h5>{user.name}</h5>        
+        <h1>{user.name}</h1>        
       </li>
     ));
   } else return null;
 };
 const TextContainer = ({ users }) => (
-  <div className="card">
-    <div className="card-header bg-primary">Online People Status:</div>
+  <div className="textContainer">
+    <div className="textContainerHeader">Online People Status:</div>
     <ul className="list-group list-group-flush">{getList(users)}</ul>
   </div>
 );

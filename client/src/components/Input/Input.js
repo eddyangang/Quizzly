@@ -2,9 +2,9 @@ import React from 'react';
 import './Input.css';
 
 const Input = ({ setMessage, sendMessage, message }) => (
-  <form className="form">
+  <form style={{position: "relative"}} className="container-fluid form">
     <input
-      className="input text-center bg-light"
+      className="input bg-light"
       type="text"
       placeholder="Type a message..."
       value={message}

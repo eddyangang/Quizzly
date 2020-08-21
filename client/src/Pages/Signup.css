@@ -6,8 +6,7 @@ h1 {
 html, body {
     font-family: 'Roboto', sans-serif;
     padding: 0;
-    margin: 0;
-    overflow: hidden;
+    margin: 0;    
     background-image: url("https://www.examenoverzicht.nl/pub/media/wysiwyg/Lege_flashcard.jpg");
     background-attachment: fixed;
     image-orientation: inherit;

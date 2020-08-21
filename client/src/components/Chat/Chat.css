@@ -1,22 +1,16 @@
-.outerContainer {
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #adadd4;
-}
-
- .container {
-  display: flex;
-  flex-direction: column;
-   flex-basis: 50vh;
+  flex-basis: 50vh;
   overflow-y: auto;
   justify-content: space-between;
   background: #FFFFFF;
   border-radius: 8px;
-  height: 90%;
-  width: 90%;
+  height: 100%;
+  margin-right:0px;  
 } 
+
+
 
 @media (min-width: 320px) and (max-width: 480px) {
   .outerContainer {

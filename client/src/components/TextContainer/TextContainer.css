@@ -1,7 +1,7 @@
 .textContainer {
   display: flex;
   flex-direction: column;
-  margin-left: 100px;
+  margin-left: 10px;
   color: white;
   height: 60%;
   justify-content: space-between;
@@ -23,7 +23,14 @@
 }
 
 .textContainer h1 {
-  margin-bottom: 0px;
+  margin-bottom: 5px;
+  font-size:1.5em;
+}
+
+.textContainerHeader {
+  background:#fbebcf;
+  font-size:2em;
+  width: 100%;
 }
 
 @media (min-width: 320px) and (max-width: 1200px) {

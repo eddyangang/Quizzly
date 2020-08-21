@@ -6,10 +6,11 @@
 .input {
   border: none;
   border-radius: 0;
-  font-size: .98em;
+  font-size: 1em;
   width:100%;
-  background-color: #BEESEB;
+  background-color:grey;
   padding:0px;
+  height:60%;
   
   }
 
@@ -24,10 +25,7 @@ input:focus, textarea:focus, select:focus{
   background: #2979FF;
   display: inline-block;
   border: none;  
-  height: 30px;
-  margin:10px;
-  position:relative;
-  left:8%;
-  bottom:0px;
-  
+  height:50%;
+  margin: 5px;
+   font-size: 1em;
 }
