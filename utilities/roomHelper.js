@@ -108,21 +108,29 @@ function getUsersInRoom(room) {
 module.exports = {
     addUser,
     getUsersInRoom,
-    checkRoomNameExist
+    checkRoomNameExist,
+    getRoomByUserId,
+    removeUserWithId
 }
 
 function getRoomByUserId(id){
-    console.log("LOOKING FOR USER");
+    console.log("LOOKING FOR USER", id);
     return Room.findOne({users: {$elemMatch: {id:id}}}).then(data=> {
-        console.log(data);
+        return data
+    }).catch(err => {
+        throw err
     })
 }
 
-async function test () {
-    const results = await getRoomByUserId("CIAcTLm983zw7upbAAAA")
-    console.log(results);
+function removeUserWithId (id) {
+    return Room.update({}, { $pull: { users: { id:id } } }, { multi: true }).then(data => console.log(data))
 }
-test()
+
+// async function test () {
+//     const results = await getRoomByUserId("PhZYn72WhDV5ELY1AAAA")
+//     console.log(results);
+// }
+// test()
 
 // async function log() {
 //     console.log("calling");

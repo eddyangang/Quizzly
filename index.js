@@ -4,7 +4,7 @@ const socketio = require('socket.io');
 const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
-const { checkRoomNameExist, addUser, getUsersInRoom } = require("./utilities/roomHelper")
+const { checkRoomNameExist, addUser, getUsersInRoom, getRoomByUserId, removeUserWithId } = require("./utilities/roomHelper")
 
 //added by Chris
 
@@ -78,7 +78,7 @@ io.on('connect', (socket) => {
         callback();
       }
       catch(err){
-        console.log(err);
+        throw err
       }
     })();
     
@@ -116,17 +116,34 @@ io.on('connect', (socket) => {
 
   socket.on('disconnect', () => {
     // const user = removeUser(socket.id);
-    console.log("HERE:", socket.id);
-    // if (user) {
-    //   io.to(user.room).emit('message', {
-    //     user: 'Admin',
-    //     text: `${user.name} has left.`
-    //   });
-    //   io.to(user.room).emit('roomData', {
-    //     room: user.room,
-    //     users: getUsersInRoom(user.room)
-    //   });
-    // }
+    (async () => {
+      try{
+        //Find room that user is in.
+        const room = await getRoomByUserId(socket.id)
+        console.log("USERS IN ROOM: ", room.users);
+        // find the user
+        let user = room.users.find(user => {
+          return user.id === socket.id
+        });
+        console.log("FOUND USER:", user);
+        await removeUserWithId(socket.id)
+        if (user) {
+          io.to(user.room).emit('message', {
+            user: 'Admin',
+            text: `${user.name} has left.`
+          });
+          io.to(user.room).emit('roomData', {
+            room: user.room,
+            users: await getUsersInRoom(user.room)
+          });
+        }
+
+
+      }
+      catch(err){
+        throw err
+      }
+    })();
   })
 });
 
