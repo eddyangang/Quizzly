@@ -20,5 +20,5 @@ room.addUser(newUser)
 
 Room.insertMany(room).then(data => console.log(data)).catch(err => {
   console.error(err);
-  process.exit(1);
+  process.exit();
 })
