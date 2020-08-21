@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import './Join.css';
 import '../OpenChatrooms/OpenChatrooms.js';
-
 export default function SignIn() {
-  const [name, setName] = useState('');
-  const [room, setRoom] = useState('');
-
+  const [name, setName] = useState("");
+  const [room, setRoom] = useState("");
   return (
 <div className="container-fluid mt-5">
   <div className="row">
@@ -27,7 +25,6 @@ export default function SignIn() {
      </div> 
     <div className="col-lg-3"></div>
   </div>
-
 </div>
   );
 }
