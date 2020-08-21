@@ -8,16 +8,11 @@ const Room = require("./models/roomModel");
 
 //added by Chris
 
-// const path = require("path");
+const path = require("path");
 // const PORT = process.env.PORT || 3001;
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-// }
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
+
 // app.listen(PORT, () => {
 //   console.log(`🌎 ==> API server now on port ${PORT}!`);
 // });
@@ -79,6 +74,13 @@ io.on('connect', (socket) => {
       io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
     }
   })
+});
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 server.listen(process.env.PORT || 5000, () => console.log(`Server listening on http://localhost:5000.`));
