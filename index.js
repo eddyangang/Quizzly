@@ -29,8 +29,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly",
 {useNewUrlParser: true, useUnifiedTopology: true});
 
 
-
-
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
 const router = require('./router');
@@ -83,4 +81,4 @@ io.on('connect', (socket) => {
   })
 });
 
-server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));
+server.listen(process.env.PORT || 5000, () => console.log(`Server listening on http://localhost:5000.`));

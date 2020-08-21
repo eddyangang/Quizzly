@@ -39,6 +39,15 @@ const RoomSchema = new Schema({
 
 })
 
+RoomSchema.methods.addUser = function(user) {
+    this.users.push(user)
+    return this.users
+}
+RoomSchema.methods.makeHost = function (id) {
+    this.hostId = id;
+    return this.hostId
+}
 
-const Room = mongoose.model("Room",RoomSchema);
+const Room = mongoose.model("Room", RoomSchema);
+
 module.exports = Room;

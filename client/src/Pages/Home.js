@@ -12,12 +12,16 @@ const Home = () => {
 
   return (
     <>
-      <Navbar onClick={logout} />      
-      <div className="container-fluid">        
-          <Router>
-            <Route exact path="/" component={Join} />
-            <Route path="/room" component={Room} />
-          </Router>
+
+      <Navbar onClick={logout} />
+      <div className="container-fluid mt-5">
+        <div className="row">
+            <Router>
+              <Route exact path="/" component={Join} />
+              <Route path="/room" component={Room} />
+            </Router>
+        </div>
+
       </div>
     </>
   );
