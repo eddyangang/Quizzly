@@ -6,11 +6,17 @@ import GameContext from "../../utils/GameContext"
 const SettingsContainer = () => {
     const { handleStartBtn } = useContext(GameContext)
     return(
-       <div>
-            <AddWordContainer/>
+        <div>
+       <div className = "row">
+           <AddWordContainer/>
+        </div>
+        <div className = "row">
             <WordBankContainer/>
-            <button onClick={handleStartBtn}>Start Game</button>
-       </div>
+        </div>
+        <div className="text-center" style={{padding:"10px",margin:"10px"}}>
+            <button className ="btn btn-success btn-lg" onClick={handleStartBtn}>Start Game</button>
+        </div>
+        </div>
     );
 }
 

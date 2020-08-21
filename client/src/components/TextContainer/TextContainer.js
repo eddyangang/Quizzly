@@ -4,7 +4,8 @@ import onlineIcon from '../../icons/onlineIcon.png';
 
 import './TextContainer.css';
 
-const TextContainer = ({ users }) => (
+const TextContainer = ({ users }) => {
+  return(
   <div className="textContainer">
     {
       users
@@ -26,6 +27,10 @@ const TextContainer = ({ users }) => (
         : null
     }
   </div>
-);
+
+  )
+  
+}
+
 
 export default TextContainer;
