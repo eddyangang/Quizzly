@@ -3,6 +3,8 @@ const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
 const app = express();
+const mongoose = require("mongoose");
+const Room = require("./models/roomModel");
 
 //added by Chris
 
@@ -21,6 +23,11 @@ const app = express();
 // });
 
 //end
+
+//Mongoose connections
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly",
+{useNewUrlParser: true, useUnifiedTopology: true});
+
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
@@ -57,6 +64,13 @@ io.on('connect', (socket) => {
     callback();
   });
 
+  socket.on("startGame", callback => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit('startGame', { user: user.name, text: `${user.name} started the game` });
+
+    callback()
+  })
+
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);
 
@@ -67,4 +81,4 @@ io.on('connect', (socket) => {
   })
 });
 
-server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));
+server.listen(process.env.PORT || 5000, () => console.log(`Server listening on http://localhost:5000.`));
