@@ -10,9 +10,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 
-router.get("/", (req, res) => {
-  res.send({ response: "Server is up and running." }).status(200);
-});
+// router.get("/", (req, res) => {
+//   res.send({ response: "Server is up and running." }).status(200);
+// });
 
 
 module.exports = router;
