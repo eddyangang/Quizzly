@@ -3,13 +3,15 @@ import { withRouter, Redirect } from "react-router";
 import { firebase, uiConfig } from "../firebaseConfig"
 import { AuthContext } from "../utils/AuthContext.js";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import Navbar from "../components/Navbar/Navbar";
 import InForm from "../components/InForm/InForm";
+import './Signup.css';
 
 const Login = ({ history }) => {
   const handleLogin = useCallback(
+
     async event => {
       event.preventDefault();
+      console.log("check: ", event)
       const { email, password } = event.target.elements;
       try {
         await firebase
@@ -32,7 +34,6 @@ const Login = ({ history }) => {
   return (
 
     <div>
-      <Navbar />
       <div className="container-fluid mt-5">
         <div className="row">
           <div className="col-lg-3"></div>
@@ -40,7 +41,7 @@ const Login = ({ history }) => {
             <div className="jumbotron">
 
 
-              <h1 className="text-center">Log in</h1>
+              <h1 className="text-center">Log In</h1>
               <InForm onSubmit={handleLogin} />
               {/* <form onSubmit={handleLogin}>
 <label>
@@ -54,7 +55,7 @@ Password
 <button type="submit">Log in</button>
 </form> */}
               <br />
-              <a href="/signup">Create a new Account</a>
+              <center><a href="/signup">Create A New Account</a></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
           </div>

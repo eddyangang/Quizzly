@@ -3,8 +3,9 @@ import { withRouter } from "react-router";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { firebase , uiConfig} from "../firebaseConfig"
-import Navbar from "../components/Navbar/Navbar";
 import InForm from "../components/InForm/InForm";
+import './Signup.css';
+
 // import { auth } from "firebase";
 // import Home from "./Home";
 // import Login from "./Login";
@@ -33,21 +34,20 @@ const SignUp = ({ history }) => {
     }
   }, [history]);
 
+
+
   return (
 
     <div>
-      <Navbar />
       <div className="container-fluid mt-5">
         <div className="row">
           <div className="col-lg-3"></div>
           <div className="col-lg-6">
             <div className="jumbotron">
-
-
-              <h1 className="text-center">Sign up</h1>
+              <h1>Sign Up</h1>
               <InForm onSubmit={handleSignUp} />
               <br />
-              <a href="/login">Already Have an Account?</a>
+              <center><a href="/login">Already Have An Account?</a></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
           </div>
