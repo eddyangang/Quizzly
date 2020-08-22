@@ -37,7 +37,8 @@ const Login = ({ history }) => {
       <div className="container-fluid mt-5">
         <div className="row">
           <div className="col-lg-3"></div>
-            <div className="col-lg-6">
+          <div className="col-lg-6">
+            <div className="jumbotron">
 
 
               <h1 className="text-center">Log In</h1>
@@ -57,6 +58,7 @@ Password
               <center><a href="/signup">Create A New Account</a></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
+          </div>
           <div className="col-lg-3"></div>
         </div>
 
