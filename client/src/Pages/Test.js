@@ -12,7 +12,7 @@ const Test = () => (
           <div className="col-lg-6">
               <h1 className="text-center">Log In</h1>
               <br />
-              {/* <center><a href="/signup">Create A New Account</a></center> */}
+              <center><a href="/signup">Create A New Account</a></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
           </div>
           <div className="col-lg-3"></div>
