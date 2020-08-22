@@ -1,17 +1,22 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
 const { checkRoomNameExist, addUser, getUsersInRoom, getRoomByUserId, removeUserWithId } = require("./utilities/roomHelper")
+
+const router = require('./router');
+
+const server = http.createServer(app);
+const io = socketio(server);
 
 //added by Chris
 
 const path = require("path");
 // const PORT = process.env.PORT || 3001;
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // app.listen(PORT, () => {
 //   console.log(`🌎 ==> API server now on port ${PORT}!`);
@@ -20,15 +25,14 @@ const path = require("path");
 //end
 
 //Mongoose connections
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly",
-{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly",
+// {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
 
-const router = require('./router');
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly");
 
-const server = http.createServer(app);
-const io = socketio(server);
 
-app.use(cors());
+
+// app.use(cors());
 app.use(router);
 
 io.on('connect', (socket) => {
