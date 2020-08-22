@@ -61,7 +61,7 @@ const Room = ({ location }) => {
     }
 
     return (
-       <div>
+      <div className="row">
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
             <SettingsContainer/> 
             <Chat />
@@ -70,4 +70,4 @@ const Room = ({ location }) => {
     );
 }
 
-export default Room
+export default Room;

@@ -44,8 +44,6 @@ const SignUp = ({ history }) => {
           <div className="col-lg-3"></div>
           <div className="col-lg-6">
             <div className="jumbotron">
-
-
               <h1>Sign Up</h1>
               <InForm onSubmit={handleSignUp} />
               <br />

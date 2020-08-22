@@ -29,16 +29,7 @@ const { checkRoomNameExist, addUser, getUsersInRoom, getRoomByUserId, removeUser
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly",
 {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
 
-
-// const {
-//   addUser,
-//   removeUser,
-//   getUser,
-//   getUserInRoom
-// } = require('./users');
-
 const router = require('./router');
-
 
 const server = http.createServer(app);
 const io = socketio(server);

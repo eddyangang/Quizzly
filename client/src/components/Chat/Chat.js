@@ -13,15 +13,22 @@ const Chat = () => {
   const { users, name, room, message, messages, setMessage, sendMessage } = useContext(GameContext)
 
   return (
-    <div className="outerContainer">
-      <div className="container">
-          <InfoBar room={room} />
-          <Messages messages={messages} name={name} />
-          <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
+    <div className="container">
+      <div className="row">
+        <TextContainer users={users} />
       </div>
-      <TextContainer users={users}/>
+      <div style={{height:"50%"}}className="row">
+        <InfoBar room={room} />
+        <div className="list-group list-group-flush"></div>
+        <Messages messages={messages} name={name} />
+        <Input
+          message={message}
+          setMessage={setMessage}
+          sendMessage={sendMessage}
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default Chat;

@@ -25,7 +25,6 @@ function checkRoomNameExist(roomName) {
     }).catch(err => {
         throw err
     })
-
 }
 
 function createNewRoom(username, roomName, id) {
@@ -104,15 +103,6 @@ function getUsersInRoom(room) {
     })
 }
 
-
-module.exports = {
-    addUser,
-    getUsersInRoom,
-    checkRoomNameExist,
-    getRoomByUserId,
-    removeUserWithId
-}
-
 function getRoomByUserId(id){
     console.log("LOOKING FOR USER", id);
     return Room.findOne({users: {$elemMatch: {id:id}}}).then(data=> {
@@ -126,22 +116,19 @@ function removeUserWithId (id) {
     return Room.update({}, { $pull: { users: { id:id } } }, { multi: true }).then(data => console.log(data))
 }
 
+module.exports = {
+    addUser,
+    getUsersInRoom,
+    checkRoomNameExist,
+    getRoomByUserId,
+    removeUserWithId
+}
+
+
 // async function test () {
 //     const results = await getRoomByUserId("PhZYn72WhDV5ELY1AAAA")
 //     console.log(results);
 // }
 // test()
-
-// async function log() {
-//     console.log("calling");
-//     const results = await createNewRoom("Eddy", "testRoom", "123456789")
-//     console.log(results);
-// }
-
-// async function log() {
-//     console.log("calling");
-//     const results = await checkRoomNameExist("myRoom")
-//     console.log(results);
-// }
 
 // log()
