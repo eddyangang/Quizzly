@@ -16,7 +16,6 @@ const Test = () => (
 
 
               <h1 className="text-center">Log In</h1>
-              <InForm/>
               {/* <form onSubmit={handleLogin}>
 <label>
 Email
