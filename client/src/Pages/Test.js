@@ -34,7 +34,6 @@ Password
           </div>
           <div className="col-lg-3"></div>
         </div>
-
       </div>
     </div>
   </div>
