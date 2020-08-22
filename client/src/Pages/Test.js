@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter, Redirect } from "react-router";
 
 
 const Test = () => (
@@ -8,4 +9,4 @@ const Test = () => (
   </div>
 );
 
-export default Test;
+export default withRouter(Test);
