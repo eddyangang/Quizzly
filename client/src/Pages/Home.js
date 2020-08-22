@@ -21,7 +21,6 @@ const Home = () => {
               <Route path="/room" component={Room} />
             </Router>
         </div>
-
       </div>
     </>
   );

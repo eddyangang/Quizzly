@@ -12,7 +12,8 @@ const RoomSchema = new Schema({
     },
     roomName: {
         type: String,
-        required: "Room must have a name"
+        required: "Room must have a unique name",
+        unique: true
     },
     unPlayedWords: {
         type: Array,

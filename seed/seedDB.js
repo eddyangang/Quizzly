@@ -7,18 +7,25 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly", {
   useUnifiedTopology: true
 });
 
-const data = {
+const newRoom = [{
   hostId: "1",
   roomName: "Terror Dome"
-}
+}, {
+  hostId: "2",
+  roomName: "myRoom"
+}]
 
-const newUser = new User("eddy", "myRoom", "myid")
-const room = new Room(data)
-room.makeHost("eddy123345")
-room.addUser(newUser)
+// newRoom.forEach(element => {
+//   const room = new Room(element)
+//   const newUser = new User("eddy", "myRoom", "myid")
+//   room.addUser(newUser)
+//   Room.create(room).then(data => console.log(data)).catch(err => {
+//     console.error(err);
+//     process.exit(1);
+//   })
+// });
 
 
-Room.insertMany(room).then(data => console.log(data)).catch(err => {
-  console.error(err);
-  process.exit(1);
-})
+Room.find({}).then(data => console.log("findAll: ", data))
+
+
