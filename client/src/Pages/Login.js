@@ -67,4 +67,4 @@ Password
   );
 };
 
-export default Login;
+export default withRouter(Login);
