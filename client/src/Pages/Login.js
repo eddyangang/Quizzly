@@ -13,14 +13,14 @@ const Login = ({ history }) => {
       event.preventDefault();
       console.log("check: ", event)
       const { email, password } = event.target.elements;
-      // try {
-      //   // await firebase
-      //     .auth()
-      //     .signInWithEmailAndPassword(email.value, password.value);
-      //   history.push("/");
-      // } catch (error) {
-      //   alert(error);
-      // }
+      try {
+        await firebase
+          .auth()
+          .signInWithEmailAndPassword(email.value, password.value);
+        history.push("/");
+      } catch (error) {
+        alert(error);
+      }
     },
     [history]
   );
@@ -56,7 +56,7 @@ Password
 </form> */}
               <br />
               <center><a href="/signup">Create A New Account</a></center>
-              {/* <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} /> */}
+              <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
           </div>
           <div className="col-lg-3"></div>
