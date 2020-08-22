@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Signup from "./Pages/Signup"
 import Home from "./Pages/Home"
 import Login from "./Pages/Login"
-import Test from "./Pages/Test"
 import { AuthProvider } from "./utils/AuthContext"
 import PrivateRoute from "./utils/PrivateRoute";
 
