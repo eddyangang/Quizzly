@@ -14,11 +14,13 @@ const getList = (users) => {
     ));
   } else return null;
 };
+
 const TextContainer = ({ users }) => (
   <div className="textContainer">
     <div className="textContainerHeader">Online People Status:</div>
     <ul className="list-group list-group-flush">{getList(users)}</ul>
   </div>
-);
+
+)
 
 export default TextContainer;

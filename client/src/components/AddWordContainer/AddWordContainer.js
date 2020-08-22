@@ -26,28 +26,8 @@ const AddWordContainer = () => {
 
   return (
       <form className="card container-fluid">
-        <div className="form-row">
-          <div className="col">
-            <button
-              style={{ background: "#605c55" }}
-              type="submit"
-              class="btn float-right text-white"
-              onClick={(e) => addWord(e)}
-            >
-              Add Word
-            </button>
-          </div>
-          <div className="col">
-            <button
-              style={{ background: "#605c55" }}
-              type="submit"
-              class="btn text-white float-left"
-              onClick={(e) => clear(e)}
-            >
-              Clear
-            </button>
-          </div>
-        </div>
+        <h3>Add a Word</h3>
+        <hr/>
         <div className="form-row">
           <div className="col">
             <label for="subjectinput">Subject</label>
@@ -72,18 +52,40 @@ const AddWordContainer = () => {
             />
           </div>
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="definationinput">Enter the Defination:</label>
           <textarea
-            class="form-control"
+            className="form-control"
             id="definationinput"
             rows="3"
             placeholder="definition"
             value={currentWordDefinition}
             onChange={({ target: { value } }) =>
-              setCurrentWordDefinition(value)
+            setCurrentWordDefinition(value)
             }
           />
+        </div>
+        <div className="form-row">
+          <div className="col">
+            <button
+              style={{ background: "#605c55" }}
+              type="submit"
+              class="btn float-right text-white"
+              onClick={(e) => addWord(e)}
+            >
+              Add Word
+            </button>
+          </div>
+          <div className="col">
+            <button
+              style={{ background: "#605c55" }}
+              type="submit"
+              className="btn text-white float-left"
+              onClick={(e) => clear(e)}
+            >
+              Clear
+            </button>
+          </div>
         </div>
       </form>
   );
