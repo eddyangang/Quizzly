@@ -1,31 +1,26 @@
-import React from 'react';
+import React from "react";
 
-import onlineIcon from '../../icons/onlineIcon.png';
+import onlineIcon from "../../icons/onlineIcon.png";
 
-import './TextContainer.css';
+import "./TextContainer.css";
+
+const getList = (users) => {
+  if (users) {
+    return users.map((user) => (
+      <li key={user.name} className="activeItem">
+        <img className="p-1" alt="Online Icon" src={onlineIcon} />
+        <h1>{user.name}</h1>        
+      </li>
+    ));
+  } else return null;
+};
 
 const TextContainer = ({ users }) => (
   <div className="textContainer">
-    {
-      users
-        ? (
-          <div>
-            <h1>People currently chatting:</h1>
-            <div className="activeContainer">
-              <h2>
-                {users.map(({name}) => (
-                  <div key={name} className="activeItem">
-                    {name}
-                    <img alt="Online Icon" src={onlineIcon}/>
-                  </div>
-                ))}
-              </h2>
-            </div>
-          </div>
-        )
-        : null
-    }
+    <div className="textContainerHeader">Online People Status:</div>
+    <ul className="list-group list-group-flush">{getList(users)}</ul>
   </div>
-);
+
+)
 
 export default TextContainer;
