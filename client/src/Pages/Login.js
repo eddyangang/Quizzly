@@ -37,7 +37,7 @@ const Login = ({ history }) => {
       <div className="container-fluid mt-5">
         <div className="row">
           <div className="col-lg-3"></div>
-            <div className="jumbotron col-lg-6">
+            <div className="col-lg-6">
 
 
               <h1 className="text-center">Log In</h1>
