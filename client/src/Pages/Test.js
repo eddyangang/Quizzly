@@ -6,7 +6,6 @@ import InForm from "../components/InForm/InForm";
 
 
 const Test = () => (
-  <div>
       <div className="container-fluid mt-5">
         <div className="row">
           <div className="col-lg-3"></div>
@@ -21,7 +20,6 @@ const Test = () => (
           <div className="col-lg-3"></div>
         </div>
       </div>
-  </div>
 );
 
 export default withRouter(Test);
