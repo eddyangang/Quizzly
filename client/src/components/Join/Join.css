@@ -65,29 +65,31 @@
 }
 */
 
-.purple {
+/* start */
+
+/* .purple {
   background: rgba(157, 157, 157, 0.866);
   color: white;
-}  
+}   */
 
-#root {
+/* #root {
   height: 100vh;
-}
+} */
 
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
-button:focus {
+/* button:focus {
   outline: 0;
-}
+} */
 
-h1 {
+/* h1 {
   color: #000000;
   text-align: center;
-}
+} */
 
-.room {
+/* .room {
   background-color: white;
   opacity: 92%;
   border: 6px solid rgb(172, 109, 75);
@@ -99,4 +101,4 @@ h1 {
   top: 140px;
   position: absolute;
   
-    }
+    } */
