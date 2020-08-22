@@ -15,17 +15,20 @@ const newRoom = [{
   roomName: "myRoom"
 }]
 
-// newRoom.forEach(element => {
-//   const room = new Room(element)
-//   const newUser = new User("eddy", "myRoom", "myid")
-//   room.addUser(newUser)
-//   Room.create(room).then(data => console.log(data)).catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   })
-// });
+
+Room.collection.drop();
+
+newRoom.forEach(element => {
+  const room = new Room(element)
+  const newUser = new User("eddy", "myRoom", "myid")
+  room.addUser(newUser)
+  Room.create(room).then(data => console.log(data)).catch(err => {
+    console.error(err);
+    process.exit(1);
+  })
+});
 
 
-Room.find({}).then(data => console.log("findAll: ", data))
+// Room.find({}).then(data => console.log("findAll: ", data))
 
 
