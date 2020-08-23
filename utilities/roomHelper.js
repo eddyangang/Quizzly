@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Room = require("../models/roomModel");
 const User = require("../UserClass");
-const users = require("../users");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly", {
     useNewUrlParser: true,
@@ -26,7 +25,7 @@ function checkRoomNameExist(roomName) {
         throw err
     })
 }
-
+// Creates a new room and makes the user host
 function createNewRoom(username, roomName, id) {
     console.log("CREATING A NEW ROOM");
     const newUser = new User(username, roomName, id);
@@ -69,6 +68,7 @@ async function addUser(username, roomName, id) {
                 }
             })
         }
+        // else create a new room since that room doesnt already exist
     } else {
         const Room = await createNewRoom(username, roomName, id)
         console.log("New Room created", Room);
@@ -93,7 +93,7 @@ function checkUsedUsername(usersList, username) {
         return false
     }
 }
-
+// Get all the users for a specific room
 function getUsersInRoom(room) {
     console.log("GETTING ALL USERS");
     return Room.findOne({
@@ -103,6 +103,7 @@ function getUsersInRoom(room) {
     })
 }
 
+// Find the room a user is in by their ID
 function getRoomByUserId(id){
     console.log("LOOKING FOR USER", id);
     return Room.findOne({users: {$elemMatch: {id:id}}}).then(data=> {
@@ -112,6 +113,7 @@ function getRoomByUserId(id){
     })
 }
 
+// Will remove a user from their room given theri ID
 function removeUserWithId (id) {
     return Room.update({}, { $pull: { users: { id:id } } }, { multi: true }).then(data => console.log(data))
 }
