@@ -8,11 +8,11 @@ const Room = ({ location }) => {
     <div>
       <div className="row">
         <div className="col-9">
-          <div style={{height:"70%", width:"70%"}} className="row mt-1 ml-5">
+          <div className="row mt-3 ml-2">
             <AddWordContainer />
             
           </div>
-         <div style={{height:"70%", width:"70%"}} className="row mt-3 ml-5">
+         <div className="row mt-3 ml-2">
             <SettingsContainer />
           </div>
           <div className= "text-center">
@@ -20,7 +20,7 @@ const Room = ({ location }) => {
             </div>
         </div>
       
-          <div style={{position: "fixed", bottom:0, right:0,height:"90%"}} className="col-3 px-1 bg-dark">
+          <div className="col-3 px-1 bg-dark fixed-right" id="sticky-sidebar">
             <Chat location={location} />
           </div>
     </div>
