@@ -67,7 +67,7 @@
 
 /* start */
 
-.purple {
+/* .purple {
   background: rgba(157, 157, 157, 0.866);
   color: white;
 }  
@@ -80,14 +80,14 @@
   box-sizing: border-box;
 } */
 
-button:focus {
+/* button:focus {
   outline: 0;
-}
+} */
 
-h1 {
+/* h1 {
   color: #000000;
   text-align: center;
-}
+} */
 
 /* .room {
   background-color: white;
