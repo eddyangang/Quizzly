@@ -12,7 +12,7 @@ const Room = ({ location }) => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [gameState, setGameState] = useState(false)
-    const ENDPOINT = 'http://localhost:5000';
+    const ENDPOINT = 'http://quizzlyisawesome.herokuapp.com/';
 
     useEffect(() => {
 

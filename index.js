@@ -8,6 +8,7 @@ const { checkRoomNameExist, addUser, getUsersInRoom, getRoomByUserId, removeUser
 
 const router = require('./router');
 
+//boilerplate setup to create an instance of socket.io
 const server = http.createServer(app);
 const io = socketio(server);
 
@@ -38,6 +39,7 @@ if (process.env.NODE_ENV === "production") {
 // app.use(cors());
 app.use(router);
 
+//built in method, runs when we have an instance of client connection
 io.on('connect', (socket) => {
   socket.on('join', ({
     name,
