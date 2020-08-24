@@ -133,26 +133,32 @@ function addWordBank (array, room) {
 }
 // create a function that will remove an element (the first or a random element) from the unpalyed word list and make it the current word
 async function setCurrentWord (room) {
-    const Room = await Room.findOne({roomName: room})
-    if(!Room) return null;
-    const { unPlayedWords, currentWord } = Room;
-    const newCurrentWord = unPlayedWords.pop();
-    if (!newCurrentWord) return console.log("NO MORE WORDS");
-    const update = {
-        $set: {unPlayedWords, currentWord: newCurrentWord}
-    }
-    if (currentWord) {
-        update.$push = {PlayedWords: currentWord}
-    }
+    Room.findOne({roomName: room}).then(foundRoom => {
+        // return null if no room is found
+        if(!Room) return null;
+        const { unPlayedWords, currentWord } = foundRoom;
+        // get a new word from the unPlayedWord list and remove it from the array.
+        const newCurrentWord = unPlayedWords.pop();
+        // If no more words in the array do some stuff
+        if (!newCurrentWord) return console.log("NO MORE WORDS");
+        // update the unPlayedWords list for the room and the currentWord
+        const update = {
+            $set: {unPlayedWords, currentWord: newCurrentWord}
+        }
+        // push the current word into the PlayedWords array
+        if (currentWord.length) {
+            update.$push = {PlayedWords: currentWord}
+        }
 
-    return await Room.updateOne({roomName: room}, update)
+        return Room.findOneAndUpdate({roomName: foundRoom.roomName}, update)
+    }).catch(err => {throw err})
 }
 
 // create a function that will add +1 to the score to a specific user given their ID  
 function addScoreForUser (id) {
-    return Room.updateOne({"users.id": id}, {'$inc': {
-        'users.$.score': 1
-    }})
+    return Room.findOneAndUpdate({"users.id": id}, {'$inc': {
+        "users.$.score": 1
+    }}).then(data => console.log(data)).catch(err => {throw err})
 }
 
 
@@ -162,13 +168,30 @@ module.exports = {
     checkRoomNameExist,
     getRoomByUserId,
     removeUserWithId,
-    addWordBank
+    addWordBank,
+    setCurrentWord,
+    addScoreForUser
 }
+// create a new room with user 
+// function test() {
+//     addUser("Eddy", "myRoom", "1")
+// }
 
-let array = [{word: "trying", definition: "world", subject: "haha"}, {word: "again", definition: "world", subject: "haha"}]
-async function test () {
-    const results = await addWordBank(array, "qwe")
-    console.log("RESULTS:", results);
+// let array = [{word: "trying", definition: "world", subject: "haha"}, {word: "again", definition: "world", subject: "haha"}]
+// async function test () {
+//     const results = await addWordBank(array, "myRoom")
+//     console.log("RESULTS:", results);
+// }
+
+
+// function test () {
+//     const results = setCurrentWord("myRoom")
+//     console.log("RESULTS:", results);
+// }
+
+function test() {
+    addScoreForUser("1")
 }
 test()
+
 
