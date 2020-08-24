@@ -63,7 +63,7 @@ const Room = ({ location }) => {
     return (
       <div className="row">
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
-            <SettingsContainer/> 
+            <SettingsContainer isHost={false}/> 
             <Chat />
       </GameContext.Provider>
        </div>
