@@ -78,17 +78,10 @@ const Room = ({ location }) => {
   }
     return (
       <div className="row">
-<<<<<<< HEAD
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
             <h1>This is a placeholder for game</h1>
             <Chat />
       </GameContext.Provider>
-=======
-        <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
-              <SettingsContainer/> 
-              <Chat />
-        </GameContext.Provider>
->>>>>>> acec49dd2d4c2fbf7a3d42680d408c499da3893d
        </div>
     );
 
