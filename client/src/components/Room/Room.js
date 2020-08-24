@@ -11,7 +11,7 @@ const Room = ({ location }) => {
     const [users, setUsers] = useState('');
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const [gameState, setGameState] = useState(true)
+    const [gameState, setGameState] = useState(false)
     const ENDPOINT = "http://localhost:5000";
     // const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
 
@@ -67,7 +67,7 @@ const Room = ({ location }) => {
     return (
       <div className="row">
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
-            <SettingsContainer isHost={false}/> 
+            <SettingsContainer isHost={true}/> 
             <Chat />
       </GameContext.Provider>
        </div>
