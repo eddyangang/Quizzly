@@ -51,9 +51,10 @@ async function addUser(username, roomName, id) {
     if (existingRoom) {
         const existingUser = checkUsedUsername(existingRoom.users, username)
         if (existingUser) {
-            return {error: 'Username is taken.'}
-        }
-        else {
+            return {
+                error: 'Username is taken.'
+            }
+        } else {
             const newUser = new User(username, roomName, id);
             return await Room.findOneAndUpdate({
                 roomName: roomName
@@ -61,12 +62,16 @@ async function addUser(username, roomName, id) {
                 $push: {
                     users: newUser
                 }
+            }, {
+                new: true
             }).then(data => {
                 const Room = data
                 return {
                     Room
                 }
-            }).catch(err => {throw err})
+            }).catch(err => {
+                throw err
+            })
         }
         // else create a new room since that room doesnt already exist
     } else {
@@ -100,13 +105,21 @@ function getUsersInRoom(room) {
         roomName: room
     }).then(data => {
         return data.users
-    }).catch(err => {throw err})
+    }).catch(err => {
+        throw err
+    })
 }
 
 // Find the room a user is in by their ID
-function getRoomByUserId(id){
+async function getRoomByUserId(id) {
     console.log("LOOKING FOR USER", id);
-    return Room.findOne({users: {$elemMatch: {id:id}}}).then(data=> {
+    return Room.findOne({
+        users: {
+            $elemMatch: {
+                id: id
+            }
+        }
+    }).then(data => {
         return data
     }).catch(err => {
         throw err
@@ -114,53 +127,100 @@ function getRoomByUserId(id){
 }
 
 // Will remove a user from their room given theri ID
-function removeUserWithId (id) {
-    return Room.update({}, { $pull: { users: { id:id } } }, { multi: true }).then(data => console.log(data)).catch(err => {throw err})
+function removeUserWithId(id) {
+    return Room.update({}, {
+        $pull: {
+            users: {
+                id: id
+            }
+        }
+    }, {
+        multi: true
+    }).then(data => console.log(data)).catch(err => {
+        throw err
+    })
 }
 
 // More functions to create
 // create a function that will mix an array
-function shuffle (array) {
+function shuffle(array) {
     console.log("SHUFFLING ARRAY");
     return array.sort(() => Math.random() - 0.5);
 }
 // add the word bank into unplayed words for a specific room.
-function addWordBank (array, room) {
+async function addWordBank(array, room) {
     // shuffle the array before adding to word bank.
     array = shuffle(array);
     console.log("ADDING WORDS");
-    return Room.findOneAndUpdate({roomName: room}, {$push: {unPlayedWords: array}}).then(data => console.log(data)).catch(err => {throw err})
+    return Room.findOneAndUpdate({
+        roomName: room
+    }, {
+        $push: {
+            unPlayedWords: array,
+            wordBank: array
+        }
+    }, {
+        new: true
+    })
 }
 // create a function that will remove an element (the first or a random element) from the unpalyed word list and make it the current word
-async function setCurrentWord (room) {
-    Room.findOne({roomName: room}).then(foundRoom => {
+async function setCurrentWord(room, callback) {
+    Room.findOne({
+        roomName: room
+    }).then(foundRoom => {
         // return null if no room is found
-        if(!Room) return null;
-        const { unPlayedWords, currentWord } = foundRoom;
+        if (!foundRoom) return null;
+        const {
+            unPlayedWords,
+            currentWord
+        } = foundRoom;
         // get a new word from the unPlayedWord list and remove it from the array.
         const newCurrentWord = unPlayedWords.pop();
         // If no more words in the array do some stuff
         if (!newCurrentWord) return console.log("NO MORE WORDS");
         // update the unPlayedWords list for the room and the currentWord
         const update = {
-            $set: {unPlayedWords, currentWord: newCurrentWord}
+            $set: {
+                unPlayedWords,
+                currentWord: newCurrentWord
+            }
         }
         // push the current word into the PlayedWords array
         if (currentWord.length) {
-            update.$push = {PlayedWords: currentWord}
+            update["$push"] = {
+                PlayedWords: currentWord
+            }
         }
+        console.log("found room name:", foundRoom);
+        Room.findOneAndUpdate({
+            roomName: foundRoom.roomName
+        }, update, {
+            new: true
+        }).then(newUpdatedRoom => {
+            callback(newUpdatedRoom)
+        })
 
-        return Room.findOneAndUpdate({roomName: foundRoom.roomName}, update)
-    }).catch(err => {throw err})
+
+    }).catch(err => {
+        throw err
+    })
 }
 
 // create a function that will add +1 to the score to a specific user given their ID  
-function addScoreForUser (id) {
-    return Room.findOneAndUpdate({"users.id": id}, {'$inc': {
-        "users.$.score": 1
-    }}).then(data => console.log(data)).catch(err => {throw err})
+function addScoreForUser(id) {
+    return Room.findOneAndUpdate({
+        "users.id": id
+    }, {
+        '$inc': {
+            "users.$.score": 1
+        }
+    }).then(data => console.log(data)).catch(err => {
+        throw err
+    })
 }
 
+// Delete a room when the host leaves
+// 
 
 module.exports = {
     addUser,
@@ -189,9 +249,12 @@ module.exports = {
 //     console.log("RESULTS:", results);
 // }
 
-function test() {
-    addScoreForUser("1")
-}
-test()
+// function test() {
+//     addScoreForUser("1")
+// }
+// test()
 
-
+// create a component that takes in a word
+// creates the word in _ (word: "hello" => _ _ _ _ _ )
+// another example "hello world!" => _ _ _ _ _   _ _ _ _ _!
+// after some time (say 5seconds) reveal a random letter if no one has guess it word yet => "hello world!" => _ e _ _ _   _ _ _ _ _!
