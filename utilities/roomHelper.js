@@ -104,7 +104,7 @@ function getUsersInRoom(room) {
 }
 
 // Find the room a user is in by their ID
-function getRoomByUserId(id){
+async function getRoomByUserId(id){
     console.log("LOOKING FOR USER", id);
     return Room.findOne({users: {$elemMatch: {id:id}}}).then(data=> {
         return data
@@ -125,11 +125,11 @@ function shuffle (array) {
     return array.sort(() => Math.random() - 0.5);
 }
 // add the word bank into unplayed words for a specific room.
-function addWordBank (array, room) {
+async function addWordBank (array, room) {
     // shuffle the array before adding to word bank.
     array = shuffle(array);
     console.log("ADDING WORDS");
-    return Room.findOneAndUpdate({roomName: room}, {$push: {unPlayedWords: array}}).then(data => console.log(data)).catch(err => {throw err})
+    return Room.findOneAndUpdate({roomName: room}, {$push: {unPlayedWords: array, wordBank: array}})
 }
 // create a function that will remove an element (the first or a random element) from the unpalyed word list and make it the current word
 async function setCurrentWord (room) {
@@ -161,6 +161,8 @@ function addScoreForUser (id) {
     }}).then(data => console.log(data)).catch(err => {throw err})
 }
 
+// Delete a room when the host leaves
+// 
 
 module.exports = {
     addUser,
@@ -189,9 +191,9 @@ module.exports = {
 //     console.log("RESULTS:", results);
 // }
 
-function test() {
-    addScoreForUser("1")
-}
-test()
+// function test() {
+//     addScoreForUser("1")
+// }
+// test()
 
 

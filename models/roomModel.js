@@ -15,6 +15,10 @@ const RoomSchema = new Schema({
         required: "Room must have a unique name",
         unique: true
     },
+    wordBank: {
+        type: Array,
+        default: []
+    },
     unPlayedWords: {
         type: Array,
         default: []
@@ -23,7 +27,7 @@ const RoomSchema = new Schema({
         type: Array,
         default: []
     },
-    currentWord: [{
+    currentWord: {
         word: {
             type: String,
             default: null
@@ -36,7 +40,7 @@ const RoomSchema = new Schema({
             type: String,
             default: null
         }
-    }]
+    }
 
 })
 

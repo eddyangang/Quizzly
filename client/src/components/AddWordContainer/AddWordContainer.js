@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
+import GameContext from "../../utils/GameContext"
 const AddWordContainer = () => {
+
+  const { addWord } = useContext(GameContext)
   const [currentSubject, setCurrentSubject] = useState("");
   const [currentWord, setCurrentWord] = useState("");
   const [currentWordDefinition, setCurrentWordDefinition] = useState("");
 
-  const addWord = (e) => {
+  const handleAddBtn = (e) => {
     e.preventDefault();
-    const newFlasCard = {
-      subject: currentSubject,
-      word: currentWord,
-      definition: currentWordDefinition,
-    };
-
+    if (currentWord.trim() !== "" && currentSubject.trim() !== "" &&currentWordDefinition.trim() !== ""){
+      addWord(currentWord, currentSubject, currentWordDefinition)
+    }
+    else alert("All fields must have an input")
     clear(e);
-    console.log(newFlasCard);
   };
 
   const clear = (e) => {
@@ -71,7 +70,7 @@ const AddWordContainer = () => {
               style={{ background: "#605c55" }}
               type="submit"
               class="btn float-right text-white"
-              onClick={(e) => addWord(e)}
+              onClick={(e) => handleAddBtn(e)}
             >
               Add Word
             </button>
