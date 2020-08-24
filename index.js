@@ -76,8 +76,6 @@ io.on('connect', (socket) => {
         throw err
       }
     })();
-    
-
   });
 
   socket.on('sendMessage', (message, name, room, callback) => {
@@ -113,9 +111,13 @@ io.on('connect', (socket) => {
     (async () => {
       try{
         const room = await getRoomByUserId(socket.id)
-    
-        io.to(room.roomName).emit('startGame', room)
-        callback();
+        // const newRoomData = await setCurrentWord(room.roomName);
+
+        setCurrentWord(room.roomName, (newRoomData)=> {
+          console.log("NEWROOMDATA:", newRoomData);
+          io.to(room.roomName).emit('startGame', newRoomData)
+          callback();
+        })
       }
       catch(err){
         throw err

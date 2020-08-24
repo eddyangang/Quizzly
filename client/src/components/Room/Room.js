@@ -39,7 +39,6 @@ const Room = ({ location }) => {
         });
       }, [ENDPOINT, location.search]);
 
-
       useEffect(() => {
         socket.on('message', message => {
           setMessages(messages => [ ...messages, message ]);
@@ -57,8 +56,9 @@ const Room = ({ location }) => {
 
         socket.on("startGame", (room) => {
             console.log("SOMEONE STARTED THE GAME. DATA: ", room);
-            if (currentWord.word) {
+            if (room.currentWord.word) {
               setGameState(true)
+              console.log("GAMESTATE CAHNGED:", gameState);
               setCurrentWord(room.currentWord)
             }
         });
@@ -79,9 +79,14 @@ const Room = ({ location }) => {
     }
 
     function handleStartBtn () {
-        setGameState(!gameState)
+        setGameState(true)
         console.log("gameState:", gameState);
         socket.emit('startGame', ()=> {console.log("working?");});
+    }
+
+    function handleClearBtn(){
+      setGameState(!gameState)
+      console.log("gameState:", gameState);
     }
 
     function addWord(word, subject, definition){
