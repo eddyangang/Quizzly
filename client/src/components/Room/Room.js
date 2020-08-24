@@ -64,14 +64,38 @@ const Room = ({ location }) => {
         socket.emit('startGame', ()=> {console.log("working?");});
     }
 
+
+
+  if (!gameState) {
     return (
       <div className="row">
-        <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
-              <SettingsContainer/> 
-              <Chat />
-        </GameContext.Provider>
+      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
+            <SettingsContainer isHost={true}/> 
+            <Chat />
+      </GameContext.Provider>
        </div>
     );
+  }
+    return (
+      <div className="row">
+      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
+            <h1>This is a placeholder for game</h1>
+            <Chat />
+      </GameContext.Provider>
+       </div>
+    );
+
 }
+
+
+//     return (
+//       <div className="row">
+//       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
+//             <SettingsContainer isHost={true}/> 
+//             <Chat />
+//       </GameContext.Provider>
+//        </div>
+//     );
+// }
 
 export default Room;
