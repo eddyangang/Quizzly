@@ -6,13 +6,19 @@ const SettingsContainer = (props) => {
   if (isHost) {
     return (
       <div className="col-lg-8 col-md-8 col-sm-12">
-          <AddWordContainer />
-          <WordBankContainer />
+        <button type="button" className="btn btn-success mb-5">Start Game</button>
+        <AddWordContainer />
+        <WordBankContainer />
+
       </div>
-  
+
     );
   }
-  return <WordBankContainer />;
+  return (
+    <div className="col-lg-8 col-md-8 col-sm-12">
+      <WordBankContainer />
+    </div>
+  )
 }
 
 export default SettingsContainer;

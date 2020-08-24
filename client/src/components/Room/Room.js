@@ -11,7 +11,7 @@ const Room = ({ location }) => {
     const [users, setUsers] = useState('');
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const [gameState, setGameState] = useState(false)
+    const [gameState, setGameState] = useState(true)
     const ENDPOINT = "http://localhost:5000";
     // const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
 
@@ -61,6 +61,9 @@ const Room = ({ location }) => {
         socket.emit('startGame', ()=> {console.log("working?");});
     }
 
+
+
+  if (!gameState) {
     return (
       <div className="row">
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
@@ -69,6 +72,27 @@ const Room = ({ location }) => {
       </GameContext.Provider>
        </div>
     );
+  }
+    return (
+      <div className="row">
+      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
+            <h1>This is a placeholder for game</h1>
+            <Chat />
+      </GameContext.Provider>
+       </div>
+    );
+
 }
+
+
+//     return (
+//       <div className="row">
+//       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
+//             <SettingsContainer isHost={true}/> 
+//             <Chat />
+//       </GameContext.Provider>
+//        </div>
+//     );
+// }
 
 export default Room;
