@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Room = require("../models/roomModel");
 const User = require("../UserClass");
-const users = require("../users");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly", {
     useNewUrlParser: true,
@@ -26,7 +25,7 @@ function checkRoomNameExist(roomName) {
         throw err
     })
 }
-
+// Creates a new room and makes the user host
 function createNewRoom(username, roomName, id) {
     console.log("CREATING A NEW ROOM");
     const newUser = new User(username, roomName, id);
@@ -67,8 +66,9 @@ async function addUser(username, roomName, id) {
                 return {
                     Room
                 }
-            })
+            }).catch(err => {throw err})
         }
+        // else create a new room since that room doesnt already exist
     } else {
         const Room = await createNewRoom(username, roomName, id)
         console.log("New Room created", Room);
@@ -93,16 +93,17 @@ function checkUsedUsername(usersList, username) {
         return false
     }
 }
-
+// Get all the users for a specific room
 function getUsersInRoom(room) {
     console.log("GETTING ALL USERS");
     return Room.findOne({
         roomName: room
     }).then(data => {
         return data.users
-    })
+    }).catch(err => {throw err})
 }
 
+// Find the room a user is in by their ID
 function getRoomByUserId(id){
     console.log("LOOKING FOR USER", id);
     return Room.findOne({users: {$elemMatch: {id:id}}}).then(data=> {
@@ -112,23 +113,85 @@ function getRoomByUserId(id){
     })
 }
 
+// Will remove a user from their room given theri ID
 function removeUserWithId (id) {
-    return Room.update({}, { $pull: { users: { id:id } } }, { multi: true }).then(data => console.log(data))
+    return Room.update({}, { $pull: { users: { id:id } } }, { multi: true }).then(data => console.log(data)).catch(err => {throw err})
 }
+
+// More functions to create
+// create a function that will mix an array
+function shuffle (array) {
+    console.log("SHUFFLING ARRAY");
+    return array.sort(() => Math.random() - 0.5);
+}
+// add the word bank into unplayed words for a specific room.
+function addWordBank (array, room) {
+    // shuffle the array before adding to word bank.
+    array = shuffle(array);
+    console.log("ADDING WORDS");
+    return Room.findOneAndUpdate({roomName: room}, {$push: {unPlayedWords: array}}).then(data => console.log(data)).catch(err => {throw err})
+}
+// create a function that will remove an element (the first or a random element) from the unpalyed word list and make it the current word
+async function setCurrentWord (room) {
+    Room.findOne({roomName: room}).then(foundRoom => {
+        // return null if no room is found
+        if(!Room) return null;
+        const { unPlayedWords, currentWord } = foundRoom;
+        // get a new word from the unPlayedWord list and remove it from the array.
+        const newCurrentWord = unPlayedWords.pop();
+        // If no more words in the array do some stuff
+        if (!newCurrentWord) return console.log("NO MORE WORDS");
+        // update the unPlayedWords list for the room and the currentWord
+        const update = {
+            $set: {unPlayedWords, currentWord: newCurrentWord}
+        }
+        // push the current word into the PlayedWords array
+        if (currentWord.length) {
+            update.$push = {PlayedWords: currentWord}
+        }
+
+        return Room.findOneAndUpdate({roomName: foundRoom.roomName}, update)
+    }).catch(err => {throw err})
+}
+
+// create a function that will add +1 to the score to a specific user given their ID  
+function addScoreForUser (id) {
+    return Room.findOneAndUpdate({"users.id": id}, {'$inc': {
+        "users.$.score": 1
+    }}).then(data => console.log(data)).catch(err => {throw err})
+}
+
 
 module.exports = {
     addUser,
     getUsersInRoom,
     checkRoomNameExist,
     getRoomByUserId,
-    removeUserWithId
+    removeUserWithId,
+    addWordBank,
+    setCurrentWord,
+    addScoreForUser
 }
-
-
-// async function test () {
-//     const results = await getRoomByUserId("PhZYn72WhDV5ELY1AAAA")
-//     console.log(results);
+// create a new room with user 
+// function test() {
+//     addUser("Eddy", "myRoom", "1")
 // }
-// test()
 
-// log()
+// let array = [{word: "trying", definition: "world", subject: "haha"}, {word: "again", definition: "world", subject: "haha"}]
+// async function test () {
+//     const results = await addWordBank(array, "myRoom")
+//     console.log("RESULTS:", results);
+// }
+
+
+// function test () {
+//     const results = setCurrentWord("myRoom")
+//     console.log("RESULTS:", results);
+// }
+
+function test() {
+    addScoreForUser("1")
+}
+test()
+
+

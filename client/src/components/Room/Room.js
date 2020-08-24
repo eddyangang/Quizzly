@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Chat from "../Chat/Chat";
 import SettingsContainer from "../SettingsContainer/SettingsContainer"
 import queryString from 'query-string';
 import io from "socket.io-client";
 import GameContext from "../../utils/GameContext"
+import {AuthContext} from "../../utils/AuthContext"
+
 let socket;
 const Room = ({ location }) => {
+    const { currentUser } = useContext(AuthContext)
     const [name, setName] = useState('');
     const [room, setRoom] = useState('');
     const [users, setUsers] = useState('');
@@ -23,7 +26,7 @@ const Room = ({ location }) => {
     
         setRoom(room);
         setName(name)
-    
+        console.log(currentUser);
         socket.emit('join', { name, room }, (error) => {
           if(error) {
             alert(error);
@@ -75,10 +78,17 @@ const Room = ({ location }) => {
   }
     return (
       <div className="row">
+<<<<<<< HEAD
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
             <h1>This is a placeholder for game</h1>
             <Chat />
       </GameContext.Provider>
+=======
+        <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
+              <SettingsContainer/> 
+              <Chat />
+        </GameContext.Provider>
+>>>>>>> acec49dd2d4c2fbf7a3d42680d408c499da3893d
        </div>
     );
 
