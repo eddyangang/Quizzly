@@ -18,12 +18,21 @@ label {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #000000;
-    border-color: #ffffff;
+    color: #ffffff !important;
+    border-color: #6245cb;
 }
 
 button:hover {
-    background-color: rgba(172, 109, 75, 0.674) !important;
+    color: #6245cb;
+    background-color: rgba(227, 227, 227, 0.674) !important;
     transition-duration: .7s;
+}
+
+a {
+    color: rgb(48, 216, 88);
+  }
+  
+a:hover {
+    color: #6245cb;
+    transition-duration: 1s;
 }

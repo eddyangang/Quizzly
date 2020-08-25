@@ -20,11 +20,36 @@ html, body {
     border: 6px solid rgb(172, 109, 75);  
   } */
 
+
+.col-lg-6 {
+  border: 6px solid #6245cb;
+  background-color: white;
+  opacity: 92%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+
 a {
-  color: rgb(255, 153, 0);
+  color: rgb(48, 216, 88);
 }
 
 a:hover {
-  color: rgba(157, 157, 157, 0.866);
+  color: rgb(48, 216, 88);
   transition-duration: 1s;
 }
+
+.btn-primary {
+  color: #6245cb !important;
+  border-color: #6245cb;
+  background-color: white;
+}
+
+button:hover {
+  color: rgb(48, 216, 88);
+  background-color: rgba(227, 227, 227, 0.674) !important;
+  transition-duration: .7s;
+}
+
