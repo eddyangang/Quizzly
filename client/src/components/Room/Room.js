@@ -122,7 +122,7 @@ const Room = ({ location }) => {
     }
     return (
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, addWord, wordBank, currentWord}}>
-          {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <WordBankContainer />)}
+          {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <div className="col-lg-8 col-md-8 col-sm-12"><WordBankContainer /></div>)}
             <Chat />
       </GameContext.Provider>
     );
