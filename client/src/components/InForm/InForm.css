@@ -1,5 +1,5 @@
 label {
-    color: rgba(157, 157, 157, 0.866);
+    color: rgba(255, 255, 255, 0.866);
     font-size: large;
 }
 
@@ -24,7 +24,7 @@ label {
 
 button:hover {
     color: #6245cb;
-    background-color: rgba(227, 227, 227, 0.674) !important;
+    background-color: rgba(188, 188, 188, 0.674) !important;
     transition-duration: .7s;
 }
 

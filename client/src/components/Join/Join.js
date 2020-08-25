@@ -6,9 +6,18 @@ export default function SignIn() {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   return (
+
 <div className="container-fluid">
-    <div className="col-lg-3 col-sm-1 col-md-2"></div>
-    <div className="centered bg-light rounded col-lg-4 col-sm-10 col-md-8 p-5">
+<div className="row">
+    <div className="col-sm-6"><h1 className="heading">Open Rooms</h1>
+    <form>
+
+      </form>
+    </div>
+
+    <div className="col-sm-1"></div>
+
+    <div className="col-sm-4">
     <h1 className="heading">Create a Room</h1>
       <form>
         <div className="form-group">
@@ -22,8 +31,9 @@ export default function SignIn() {
         <center><button type="submit" className="btn purple">Create</button></center>
         </Link>
       </form>
-     </div> 
 
+     </div> 
+</div>
 </div>
   );
 }
