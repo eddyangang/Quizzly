@@ -67,10 +67,21 @@
 
 /* start */
 
-/* .purple {
-  background: rgba(157, 157, 157, 0.866);
+.purple {
+  background: rgba(157, 157, 157);
   color: white;
 }  
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  margin:auto;
+  color: white;
+}
+
 
 /* #root {
   height: 100vh;
