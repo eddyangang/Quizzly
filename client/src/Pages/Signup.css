@@ -19,7 +19,7 @@ html, body {
 .col-lg-6 {
   border: 6px solid #6A59FE;
   background-color: rgb(24, 24, 24);
-  opacity: 92%;
+  /* opacity: 92%; */
   padding-left: 10%;
   padding-right: 10%;
   padding-top: 5%;
