@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; //links to our chat
 import './Join.css';
-import '../OpenChatrooms/OpenChatrooms.js';
+import TextContainer from '../TextContainer/TextContainer';
+
 export default function SignIn() {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+
   return (
+  
 
 <div className="container-fluid">
 <div className="row">
     <div className="col-sm-6"><h1 className="heading">Open Rooms</h1>
-    <form>
 
-      </form>
     </div>
 
     <div className="col-sm-1"></div>
