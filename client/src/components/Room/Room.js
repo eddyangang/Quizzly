@@ -134,6 +134,8 @@ const Room = ({ location }) => {
 //       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
 //             <SettingsContainer isHost={true}/> 
 //             <Chat />
+//--------------if u want to check the functionality u should uncomment this line 137
+//<Game defination={"Your Name"} word="Preeti" guessedWord='{message}'/>
 //       </GameContext.Provider>
 //        </div>
 //     );
