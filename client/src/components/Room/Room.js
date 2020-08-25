@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import Chat from "../Chat/Chat";
 import SettingsContainer from "../SettingsContainer/SettingsContainer"
 import WordBankContainer from "../WordBankContainer/WordBankContainer";
@@ -6,7 +6,7 @@ import queryString from 'query-string';
 import io from "socket.io-client";
 import GameContext from "../../utils/GameContext"
 // import {AuthContext} from "../../utils/AuthContext"
-import DefinitionDisplay from "../DefinitionDisplay/DefinitionDisplay";
+import GameContainer from "../GameContainer/GameContainer"
 
 let socket;
 const Room = ({ location }) => {
@@ -20,8 +20,8 @@ const Room = ({ location }) => {
     const [currentWord, setCurrentWord] = useState({});
     const [gameState, setGameState] = useState(false);
     const [isHost, setisHost] = useState(false)
-    // const ENDPOINT = "http://localhost:5000";
-    const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
+    const ENDPOINT = "http://localhost:5000";
+    // const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
 
     useEffect(() => {
 
@@ -55,8 +55,8 @@ const Room = ({ location }) => {
         socket.on("startGame", (room) => {
             console.log("SOMEONE STARTED THE GAME. DATA: ", room);
             if (room.currentWord.word) {
-              setGameState(true)
               setCurrentWord(room.currentWord)
+              setGameState(true)
             }
         });
 
@@ -74,6 +74,7 @@ const Room = ({ location }) => {
           socket.emit('correctAnswerSubmitted', message, name, room, (roomData) => {
             setMessage('')
             console.log("UPDATED SCORE:", roomData);
+            setCurrentWord(roomData.currentWord)
           });
         } else{
           if(message) {
@@ -85,7 +86,7 @@ const Room = ({ location }) => {
     function handleStartBtn () {
         setGameState(true)
         console.log("gameState:", gameState);
-        socket.emit('startGame', () => {console.log("working?");});
+        socket.emit('startGame', () => {console.log("You started a Game")});
     }
 
     function handleCancelBtn(){
@@ -106,36 +107,25 @@ const Room = ({ location }) => {
       });
     }
 
-
+    function returnGameContainer(){
+      if (currentWord.word) {
+        return <GameContainer /> 
+      }
+      else {
+        return (
+          // Change this to score board
+          <div class="spinner-border text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        )
+      }
+    }
     return (
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, addWord, wordBank, currentWord}}>
-          {gameState ? <DefinitionDisplay /> : ( isHost ? <SettingsContainer /> : <WordBankContainer />)}
-  
+          {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <WordBankContainer />)}
             <Chat />
       </GameContext.Provider>
-
     );
-  
-    // return (
-    //   <div className="row">
-    //   <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
-    //         <h1>This is a placeholder for game</h1>
-    //         <Chat />
-    //   </GameContext.Provider>
-    //    </div>
-    // );
-
 }
-
-
-//     return (
-//       <div className="row">
-//       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
-//             <SettingsContainer isHost={true}/> 
-//             <Chat />
-//       </GameContext.Provider>
-//        </div>
-//     );
-// }
 
 export default Room;

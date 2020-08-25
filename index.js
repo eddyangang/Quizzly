@@ -69,11 +69,11 @@ io.on('connect', (socket) => {
         socket.join(Room.roomName);
 
         socket.emit('message', {
-          user: 'admin',
+          user: 'Admin',
           text: `${name}, welcome to room ${Room.roomName}.`
         });
         socket.broadcast.to(Room.roomName).emit('message', {
-          user: 'admin',
+          user: 'Admin',
           text: `${name} has joined!`
         });
 
@@ -121,8 +121,6 @@ io.on('connect', (socket) => {
     (async () => {
       try {
         const room = await getRoomByUserId(socket.id)
-        // const newRoomData = await setCurrentWord(room.roomName);
-
         setCurrentWord(room.roomName, (newRoomData) => {
           io.to(room.roomName).emit('startGame', newRoomData)
           callback();
@@ -171,7 +169,7 @@ io.on('connect', (socket) => {
             text: `${user.name} has left.`
           });
           io.to(user.room).emit('roomData', {
-            room: user.room,
+            room: room,
             users: await getUsersInRoom(user.room)
           });
         }

@@ -99,7 +99,7 @@ function checkUsedUsername(usersList, username) {
     }
 }
 // Get all the users for a specific room
-function getUsersInRoom(room) {
+async function getUsersInRoom(room) {
     console.log("GETTING ALL USERS");
     return Room.findOne({
         roomName: room
@@ -127,7 +127,7 @@ async function getRoomByUserId(id) {
 }
 
 // Will remove a user from their room given theri ID
-function removeUserWithId(id) {
+async function removeUserWithId(id) {
     return Room.update({}, {
         $pull: {
             users: {
@@ -179,7 +179,8 @@ async function setCurrentWord(room, callback) {
         // If no more words in the array do some stuff
         if (!newCurrentWord) {
             console.log("NO MORE WORDS");
-            return null
+            const newRoomData = setCurrentWordToNull(foundRoom)
+            return newRoomData
         };
         // update the unPlayedWords list for the room and the currentWord
         const update = {
@@ -207,6 +208,21 @@ async function setCurrentWord(room, callback) {
     }).catch(err => {
         throw err
     })
+}
+
+async function setCurrentWordToNull(room) {
+    const currentWord ={
+        word: null,
+        definition: null,
+        subject: null
+    }
+
+    const update = {
+        $set: {
+            currentWord: currentWord
+        }
+    }
+    return Room.findOneAndUpdate({roomName: room}, update, {new: true})
 }
 
 // create a function that will add +1 to the score to a specific user given their ID  
@@ -253,12 +269,8 @@ module.exports = {
 //     console.log("RESULTS:", results);
 // }
 
-// function test() {
-//     addScoreForUser("1")
+// async function test() {
+//     const results = await setCurrentWordToNull("6")
+//     console.log("SET CURRENT WORD TO NULL: ", results);
 // }
 // test()
-
-// create a component that takes in a word
-// creates the word in _ (word: "hello" => _ _ _ _ _ )
-// another example "hello world!" => _ _ _ _ _   _ _ _ _ _!
-// after some time (say 5seconds) reveal a random letter if no one has guess it word yet => "hello world!" => _ e _ _ _   _ _ _ _ _!
