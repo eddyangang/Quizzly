@@ -42,7 +42,8 @@ const Login = ({ history }) => {
 
               <h1 className="text-center">Log In</h1>
               <InForm onSubmit={handleLogin} />
-              {/* <form onSubmit={handleLogin}>
+
+{/* <form onSubmit={handleLogin}>
 <label>
 Email
 <input name="email" type="email" placeholder="Email" />
