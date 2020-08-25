@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import Chat from "../Chat/Chat";
 import SettingsContainer from "../SettingsContainer/SettingsContainer"
 import WordBankContainer from "../WordBankContainer/WordBankContainer";
@@ -20,8 +20,8 @@ const Room = ({ location }) => {
     const [currentWord, setCurrentWord] = useState({});
     const [gameState, setGameState] = useState(false);
     const [isHost, setisHost] = useState(false)
-    // const ENDPOINT = "http://localhost:5000";
-    const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
+    const ENDPOINT = "http://localhost:5000";
+    // const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
 
     useEffect(() => {
 

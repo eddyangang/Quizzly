@@ -237,9 +237,9 @@ module.exports = {
     addScoreForUser
 }
 // create a new room with user 
-// function test() {
-//     addUser("Eddy", "myRoom", "1")
-// }
+function test() {
+    addUser("Eddy", "myRoom", "1")
+}
 
 // let array = [{word: "trying", definition: "world", subject: "haha"}, {word: "again", definition: "world", subject: "haha"}]
 // async function test () {
@@ -256,9 +256,4 @@ module.exports = {
 // function test() {
 //     addScoreForUser("1")
 // }
-// test()
-
-// create a component that takes in a word
-// creates the word in _ (word: "hello" => _ _ _ _ _ )
-// another example "hello world!" => _ _ _ _ _   _ _ _ _ _!
-// after some time (say 5seconds) reveal a random letter if no one has guess it word yet => "hello world!" => _ e _ _ _   _ _ _ _ _!
+test()
