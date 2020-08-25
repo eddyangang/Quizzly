@@ -29,7 +29,7 @@ const AddWordContainer = () => {
         <hr/>
         <div className="form-row">
           <div className="col">
-            <label for="subjectinput">Subject</label>
+            <label htmlFor="subjectinput">Subject</label>
             <input
               placeholder="Subject"
               type="text"
@@ -40,7 +40,7 @@ const AddWordContainer = () => {
             />
           </div>
           <div className="col">
-            <label for="wordinput">Word</label>
+            <label htmlFor="wordinput">Word</label>
             <input
               type="text"
               placeholder="Word"
@@ -52,7 +52,7 @@ const AddWordContainer = () => {
           </div>
         </div>
         <div className="form-group">
-          <label for="definationinput">Enter the Defination:</label>
+          <label htmlFor="definationinput">Enter the Defination:</label>
           <textarea
             className="form-control"
             id="definationinput"
@@ -69,7 +69,7 @@ const AddWordContainer = () => {
             <button
               style={{ background: "#605c55" }}
               type="submit"
-              class="btn float-right text-white"
+              className="btn float-right text-white"
               onClick={(e) => handleAddBtn(e)}
             >
               Add Word

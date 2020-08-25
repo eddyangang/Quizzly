@@ -11,7 +11,6 @@ const Login = ({ history }) => {
 
     async event => {
       event.preventDefault();
-      console.log("check: ", event)
       const { email, password } = event.target.elements;
       try {
         await firebase
