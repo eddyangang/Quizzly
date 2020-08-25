@@ -5,12 +5,12 @@ import WordBankContainer from "../WordBankContainer/WordBankContainer";
 import queryString from 'query-string';
 import io from "socket.io-client";
 import GameContext from "../../utils/GameContext"
-import {AuthContext} from "../../utils/AuthContext"
+// import {AuthContext} from "../../utils/AuthContext"
 import DefinitionDisplay from "../DefinitionDisplay/DefinitionDisplay";
 
 let socket;
 const Room = ({ location }) => {
-    const { currentUser } = useContext(AuthContext)
+    // const { currentUser } = useContext(AuthContext)
     const [name, setName] = useState('');
     const [room, setRoom] = useState('');
     const [users, setUsers] = useState('');
@@ -31,7 +31,7 @@ const Room = ({ location }) => {
     
         setRoom(room);
         setName(name)
-        console.log(currentUser);
+        // console.log(currentUser);
         socket.emit('join', { name, room }, (error) => {
           if(error) {
             alert(error);
@@ -45,8 +45,6 @@ const Room = ({ location }) => {
         });
         
         socket.on("roomData", ({ room, users, userID }) => {
-          console.log("ROOM:", room);
-          console.log("USERID:", userID);
           if (room.hostId === userID){
             setisHost(true);
           }
@@ -58,13 +56,11 @@ const Room = ({ location }) => {
             console.log("SOMEONE STARTED THE GAME. DATA: ", room);
             if (room.currentWord.word) {
               setGameState(true)
-              console.log("GAMESTATE CAHNGED:", gameState);
               setCurrentWord(room.currentWord)
             }
         });
 
         socket.on("newWord", (data) => {
-          console.log("AFTER BROADCAST");
           setwordBank([...data.wordBank])
         });
 
@@ -72,21 +68,28 @@ const Room = ({ location }) => {
 
     const sendMessage = (event) => {
         event.preventDefault();
-    
-        if(message) {
-          socket.emit('sendMessage', message, name, room, () => setMessage(''));
+
+        if(gameState && currentWord.word.trim().toLowerCase() === message.trim().toLowerCase()){
+          console.log("right answer");
+          socket.emit('correctAnswerSubmitted', message, name, room, (roomData) => {
+            setMessage('')
+            console.log("UPDATED SCORE:", roomData);
+          });
+        } else{
+          if(message) {
+            socket.emit('sendMessage', message, name, room, () => setMessage(''));
+          }
         }
     }
 
     function handleStartBtn () {
         setGameState(true)
         console.log("gameState:", gameState);
-        socket.emit('startGame', ()=> {console.log("working?");});
+        socket.emit('startGame', () => {console.log("working?");});
     }
 
-    function handleClearBtn(){
-      setGameState(!gameState)
-      console.log("gameState:", gameState);
+    function handleCancelBtn(){
+      setGameState(false)
     }
 
     function addWord(word, subject, definition){

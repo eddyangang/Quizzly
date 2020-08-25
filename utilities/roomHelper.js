@@ -177,7 +177,10 @@ async function setCurrentWord(room, callback) {
         // get a new word from the unPlayedWord list and remove it from the array.
         const newCurrentWord = unPlayedWords.pop();
         // If no more words in the array do some stuff
-        if (!newCurrentWord) return console.log("NO MORE WORDS");
+        if (!newCurrentWord) {
+            console.log("NO MORE WORDS");
+            return null
+        };
         // update the unPlayedWords list for the room and the currentWord
         const update = {
             $set: {
@@ -207,15 +210,16 @@ async function setCurrentWord(room, callback) {
 }
 
 // create a function that will add +1 to the score to a specific user given their ID  
-function addScoreForUser(id) {
+async function addScoreForUser(id) {
+    console.log("HELPER: UPDATING SCORE");
     return Room.findOneAndUpdate({
         "users.id": id
     }, {
         '$inc': {
             "users.$.score": 1
         }
-    }).then(data => console.log(data)).catch(err => {
-        throw err
+    }, {
+        new: true
     })
 }
 

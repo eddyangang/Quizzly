@@ -44,8 +44,7 @@ const list = [
 Room.create(list).then(data => {
   console.log(data)
   process.exit();
-}).catch(err => console.log(err))
+}).catch(err => {throw err})
 
-// Room.find({}).then(data => console.log("findAll: ", data))
 
 

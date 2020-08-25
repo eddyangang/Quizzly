@@ -4,7 +4,16 @@ const socketio = require('socket.io');
 // const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
-const { checkRoomNameExist, addUser, getUsersInRoom, getRoomByUserId, removeUserWithId, addWordBank, setCurrentWord, addScoreForUser } = require("./utilities/roomHelper")
+const {
+  checkRoomNameExist,
+  addUser,
+  getUsersInRoom,
+  getRoomByUserId,
+  removeUserWithId,
+  addWordBank,
+  setCurrentWord,
+  addScoreForUser
+} = require("./utilities/roomHelper")
 
 const router = require('./router');
 
@@ -16,7 +25,9 @@ const io = socketio(server);
 
 const path = require("path");
 // const PORT = process.env.PORT || 3001;
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(express.json());
 
 // app.listen(PORT, () => {
@@ -48,13 +59,15 @@ io.on('connect', (socket) => {
     (async () => {
       try {
         const id = socket.id;
-        console.log("Given:", name, room ,id);
-        const { error, Room } = await addUser(name, room, id );
-        console.log("error: ", error);
+        console.log("Given:", name, room, id);
+        const {
+          error,
+          Room
+        } = await addUser(name, room, id);
         console.log("Room", Room);
         if (error) return callback(error);
         socket.join(Room.roomName);
-      
+
         socket.emit('message', {
           user: 'admin',
           text: `${name}, welcome to room ${Room.roomName}.`
@@ -63,16 +76,15 @@ io.on('connect', (socket) => {
           user: 'admin',
           text: `${name} has joined!`
         });
-    
+
         io.to(Room.roomName).emit('roomData', {
           room: Room,
           users: await getUsersInRoom(Room.roomName),
           userID: socket.id
         });
-    
+
         callback();
-      }
-      catch(err){
+      } catch (err) {
         throw err
       }
     })();
@@ -97,11 +109,9 @@ io.on('connect', (socket) => {
         const wordToAdd = [flashCard]
         const newRoomData = await addWordBank(wordToAdd, room);
         socket.emit('newWord', newRoomData);
-        console.log("BEFORE BROADCAST");
         socket.broadcast.to(room).emit('newWord', newRoomData);
         callback(newRoomData);
-      }
-      catch (err) {
+      } catch (err) {
         throw err
       }
     })();
@@ -109,34 +119,43 @@ io.on('connect', (socket) => {
 
   socket.on("startGame", (callback) => {
     (async () => {
-      try{
+      try {
         const room = await getRoomByUserId(socket.id)
         // const newRoomData = await setCurrentWord(room.roomName);
 
-        setCurrentWord(room.roomName, (newRoomData)=> {
-          console.log("NEWROOMDATA:", newRoomData);
+        setCurrentWord(room.roomName, (newRoomData) => {
           io.to(room.roomName).emit('startGame', newRoomData)
           callback();
         })
-      }
-      catch(err){
+      } catch (err) {
         throw err
       }
 
     })()
   });
 
-  // socket.on("startGame", callback => {
-  //   const user = getUser(socket.id);
-  //   io.to(user.room).emit('startGame', { user: user.name, text: `${user.name} started the game` });
+  socket.on("correctAnswerSubmitted", (message, name, room, callback) => {
+    console.log(message, name, room);
+    (async () => {
+      try {
+        await addScoreForUser(socket.id);
 
-  //   callback()
-  // })
+        setCurrentWord(room, (newRoomData) => {
+          console.log("SENDING UPDATED SCORE", newRoomData);
+          callback(newRoomData);
+        })
+      }
+      catch (err) {
+        throw err
+      }
+    })();
+  })
+
 
   socket.on('disconnect', () => {
     // const user = removeUser(socket.id);
     (async () => {
-      try{
+      try {
         //Find room that user is in.
         const room = await getRoomByUserId(socket.id)
         console.log("USERS IN ROOM: ", room.users);
@@ -158,8 +177,7 @@ io.on('connect', (socket) => {
         }
 
 
-      }
-      catch(err){
+      } catch (err) {
         throw err
       }
     })();
