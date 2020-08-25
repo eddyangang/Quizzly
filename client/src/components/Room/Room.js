@@ -20,8 +20,8 @@ const Room = ({ location }) => {
     const [currentWord, setCurrentWord] = useState({});
     const [gameState, setGameState] = useState(false);
     const [isHost, setisHost] = useState(false)
-    // const ENDPOINT = "http://localhost:5000";
-    const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
+    const ENDPOINT = "http://localhost:5000";
+    // const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
 
     useEffect(() => {
 
@@ -109,7 +109,8 @@ const Room = ({ location }) => {
 
     return (
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, addWord, wordBank, currentWord}}>
-          {gameState ? <DefinitionDisplay /> : ( isHost ? <SettingsContainer /> : <WordBankContainer />)}
+          {gameState ? <DefinitionDisplay /> : ( isHost ? <SettingsContainer /> : 
+           <div className="col-lg-8 col-md-8 col-sm-12"><WordBankContainer /> </div>)}
   
             <Chat />
       </GameContext.Provider>
