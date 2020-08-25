@@ -1,12 +1,12 @@
 import React from "react";
-
+import WordBankItem from "../WordBankItem/WordBankItem"
 const WordBankContainer = () => {
   return (
-    <div className="card border-dark mb-3 .text-nowrap table-responsive" style={{ width: "40rem", margin:"10px",padding:"10px"}}>
+    <div className="card container-fluid">
       <h2>Word Bank</h2>
-      <table className="table table-bordered table-fixed">
+      <table className="table table-bordered border-bark">
         <thead>
-          <tr className="table-dark table-info">
+          <tr >
             <th className="text-center " scope="col-md-4">
               Subject
             </th>
@@ -18,13 +18,7 @@ const WordBankContainer = () => {
             </th>
           </tr>
         </thead>
-        <tbody>
-          <tr className=  "table-info">
-            <td className="border-dark mb-3">dfgfghfghfghfgh</td>
-            <td className="border-dark mb-3">dfgdfgdfgdfgdfgdfgdfgfghfghfghfgh</td>
-            <td className="border-dark mb-3">adddefinationdfgdfgdfgdfgdfgdfgdfgdfgfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfg</td>
-          </tr>
-        </tbody>
+        <WordBankItem/>
       </table>
     </div>
   );

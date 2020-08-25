@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom"; //links to our chat
 import './Join.css';
-
+import '../OpenChatrooms/OpenChatrooms.js';
 export default function SignIn() {
-  const [name, setName] = useState('');
-  const [room, setRoom] = useState('');
-
+  const [name, setName] = useState("");
+  const [room, setRoom] = useState("");
   return (
-
-    <div className="text-center mt-5">
-        <h1 className="heading">Join</h1>
+<div className="container-fluid mt-5">
+  <div className="row">
+    <div className="col-lg-3"></div>
+    <div className="room">
+    <h1 className="heading">Create A Room</h1>
       <form>
         <div className="form-group">
-          <input type="name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name" onChange={(event) => setName(event.target.value)}/>
+          <input type="name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Room Name" onChange={(event) => setName(event.target.value)}/>
         </div>
         <div className="form-group">
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="room" onChange={(event) => setRoom(event.target.value)} />
+          <input type="name" className="form-control" id="exampleInputPassword1" placeholder="Room Number" onChange={(event) => setRoom(event.target.value)} />
         </div>
         <Link onClick={e => (!name || !room) ? e.preventDefault() : null} to={`/room?name=${name}&room=${room}`}>
-        <button type="submit" className="btn purple">Sign-in</button>
+          {/* prevents click if there is no name or room; otherwise does nothing and we are routed to the url */}
+        <center><button type="submit" className="btn purple">Create</button></center>
         </Link>
       </form>
-
-      </div>
+     </div> 
+    <div className="col-lg-3"></div>
+  </div>
+</div>
   );
 }

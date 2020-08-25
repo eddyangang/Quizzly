@@ -1,23 +1,18 @@
-import React from 'react';
-import AddWordContainer from '../AddWordContainer/AddWordContainer';
-import WordBankContainer from "../WordBankContainer/WordBankContainer"
-
-
+import React, { useContext } from "react";
+import WordBankContainer from "../WordBankContainer/WordBankContainer";
+import AddWordContainer from "../AddWordContainer/AddWordContainer"
+import GameContext from "../../utils/GameContext"
 const SettingsContainer = () => {
+  const{ handleStartBtn } = useContext(GameContext);
+    return (
+      <div className="col-lg-8 col-md-8 col-sm-12">
+        <button type="button" className="btn btn-success mb-5" onClick={handleStartBtn}>Start Game</button>
+        <AddWordContainer />
+        <WordBankContainer />
+      </div>
 
-    return(
-        <div>
-       <div className = "row">
-           <AddWordContainer/>
-        </div>
-        <div className = "row">
-            <WordBankContainer/>
-        </div>
-        <div className="text-center" style={{padding:"10px",margin:"10px"}}>
-            <button className ="btn btn-success btn-lg ">Start Game</button>
-        </div>
-        </div>
     );
+
 }
 
 export default SettingsContainer;
