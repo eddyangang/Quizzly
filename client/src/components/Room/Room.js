@@ -74,6 +74,7 @@ const Room = ({ location }) => {
           socket.emit('correctAnswerSubmitted', message, name, room, (roomData) => {
             setMessage('')
             console.log("UPDATED SCORE:", roomData);
+            setCurrentWord(roomData.currentWord)
           });
         } else{
           if(message) {
