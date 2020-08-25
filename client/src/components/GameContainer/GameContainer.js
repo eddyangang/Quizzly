@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
-
-const Game = (props) => {
+import React, { useState, useEffect, useContext } from "react";
+import GameContext from "../../utils/GameContext"
+const Game = () => {
+  const { currentWord, message } = useContext(GameContext)
+  const [charactersAlreadyDisplay, addNewCharacterToCharactersAlreadyDisplay] = useState([]);
+  let timeOut = null;
+  
+  console.log(currentWord);
   const questionTimerInSec = 30;
   //const score = 1000;
-  const word = props.word;
+  const word = currentWord.word;
   const length = word.length;
   const timeInMilliSec = (questionTimerInSec/length)  * 1000;
-  const guessedWord = props.guessedWord;
+  const guessedWord = message;
   let i = 0;
   const getRandomNumber = () => {
     return Math.floor(Math.random() * length);
   };
-
-  const [charactersAlreadyDisplay, addNewCharacterToCharactersAlreadyDisplay] = useState([]);
-  let timeOut = null;
   useEffect(() => {
     timeOut = setTimeout(function () {
       if (charactersAlreadyDisplay.length < length) {
@@ -76,10 +78,10 @@ const Game = (props) => {
   return (
     <div className="card text-center">
       <div className="card-header">
-        <p className="card-text">Defination</p>
+        <p className="card-text">Definition</p>
       </div>
       <div className="card-body">
-        <p className="card-text">{props.defination}</p>
+        <p className="card-text">{currentWord.definition}</p>
       </div>
       <div className="card-footer">
         {Array.from(word).map((x) => getSpan(x, charactersAlreadyDisplay))}

@@ -6,7 +6,7 @@ import queryString from 'query-string';
 import io from "socket.io-client";
 import GameContext from "../../utils/GameContext"
 // import {AuthContext} from "../../utils/AuthContext"
-import DefinitionDisplay from "../DefinitionDisplay/DefinitionDisplay";
+import GameContainer from "../GameContainer/GameContainer"
 
 let socket;
 const Room = ({ location }) => {
@@ -55,8 +55,8 @@ const Room = ({ location }) => {
         socket.on("startGame", (room) => {
             console.log("SOMEONE STARTED THE GAME. DATA: ", room);
             if (room.currentWord.word) {
-              setGameState(true)
               setCurrentWord(room.currentWord)
+              setGameState(true)
             }
         });
 
@@ -107,38 +107,24 @@ const Room = ({ location }) => {
       });
     }
 
-
+    function returnGameContainer(){
+      if (currentWord.word) {
+        return <GameContainer /> 
+      }
+      else {
+        return (
+          <div class="spinner-border text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        )
+      }
+    }
     return (
       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, addWord, wordBank, currentWord}}>
-          {gameState ? <DefinitionDisplay /> : ( isHost ? <SettingsContainer /> : <WordBankContainer />)}
-  
+          {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <WordBankContainer />)}
             <Chat />
       </GameContext.Provider>
-
     );
-  
-    // return (
-    //   <div className="row">
-    //   <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
-    //         <h1>This is a placeholder for game</h1>
-    //         <Chat />
-    //   </GameContext.Provider>
-    //    </div>
-    // );
-
 }
-
-
-//     return (
-//       <div className="row">
-//       <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn}}>
-//             <SettingsContainer isHost={true}/> 
-//             <Chat />
-//--------------if u want to check the functionality u should uncomment this line 137
-//<Game defination={"Your Name"} word="Preeti" guessedWord='{message}'/>
-//       </GameContext.Provider>
-//        </div>
-//     );
-// }
 
 export default Room;
