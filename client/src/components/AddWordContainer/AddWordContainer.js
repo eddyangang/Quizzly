@@ -55,7 +55,7 @@ const AddWordContainer = () => {
           <label htmlFor="definationinput">Enter the Definition:</label>
           <textarea
             className="form-control"
-            id="definationinput"
+            id="definitioninput"
             rows="3"
             placeholder="definition"
             value={currentWordDefinition}
