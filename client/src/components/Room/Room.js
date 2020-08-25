@@ -64,6 +64,10 @@ const Room = ({ location }) => {
           setwordBank([...data.wordBank])
         });
 
+        socket.on("correctAnswerSubmitted", (roomData) => {
+          setCurrentWord(roomData.currentWord)
+        })
+
     }, []);
 
     const sendMessage = (event) => {
