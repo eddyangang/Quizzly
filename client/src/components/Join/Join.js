@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; //links to our chat
 import './Join.css';
 import '../OpenChatrooms/OpenChatrooms.js';
 export default function SignIn() {
@@ -19,6 +19,7 @@ export default function SignIn() {
           <input type="name" className="form-control" id="exampleInputPassword1" placeholder="Room Number" onChange={(event) => setRoom(event.target.value)} />
         </div>
         <Link onClick={e => (!name || !room) ? e.preventDefault() : null} to={`/room?name=${name}&room=${room}`}>
+          {/* prevents click if there is no name or room; otherwise does nothing and we are routed to the url */}
         <center><button type="submit" className="btn purple">Create</button></center>
         </Link>
       </form>

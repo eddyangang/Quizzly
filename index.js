@@ -1,24 +1,24 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
-const { checkRoomNameExist, addUser, getUsersInRoom, getRoomByUserId, removeUserWithId } = require("./utilities/roomHelper")
+const { checkRoomNameExist, addUser, getUsersInRoom, getRoomByUserId, removeUserWithId, addWordBank, setCurrentWord, addScoreForUser } = require("./utilities/roomHelper")
+
+const router = require('./router');
+
+//boilerplate setup to create an instance of socket.io
+const server = http.createServer(app);
+const io = socketio(server);
 
 //added by Chris
 
-
-// const path = require("path");
+const path = require("path");
 // const PORT = process.env.PORT || 3001;
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-// }
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // app.listen(PORT, () => {
 //   console.log(`🌎 ==> API server now on port ${PORT}!`);
 // });
@@ -26,17 +26,20 @@ const { checkRoomNameExist, addUser, getUsersInRoom, getRoomByUserId, removeUser
 //end
 
 //Mongoose connections
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly",
-{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly",
+// {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
 
-const router = require('./router');
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly");
 
-const server = http.createServer(app);
-const io = socketio(server);
+if (process.env.NODE_ENV === "production") {
+  console.log("this is production")
+  app.use(express.static("client/build"));
+}
 
-app.use(cors());
+// app.use(cors());
 app.use(router);
 
+//built in method, runs when we have an instance of client connection
 io.on('connect', (socket) => {
   socket.on('join', ({
     name,
@@ -62,8 +65,9 @@ io.on('connect', (socket) => {
         });
     
         io.to(Room.roomName).emit('roomData', {
-          room: Room.roomName,
-          users: await getUsersInRoom(Room.roomName)
+          room: Room,
+          users: await getUsersInRoom(Room.roomName),
+          userID: socket.id
         });
     
         callback();
@@ -72,8 +76,6 @@ io.on('connect', (socket) => {
         throw err
       }
     })();
-    
-
   });
 
   socket.on('sendMessage', (message, name, room, callback) => {
@@ -88,15 +90,41 @@ io.on('connect', (socket) => {
     callback();
   });
 
-  // socket.on("startGame", (callback) => {
-  //   const user = getUser(socket.id);
 
-  //   io.to(user.room).emit('startGame', {
-  //     text: `${user.name} started the game`
-  //   })
+  socket.on('addWord', (flashCard, room, callback) => {
+    (async () => {
+      try {
+        const wordToAdd = [flashCard]
+        const newRoomData = await addWordBank(wordToAdd, room);
+        socket.emit('newWord', newRoomData);
+        console.log("BEFORE BROADCAST");
+        socket.broadcast.to(room).emit('newWord', newRoomData);
+        callback(newRoomData);
+      }
+      catch (err) {
+        throw err
+      }
+    })();
+  });
 
-  //   callback();
-  // });
+  socket.on("startGame", (callback) => {
+    (async () => {
+      try{
+        const room = await getRoomByUserId(socket.id)
+        // const newRoomData = await setCurrentWord(room.roomName);
+
+        setCurrentWord(room.roomName, (newRoomData)=> {
+          console.log("NEWROOMDATA:", newRoomData);
+          io.to(room.roomName).emit('startGame', newRoomData)
+          callback();
+        })
+      }
+      catch(err){
+        throw err
+      }
+
+    })()
+  });
 
   // socket.on("startGame", callback => {
   //   const user = getUser(socket.id);
@@ -137,5 +165,10 @@ io.on('connect', (socket) => {
     })();
   })
 });
+
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
 
 server.listen(process.env.PORT || 5000, () => console.log(`Server listening on http://localhost:5000.`));
