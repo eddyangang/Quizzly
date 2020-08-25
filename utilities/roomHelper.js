@@ -99,7 +99,7 @@ function checkUsedUsername(usersList, username) {
     }
 }
 // Get all the users for a specific room
-function getUsersInRoom(room) {
+async function getUsersInRoom(room) {
     console.log("GETTING ALL USERS");
     return Room.findOne({
         roomName: room
@@ -127,7 +127,7 @@ async function getRoomByUserId(id) {
 }
 
 // Will remove a user from their room given theri ID
-function removeUserWithId(id) {
+async function removeUserWithId(id) {
     return Room.update({}, {
         $pull: {
             users: {
@@ -179,7 +179,8 @@ async function setCurrentWord(room, callback) {
         // If no more words in the array do some stuff
         if (!newCurrentWord) {
             console.log("NO MORE WORDS");
-            return null
+            const newRoomData = setCurrentWordToNull(foundRoom)
+            return newRoomData
         };
         // update the unPlayedWords list for the room and the currentWord
         const update = {
@@ -207,6 +208,21 @@ async function setCurrentWord(room, callback) {
     }).catch(err => {
         throw err
     })
+}
+
+async function setCurrentWordToNull(room) {
+    const currentWord ={
+        word: null,
+        definition: null,
+        subject: null
+    }
+
+    const update = {
+        $set: {
+            currentWord: currentWord
+        }
+    }
+    return Room.findOneAndUpdate({roomName: room}, update, {new: true})
 }
 
 // create a function that will add +1 to the score to a specific user given their ID  
@@ -237,9 +253,9 @@ module.exports = {
     addScoreForUser
 }
 // create a new room with user 
-function test() {
-    addUser("Eddy", "myRoom", "1")
-}
+// function test() {
+//     addUser("Eddy", "myRoom", "1")
+// }
 
 // let array = [{word: "trying", definition: "world", subject: "haha"}, {word: "again", definition: "world", subject: "haha"}]
 // async function test () {
@@ -253,7 +269,8 @@ function test() {
 //     console.log("RESULTS:", results);
 // }
 
-// function test() {
-//     addScoreForUser("1")
+// async function test() {
+//     const results = await setCurrentWordToNull("6")
+//     console.log("SET CURRENT WORD TO NULL: ", results);
 // }
-test()
+// test()

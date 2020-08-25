@@ -86,7 +86,7 @@ const Room = ({ location }) => {
     function handleStartBtn () {
         setGameState(true)
         console.log("gameState:", gameState);
-        socket.emit('startGame', () => {console.log("working?");});
+        socket.emit('startGame', () => {console.log("You started a Game")});
     }
 
     function handleCancelBtn(){
@@ -113,6 +113,7 @@ const Room = ({ location }) => {
       }
       else {
         return (
+          // Change this to score board
           <div class="spinner-border text-secondary" role="status">
             <span class="sr-only">Loading...</span>
           </div>
