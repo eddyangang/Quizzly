@@ -8,8 +8,8 @@ const getList = (users) => {
   if (users) {
     return users.map((user) => (
       <li key={user.name} className="activeItem">
-        <img className="p-1" alt="Online Icon" src={onlineIcon} />
-        <h1>{user.name}</h1>        
+        {/* <img className="p-1" alt="Online Icon" src={onlineIcon} /> */}
+        <p className="playername" >{user.name}</p>        
       </li>
     ));
   } else return null;
@@ -17,7 +17,7 @@ const getList = (users) => {
 
 const TextContainer = ({ users }) => (
   <div className="textContainer">
-    <div className="textContainerHeader">Online People Status:</div>
+    {/* <div className="textContainerHeader">Online People Status:</div> */}
     <ul className="list-group list-group-flush">{getList(users)}</ul>
   </div>
 
