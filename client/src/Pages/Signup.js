@@ -43,13 +43,13 @@ const SignUp = ({ history }) => {
         <div className="row">
           <div className="col-lg-3"></div>
           <div className="col-lg-6">
-            <div className="jumbotron">
+            {/* <div className="jumbotron"> */}
               <h1>Sign Up</h1>
               <InForm onSubmit={handleSignUp} />
               <br />
               <center><a href="/login">Already Have An Account?</a></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-            </div>
+            {/* </div> */}
           </div>
           <div className="col-lg-3"></div>
         </div>

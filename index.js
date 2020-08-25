@@ -140,6 +140,7 @@ io.on('connect', (socket) => {
 
         setCurrentWord(room, (newRoomData) => {
           console.log("SENDING UPDATED SCORE", newRoomData);
+          io.to(room).emit('correctAnswerSubmitted', newRoomData)
           callback(newRoomData);
         })
       }
