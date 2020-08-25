@@ -24,7 +24,7 @@ const AddWordContainer = () => {
   };
 
   return (
-      <form className="card container-fluid">
+      <form className="card container-fluid py-3">
         <h3>Add a Word</h3>
         <hr/>
         <div className="form-row">
@@ -52,7 +52,7 @@ const AddWordContainer = () => {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="definationinput">Enter the Defination:</label>
+          <label htmlFor="definationinput">Enter the Definition:</label>
           <textarea
             className="form-control"
             id="definationinput"
