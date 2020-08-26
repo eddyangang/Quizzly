@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; //links to our chat
 import './Join.css';
-import TextContainer from '../TextContainer/TextContainer';
 
 export default function SignIn() {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
-
   return (
   
 
