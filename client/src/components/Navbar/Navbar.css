@@ -3,22 +3,36 @@
     max-width: 100px;
 }
 
-a {
-    color: rgb(48, 216, 88);
-  }
-  
+.bg-light {
+  background-color: #0E0E10 !important;
+  border-bottom: 3px solid #3A3A3D;
+  border-radius: 5px 5px 5px 5px;
+}
+
 a:hover {
-    color: #6245cb;
+    color: #6245cb !important;
     transition-duration: 1s;
+    border-color: #6558F5;
   }
 
 .btn-outline-success {
-    color: #fff;
-    border-color: #6245cb;
+  color: #6558F5 !important;
+  border-color: #6558F5;
+  background-color: #3A3A3D;
 }
 
 button:hover {
-    color: #6245cb;
-    background-color: rgba(227, 227, 227, 0.674) !important;
-    transition-duration: .7s;
+  background-color: #0E0E10 !important;
+  transition-duration: .7s;
+  border-color: #6558F5;
+}
+
+a {
+  color: #6c6c8c;
+  font-weight: bold;
+}
+
+a:hover {
+  color:#0E0E10 !important;
+  transition-duration: 1s;
 }
