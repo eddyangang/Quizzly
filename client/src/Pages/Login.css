@@ -1,26 +1,26 @@
 .col-lg-4 {
-  border: 6px solid #6A59FE;
-  background-color: rgb(62, 62, 62);
+  border: 6px solid #6558F5;
+  background-color: #3A3A3D;
   opacity: 92%;
 }
 
 a {
-  color: rgb(188, 188, 188);
+  color: #DEDEE3;
   font-weight: bold;
 }
 
 a:hover {
-  color: rgb(116, 116, 116);
+  color: #DEDEE3;
   transition-duration: 1s;
 }
 
 .btn-primary {
-  color: #6A59FE !important;
-  border-color: #6A59FE;
+  color: #6558F5 !important;
+  border-color: #6558F5;
   background-color: white;
 }
 
 button:hover {
-  background-color: rgba(188, 188, 188, 0.674) !important;
+  background-color: #DEDEE3 !important;
   transition-duration: .7s;
 }

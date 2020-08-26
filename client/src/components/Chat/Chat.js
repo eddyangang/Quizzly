@@ -24,7 +24,7 @@ const Chat = () => {
           <div class="card-header" id="headingOne">
             <h2 class="mb-0">
               <button class="btn btn-link btn-block text-left text-white text-center cardback" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Players (online)
+                Online Players
         </button>
             </h2>
           </div>
