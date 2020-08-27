@@ -12,8 +12,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly", {
 });
 
 if (process.env.NODE_ENV === "production") {
-  router.use(function (req, res) {
+  router.use(function (req, res, next) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"))
+    next()
   })
 }
 
