@@ -3,15 +3,18 @@
   
 }
 
+.body {
+  background-color: #3A3A3D;
+}
 .input {
   border: none;
   border-radius: 0;
   font-size: 1em;
   width:100%;
-  background-color:grey;
+  background-color:rgb(255, 255, 255);
   padding:0px;
   height:60%;
-  
+  color: #848486;
   }
 
 input:focus, textarea:focus, select:focus{
@@ -19,13 +22,21 @@ input:focus, textarea:focus, select:focus{
 }
 
 .sendButton {
-  color: #fff !important;
-  text-transform: uppercase;
+  color: rgb(255, 255, 255) !important;
   text-decoration: none;
-  background: #2979FF;
+  background: #6558F5;
   display: inline-block;
   border: none;  
   height:50%;
   margin: 5px;
-   font-size: 1em;
+  font-size: 1em;
+  border: 1px solid #6558F5;
+
+}
+
+bg-light {
+color: #ffffff !important;
+background-color: #3A3A3D;
+
+
 }

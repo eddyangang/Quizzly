@@ -5,14 +5,15 @@ const socketio = require('socket.io');
 const app = express();
 const mongoose = require("mongoose");
 const {
-  checkRoomNameExist,
   addUser,
   getUsersInRoom,
   getRoomByUserId,
   removeUserWithId,
   addWordBank,
   setCurrentWord,
-  addScoreForUser
+  addScoreForUser,
+  deleteRoom,
+  suffledUnPlayedWords
 } = require("./utilities/roomHelper")
 
 const router = require('./router');
@@ -121,6 +122,7 @@ io.on('connect', (socket) => {
     (async () => {
       try {
         const room = await getRoomByUserId(socket.id)
+        await suffledUnPlayedWords(room.roomName);
         setCurrentWord(room.roomName, (newRoomData) => {
           io.to(room.roomName).emit('startGame', newRoomData)
           callback();
@@ -140,10 +142,10 @@ io.on('connect', (socket) => {
 
         setCurrentWord(room, (newRoomData) => {
           console.log("SENDING UPDATED SCORE", newRoomData);
+          io.to(room).emit('correctAnswerSubmitted', newRoomData)
           callback(newRoomData);
         })
-      }
-      catch (err) {
+      } catch (err) {
         throw err
       }
     })();
@@ -156,14 +158,21 @@ io.on('connect', (socket) => {
       try {
         //Find room that user is in.
         const room = await getRoomByUserId(socket.id)
-        console.log("USERS IN ROOM: ", room.users);
         // find the user
         let user = room.users.find(user => {
           return user.id === socket.id
         });
-        console.log("FOUND USER:", user);
-        await removeUserWithId(socket.id)
-        if (user) {
+        // if the user is the host
+        if (user && user.id === room.hostId) {
+          // delete the room the host is in
+          await deleteRoom(room.roomName)
+          io.to(user.room).emit('message', {
+            user: 'Admin',
+            text: `The host has left the room. The room is now closed`
+          });
+        } else {
+          // remove the user from the room
+          await removeUserWithId(socket.id)
           io.to(user.room).emit('message', {
             user: 'Admin',
             text: `${user.name} has left.`
@@ -172,9 +181,8 @@ io.on('connect', (socket) => {
             room: room,
             users: await getUsersInRoom(user.room)
           });
+
         }
-
-
       } catch (err) {
         throw err
       }
