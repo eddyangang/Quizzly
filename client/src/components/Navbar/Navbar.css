@@ -3,6 +3,31 @@
     max-width: 100px;
 }
 
+/* use as an accent color only */
+.purple-text {
+    color:#6558F5;
+}
+
+/* use for muted text on forms and such */
+.gray-text {
+    color:#3A3A3D;
+}
+
+/* use on containers for background color */
+.gray {
+    color:#848486 !important;
+}
+
+/* use as dark background or similiar */
+.dark-gray {
+    color:#0E0E10;
+}
+
+/* use for text color where white is required */
+.white-text {
+   color: #DEDEE3;
+}
+
 .bg-light {
   background-color: #0E0E10 !important;
   border-bottom: 3px solid #3A3A3D;
