@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
 import Chat from "../Chat/Chat";
-import SettingsContainer from "../SettingsContainer/SettingsContainer"
+import SettingsContainer from "../SettingsContainer/SettingsContainer";
 import WordBankContainer from "../WordBankContainer/WordBankContainer";
 import queryString from 'query-string';
 import io from "socket.io-client";
-import GameContext from "../../utils/GameContext"
+import GameContext from "../../utils/GameContext";
 // import {AuthContext} from "../../utils/AuthContext"
-import GameContainer from "../GameContainer/GameContainer"
+import GameContainer from "../GameContainer/GameContainer";
+import ScoreContainer from "../ScoreContainer/ScoreContainer";
 
 let socket;
 const Room = ({ location }) => {
@@ -111,6 +112,7 @@ const Room = ({ location }) => {
       });
     }
 
+    //Game container UI elements
     function returnGameContainer(){
       if (currentWord.word) {
         return <GameContainer /> 
@@ -118,9 +120,10 @@ const Room = ({ location }) => {
       else {
         return (
           // Change this to score board
-          <div class="spinner-border text-secondary" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
+          <ScoreContainer />
+          // <div class="spinner-border text-secondary" role="status">
+          //   <span class="sr-only">Loading...</span>
+          // </div>
         )
       }
     }

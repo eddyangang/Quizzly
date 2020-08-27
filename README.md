@@ -3,16 +3,8 @@
 ### Quizzly
 Quizzly is a real-time game that allows users to create and join different chatrooms as they try and guess the word to definitions displayed on screen.
 
-
 ## Description
 This game allows users to chat in real-time to guess the definition of words. It can be for students who want to study together, teachers who want to have a friendly-interface to teach their students definitions, and also friends who simply want to play a guessing game!
-
-<!-- ## Software Requirements
-- must use React
-- must use a `Header` component that appears on multiple pages
-- must use a single `Project` component that will be used multiple times on a single page
-- must use navigation with React Router
-- must have a `Footer` component that will be used on multiple times on a single page -->
 
 ##  Utilities/Libraries Used
 
@@ -30,15 +22,7 @@ This game allows users to chat in real-time to guess the definition of words. It
 
 * Socket.IO 
 
-
-## Technologies
 <img src="./assets/technologies-collage.png" width="400"><br>
-<!-- - mongodb.com for database
-- mongoosejs.com for database models
-- Firebase.google.com for authentication
-- Socket.IO for real time chat
-- expressjs.com for server
-- reactjs.org for front end duties  -->
 
 ## Screenshots
 
@@ -68,3 +52,11 @@ application is deployed using Heroku and MongoDb Atlas for database
 **Preeti Gupta**
 - [Link to Github](https://github.com/preeti1234567)
 - [Link to LinkedIn](https://www.linkedin.com/in/preetigupta-59a5641ab/)
+
+
+<!-- ## Software Requirements
+- must use React
+- must use a `Header` component that appears on multiple pages
+- must use a single `Project` component that will be used multiple times on a single page
+- must use navigation with React Router
+- must have a `Footer` component that will be used on multiple times on a single page -->

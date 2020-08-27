@@ -4,7 +4,7 @@ import GameContext from "../../utils/GameContext";
 const GameContainer = (props) => {
   const { currentWord, message } = useContext(GameContext);
   const questionTimerInSec = 30;
-  const score = 1000;
+  // const score = 1000;
   const word = currentWord.word;
   const guessedWord =message;
   const defaultCharacterToBeDisplay = ['!',' ','?','-','_']
