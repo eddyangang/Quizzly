@@ -42,6 +42,9 @@ This game allows users to chat in real-time to guess the definition of words. It
 
 ## Screenshots
 
+## Deployment
+application is deployed using Heroku and MongoDb Atlas for database
+[Deployed link](http://quizzlyisawesome.herokuapp.com/)
 
 ## Authors
 
