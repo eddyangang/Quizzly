@@ -9,30 +9,25 @@
   border-radius: 5px 5px 5px 5px;
 }
 
-a:hover {
-    color: #6245cb !important;
-    transition-duration: 1s;
-    border-color: #6558F5;
-  }
-
 .btn-outline-success {
   color: #6558F5 !important;
   border-color: #6558F5;
-  background-color: #3A3A3D;
+  background-color: #3A3A3D !important;
 }
 
 button:hover {
-  background-color: #0E0E10 !important;
+  background-color: #0E0E10  !important;
   transition-duration: .7s;
-  border-color: #6558F5;
+  border-color: #6558F5 !important;
 }
 
 a {
-  color: #6c6c8c;
+  color: #ffffff !important;
   font-weight: bold;
 }
 
 a:hover {
-  color:#0E0E10 !important;
+  color:#DEDEE3 !important;
   transition-duration: 1s;
+  border-color: #DEDEE3;
 }
