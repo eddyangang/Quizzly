@@ -43,6 +43,9 @@ app.use(express.json());
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly");
 
+// app.use(cors());
+app.use(router);
+
 if (process.env.NODE_ENV === "production") {
   console.log("this is production")
   app.use(express.static("client/build"));
@@ -52,8 +55,7 @@ if (process.env.NODE_ENV === "production") {
   })
 }
 
-// app.use(cors());
-app.use(router);
+
 
 //built in method, runs when we have an instance of client connection
 io.on('connect', (socket) => {
