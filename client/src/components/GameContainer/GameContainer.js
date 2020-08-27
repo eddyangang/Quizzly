@@ -96,7 +96,7 @@ const GameContainer = (props) => {
   return (
     <div className="card text-center">
       <div className="card-header">
-        <p className="card-text">Defination</p>
+        <p className="card-text">Definition</p>
       </div>
       <div className="card-body">
         <p className="card-text">{currentWord.definition}</p>
