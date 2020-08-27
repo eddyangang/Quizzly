@@ -1,7 +1,7 @@
 .col-sm-4, .col-sm-6 {
   border: 2px solid #6558F5;
   background-color: rgb(24, 24, 24);
-  opacity: 92%;
+  /* opacity: 92%; */
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 5%;

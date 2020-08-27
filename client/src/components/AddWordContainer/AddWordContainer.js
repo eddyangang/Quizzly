@@ -24,7 +24,7 @@ const AddWordContainer = () => {
   };
 
   return (
-      <form className="card container-fluid">
+      <form className="card container-fluid py-3">
         <h3>Add a Word</h3>
         <hr/>
         <div className="form-row">

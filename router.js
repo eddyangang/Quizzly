@@ -11,11 +11,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly", {
   useFindAndModify: false
 });
 
-if (process.env.NODE_ENV === "production") {
-  router.use(function (req, res) {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"))
-  })
-}
+
 
 // check if server is running
 router.get("/", (req, res) => {
@@ -26,15 +22,16 @@ router.get("/", (req, res) => {
 
 // return all the current rooms
 router.get("/api/rooms", (req, res) => {
-  (async () => {
-    try {
-      const rooms = await Room.find({});
-      res.json(rooms);
-    } catch (err) {
-      throw err;
-    }
-  })();
+      Room.find({}).then((rooms)=>{
+        res.json(rooms);
+      })
 })
 
+if (process.env.NODE_ENV === "production") {
+  router.use(function (req, res, next) {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"))
+    next()
+  })
+}
 
 module.exports = router;
