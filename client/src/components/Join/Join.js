@@ -9,25 +9,12 @@ export default function SignIn() {
   const [existingRooms, setExistingRooms] = useState([])
   const { currentUser } = useContext(AuthContext)
   useEffect(() => {
-    // (async () => {
-
-
-    // try{
     const url = "/api/rooms";
-    // const response = await fetch(url);
     Axios.get(url).then((data) => {
-      // const data = await response.json()
       console.log("ROOMS:", data);
       console.log("FROM JOIN:", currentUser);
       setExistingRooms(data.data)
-    }
-    )
-
-    // }
-    // catch(err){
-    //   console.log(err);
-    // }
-    // })()
+    })
   }, [])
 
 
