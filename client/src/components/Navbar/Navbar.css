@@ -3,8 +3,6 @@
     max-width: 100px;
 }
 
-
-
 /* use as an accent color only */
 .purple-text {
     color:#6558F5;
@@ -28,4 +26,33 @@
 /* use for text color where white is required */
 .white-text {
    color: #DEDEE3;
+
+.bg-light {
+  background-color: #0E0E10 !important;
+  border-bottom: 3px solid #3A3A3D;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.btn-outline-success {
+  color: #6558F5 !important;
+  border-color: #6558F5;
+  background-color: #3A3A3D !important;
+}
+
+button:hover {
+  background-color: #0E0E10  !important;
+  transition-duration: .7s;
+  border-color: #6558F5 !important;
+}
+
+a {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+a:hover {
+  color:#DEDEE3 !important;
+  transition-duration: 1s;
+  border-color: #DEDEE3;
+
 }
