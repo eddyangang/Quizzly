@@ -3,16 +3,17 @@ h1 {
     text-align: center;
 }
 
-html, body {
+body, html {
     font-family: 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
     /* overflow: hidden; */
-    background-color: #000000;
+    background-color: #0E0E10;
     background-attachment: fixed;
     image-orientation: inherit;
     background-size:100% 100%;
     border-radius: 4px 4px 4px 4px;
+    color: #ffffff;
   }
 
 
@@ -29,23 +30,24 @@ html, body {
 
 
 a {
-  color: rgb(189, 189, 189);
+  color: #ffffff;
   font-weight: bold;
 }
 
 a:hover {
-  color: rgba(188, 188, 188, 0.674) !important;
+  color: #ffffff !important;
   transition-duration: 1s;
 }
 
 .btn-primary {
-  color: #6A59FE !important;
-  border-color: #6A59FE;
+  color: #6558F5 !important;
+  border-color: #6558F5;
   background-color: white;
 }
 
 button:hover {
-  background-color: rgba(188, 188, 188, 0.674) !important;
+  background-color: #DEDEE3;
   transition-duration: .7s;
+  border-color: #6558F5;
 }
 

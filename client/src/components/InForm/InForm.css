@@ -1,5 +1,5 @@
 label {
-    color: rgba(255, 255, 255, 0.866);
+    color: #6558F5;
     font-size: large;
 }
 
@@ -9,7 +9,7 @@ label {
 
 .form-control {
     color: rgb(0, 0, 0);
-    border-bottom: 1px solid rgba(172, 109, 75, 0.674);
+    border-bottom: 1px solid #3A3A3D;
     padding: .375rem .75rem;
     border-radius: .25rem;
     background-color: #ffffff;
@@ -19,20 +19,16 @@ label {
 
 .btn-primary {
     color: #ffffff !important;
-    border-color: #6245cb;
+    border-color: #6558F5;
 }
 
 button:hover {
-    color: #6245cb;
+    color: #6558F5;
     background-color: rgba(188, 188, 188, 0.674) !important;
     transition-duration: .7s;
 }
-
-a {
-    color: rgb(48, 216, 88);
-  }
   
 a:hover {
-    color: #6245cb;
+    color: #6558F5;
     transition-duration: 1s;
 }

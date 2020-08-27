@@ -141,16 +141,15 @@ async function removeUserWithId(id) {
     })
 }
 
+// deletes the room when the host leaves
+async function deleteRoom(roomName) {
+    return Room.deleteOne({roomName: roomName})
+}
 // More functions to create
 // create a function that will mix an array
-function shuffle(array) {
-    console.log("SHUFFLING ARRAY");
-    return array.sort(() => Math.random() - 0.5);
-}
+
 // add the word bank into unplayed words for a specific room.
 async function addWordBank(array, room) {
-    // shuffle the array before adding to word bank.
-    array = shuffle(array);
     console.log("ADDING WORDS");
     return Room.findOneAndUpdate({
         roomName: room
@@ -224,6 +223,21 @@ async function setCurrentWordToNull(room) {
     }
     return Room.findOneAndUpdate({roomName: room}, update, {new: true})
 }
+function suffleArray(array) {
+    return array.sort(() => Math.random() - 0.5)
+}
+
+async function suffledUnPlayedWords(roomName) {
+    const room = await Room.findOne({roomName: roomName});
+    const unPlayedWords = room.unPlayedWords;
+    const suffledWords = suffleArray(unPlayedWords);
+    const update = {
+        $set: {
+            unPlayedWords: suffledWords
+        }
+    }
+    return Room.findOneAndUpdate({roomName: roomName}, update, {new: true})
+}
 
 // create a function that will add +1 to the score to a specific user given their ID  
 async function addScoreForUser(id) {
@@ -250,7 +264,9 @@ module.exports = {
     removeUserWithId,
     addWordBank,
     setCurrentWord,
-    addScoreForUser
+    addScoreForUser,
+    deleteRoom,
+    suffledUnPlayedWords
 }
 // create a new room with user 
 // function test() {
@@ -265,12 +281,12 @@ module.exports = {
 
 
 // function test () {
-//     const results = setCurrentWord("myRoom")
+//     const results = await suffledUnPlayedWords("17")
 //     console.log("RESULTS:", results);
 // }
 
 // async function test() {
-//     const results = await setCurrentWordToNull("6")
-//     console.log("SET CURRENT WORD TO NULL: ", results);
+//     const results = await deleteRoom("24")
+//     console.log("DELTED ROOM: ", results);
 // }
 // test()

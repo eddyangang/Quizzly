@@ -5,22 +5,22 @@
 }
 
 a {
-  color: rgb(188, 188, 188);
+  color: #ffffff;
   font-weight: bold;
 }
 
 a:hover {
-  color: rgb(116, 116, 116);
+  color: #ffffff;
   transition-duration: 1s;
 }
 
 .btn-primary {
-  color: #6A59FE !important;
-  border-color: #6A59FE;
+  color: #6558F5 !important;
+  border-color: #6558F5;
   background-color: white;
 }
 
 button:hover {
-  background-color: rgba(188, 188, 188, 0.674) !important;
+  background-color: #DEDEE3;
   transition-duration: .7s;
 }
