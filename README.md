@@ -21,6 +21,9 @@ Quizzly is a game that allows the users to join different rooms and chat in real
 
 ## Screenshots
 
+## Deployment
+application is deployed using Heroku and MongoDb Atlas for database
+[Deployed link](http://quizzlyisawesome.herokuapp.com/)
 
 ## Submission Requirements
 - Update GitHub profile with pinned repositories featuring those same projects
