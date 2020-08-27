@@ -31,7 +31,7 @@ export default function SignIn() {
                 <button type="submit" className="btn purple">Join</button>
               </Link>
             </div>
-          ))) : <h1>Nothing to display</h1>}
+          ))) : <h1>No Rooms</h1>}
         </div>
 
         <div className="col-sm-1"></div>

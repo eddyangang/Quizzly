@@ -27,11 +27,11 @@ router.get("/api/rooms", (req, res) => {
       })
 })
 
-if (process.env.NODE_ENV === "production") {
-  router.use(function (req, res, next) {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"))
-    next()
-  })
-}
+// if (process.env.NODE_ENV === "production") {
+//   router.use(function (req, res, next) {
+//     res.sendFile(path.join(__dirname, "./client/build/index.html"))
+//     next()
+//   })
+// }
 
 module.exports = router;
