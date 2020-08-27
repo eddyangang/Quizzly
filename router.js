@@ -26,14 +26,17 @@ router.get("/", (req, res) => {
 
 // return all the current rooms
 router.get("/api/rooms", (req, res) => {
-  (async () => {
-    try {
-      const rooms = await Room.find({});
-      res.json(rooms);
-    } catch (err) {
-      throw err;
-    }
-  })();
+  // (async () => {
+  //   try {
+      // const rooms = await Room.find({});
+      Room.find({}).then((rooms)=>{
+        res.json(rooms);
+      })
+
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // })();
 })
 
 
