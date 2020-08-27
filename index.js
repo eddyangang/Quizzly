@@ -46,10 +46,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly");
 if (process.env.NODE_ENV === "production") {
   console.log("this is production")
   app.use(express.static("client/build"));
-  app.use(function (req, res, next) {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"))
-    next()
-  })
 }
 
 // app.use(cors());
