@@ -14,9 +14,9 @@ margin: 0 35px;
 }
 
 .purple {
-  background-color: #6c6c8c !important;
-  color: white;
+  color: #ffffff !important;
   border-color: #6558F5;
+  background-color: #3A3A3D !important;
 }  
 
 .centered {
@@ -28,5 +28,4 @@ margin: 0 35px;
   margin:auto;
   color: white;
 }
-
 

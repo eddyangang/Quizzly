@@ -30,12 +30,12 @@ body, html {
 
 
 a {
-  color: #DEDEE3;
+  color: #ffffff;
   font-weight: bold;
 }
 
 a:hover {
-  color: #DEDEE3 !important;
+  color: #ffffff !important;
   transition-duration: 1s;
 }
 
@@ -46,7 +46,7 @@ a:hover {
 }
 
 button:hover {
-  background-color: #DEDEE3 !important;
+  background-color: #DEDEE3;
   transition-duration: .7s;
   border-color: #6558F5;
 }
