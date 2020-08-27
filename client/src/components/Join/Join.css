@@ -1,5 +1,5 @@
 .col-sm-4, .col-sm-6 {
-  border: 2px solid #6245cb;
+  border: 2px solid #6558F5;
   background-color: rgb(24, 24, 24);
   opacity: 92%;
   padding-left: 5%;
@@ -14,8 +14,9 @@ margin: 0 35px;
 }
 
 .purple {
-  background: rgba(188, 188, 188, 0.674) !important;
-  color: white;
+  color: #ffffff !important;
+  border-color: #6558F5;
+  background-color: #3A3A3D !important;
 }  
 
 .centered {
@@ -27,5 +28,4 @@ margin: 0 35px;
   margin:auto;
   color: white;
 }
-
 
