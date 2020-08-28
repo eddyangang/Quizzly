@@ -11,6 +11,7 @@ const {
   removeUserWithId,
   addWordBank,
   setCurrentWord,
+  setCurrentWordToNull,
   addScoreForUser,
   deleteRoom,
   suffledUnPlayedWords,
@@ -135,6 +136,21 @@ io.on('connect', (socket) => {
       }
 
     })()
+  });
+
+  socket.on("endGame", (room, callback) => {
+
+  (async () => {
+    try {
+      console.log("You ended the Game");
+      const newRoomData = await setCurrentWordToNull(room)
+      io.to(newRoomData.roomName).emit('endGame', newRoomData)
+      callback();
+    }
+    catch (err){
+      throw err
+    }
+  })();
   });
 
   socket.on("correctAnswerSubmitted", (message, name, room, callback) => {

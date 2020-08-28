@@ -276,6 +276,7 @@ module.exports = {
     removeUserWithId,
     addWordBank,
     setCurrentWord,
+    setCurrentWordToNull,
     addScoreForUser,
     deleteRoom,
     suffledUnPlayedWords,

@@ -61,12 +61,18 @@ const Room = ({ location }) => {
             }
         });
 
+        socket.on("endGame", () => {
+          console.log("SOMEONE ENDED THE GAME. DATA: ");
+            setGameState(false)
+      });
+
         socket.on("newWord", (data) => {
           setwordBank([...data.wordBank])
         });
 
         socket.on("correctAnswerSubmitted", (roomData) => {
           setCurrentWord(roomData.currentWord)
+          setUsers(roomData.users);
         })
 
     }, []);
@@ -90,13 +96,18 @@ const Room = ({ location }) => {
     }
 
     function handleStartBtn () {
+      console.log("gameState:", gameState);
+      socket.emit('startGame', () => {
+        console.log("You started a Game")
         setGameState(true)
-        console.log("gameState:", gameState);
-        socket.emit('startGame', () => {console.log("You started a Game")});
+      });
     }
 
     function handleCancelBtn(){
-      setGameState(false)
+      socket.emit('endGame', room, () => {
+        console.log("You ended the Game")
+        setGameState(false)
+      });
     }
 
     function addWord(word, subject, definition){
@@ -120,7 +131,7 @@ const Room = ({ location }) => {
           <>
           <GameContainer /> 
           <ScoreContainer />
-          <button className="btn btn-danger m-1" onClick={handleCancelBtn}>Cancel</button>
+          {isHost ? (<button className="btn btn-danger m-1" onClick={handleCancelBtn}>Cancel</button>) : null}
           </>
           ) 
       }
@@ -128,7 +139,7 @@ const Room = ({ location }) => {
         return (
           <>
           <ScoreContainer />
-          <button className="btn btn-success m-1" onClick={handleCancelBtn}>Return</button>
+          {isHost ? (<button className="btn btn-success m-1" onClick={handleCancelBtn}>Return</button>) : null}
           </>
         )
       }
