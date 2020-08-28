@@ -1,4 +1,5 @@
 import React, { useCallback, useContext } from "react";
+import { Link } from "react-router-dom";
 import { withRouter, Redirect } from "react-router";
 import { firebase, uiConfig } from "../firebaseConfig"
 import { AuthContext } from "../utils/AuthContext.js";
@@ -55,7 +56,7 @@ Password
 <button type="submit">Log in</button>
 </form> */}
               <br />
-              <center><a href="/signup">Create A New Account</a></center>
+              <center><Link to={"/signup"}>Create A New Account</Link></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             {/* </div> */}
           </div>

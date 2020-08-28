@@ -62,12 +62,10 @@ io.on('connect', (socket) => {
     (async () => {
       try {
         const id = socket.id;
-        console.log("Given:", name, room, id);
         const {
           error,
           Room
         } = await addUser(name, room, id);
-        console.log("Room", Room);
         if (error) return callback(error);
         socket.join(Room.roomName);
 
