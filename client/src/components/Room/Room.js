@@ -128,19 +128,19 @@ const Room = ({ location }) => {
     function returnGameContainer(){
       if (currentWord !== null && currentWord.word) {
         return (
-          <>
+          <div className="container">
           <GameContainer /> 
           <ScoreContainer />
           {isHost ? (<button className="btn btn-danger m-1" onClick={handleCancelBtn}>Cancel</button>) : null}
-          </>
+          </div>
           ) 
       }
       else {
         return (
-          <>
+          <div className="container">
           <ScoreContainer />
           {isHost ? (<button className="btn btn-success m-1" onClick={handleCancelBtn}>Return</button>) : null}
-          </>
+          </div>
         )
       }
     }
