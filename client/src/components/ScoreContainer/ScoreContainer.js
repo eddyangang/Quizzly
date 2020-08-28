@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import Score from "../ScoreItem/ScoreItem" //might use this to display score
+// import Score from "../ScoreItem/ScoreItem" //might use this to display score
 import GameContext from "../../utils/GameContext"
 
 
