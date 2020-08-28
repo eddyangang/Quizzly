@@ -17,13 +17,13 @@ export default function SignIn() {
     })
   }, [])
 
-  useEffect(() => {
-    const url = "https://quizlet.com/8775815/software-engineering-vocabulary-flash-cards/"
+  // useEffect(() => {
+  //   const url = "https://quizlet.com/8775815/software-engineering-vocabulary-flash-cards/"
 
-    Axios.get("/api/quizletScrap/", url).then((data) => {
-      console.log(data);
-    })
-  }, [])
+  //   Axios.get("/api/quizletScrap/", url).then((data) => {
+  //     console.log(data);
+  //   })
+  // }, [])
   return (
 
 
