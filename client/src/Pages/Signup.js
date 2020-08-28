@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { firebase , uiConfig} from "../firebaseConfig"
@@ -47,7 +48,7 @@ const SignUp = ({ history }) => {
               <h1>Sign Up</h1>
               <InForm onSubmit={handleSignUp} />
               <br />
-              <center><a href="/login">Already Have An Account?</a></center>
+              <center><Link to={"/login"}>Already Have an Account</Link></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             {/* </div> */}
           </div>
