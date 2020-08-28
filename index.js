@@ -11,9 +11,11 @@ const {
   removeUserWithId,
   addWordBank,
   setCurrentWord,
+  setCurrentWordToNull,
   addScoreForUser,
   deleteRoom,
-  suffledUnPlayedWords
+  suffledUnPlayedWords,
+  setWordBankToUnPlayedWords
 } = require("./utilities/roomHelper")
 
 const router = require('./router');
@@ -122,6 +124,8 @@ io.on('connect', (socket) => {
     (async () => {
       try {
         const room = await getRoomByUserId(socket.id)
+        const wordBank = room.wordBank;
+        await setWordBankToUnPlayedWords(room.roomName, wordBank);
         await suffledUnPlayedWords(room.roomName);
         setCurrentWord(room.roomName, (newRoomData) => {
           io.to(room.roomName).emit('startGame', newRoomData)
@@ -132,6 +136,21 @@ io.on('connect', (socket) => {
       }
 
     })()
+  });
+
+  socket.on("endGame", (room, callback) => {
+
+  (async () => {
+    try {
+      console.log("You ended the Game");
+      const newRoomData = await setCurrentWordToNull(room)
+      io.to(newRoomData.roomName).emit('endGame', newRoomData)
+      callback();
+    }
+    catch (err){
+      throw err
+    }
+  })();
   });
 
   socket.on("correctAnswerSubmitted", (message, name, room, callback) => {
