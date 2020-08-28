@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly", {
     useFindAndModify: false
 });
 
-function checkRoomNameExist(roomName) {
+async function checkRoomNameExist(roomName) {
     console.log("CHECKING IF ROOM NAME EXIST");
     return Room.find({}).then(allRooms => {
         let state = false;
@@ -26,7 +26,7 @@ function checkRoomNameExist(roomName) {
     })
 }
 // Creates a new room and makes the user host
-function createNewRoom(username, roomName, id) {
+async function createNewRoom(username, roomName, id) {
     console.log("CREATING A NEW ROOM");
     const newUser = new User(username, roomName, id);
 

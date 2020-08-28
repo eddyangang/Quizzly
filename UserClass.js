@@ -6,5 +6,4 @@ class User {
         this.score = score
     }
 }
-
 module.exports = User
