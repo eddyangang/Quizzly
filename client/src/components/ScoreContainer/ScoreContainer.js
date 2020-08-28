@@ -11,7 +11,7 @@ const ScoreContainer = () => {
   const getUserList = (users) => {
     if (users) {
       return users.map((user) => (
-        <li key={user.name} className="activeItem">
+        <li key={user.name} className="activeItem text-center">
           <p className="purple-text">{user.name}</p>
         </li>
       ));
@@ -21,7 +21,7 @@ const ScoreContainer = () => {
   const getUserScoreList = (users) => {
     if (users) {
       return users.map((user) => (
-        <li key={user.score} className="activeItem">
+        <li key={user.score} className="activeItem text-center">
           <p className="purple-text">{user.score}</p>
         </li>
       ));
@@ -29,21 +29,20 @@ const ScoreContainer = () => {
   };
 
   return (
-    //holds
-    // set margin to 4 and make container responsive
-    <div className="card container-fluid w-50 h-50 m-4">
+    //holds the score table
+    <div className="card m-3">
       <h2>Score Board</h2>
       <table className="table table-bordered border-purple">
         <thead>
           <tr >
-            <th className="text-center" scope="col-sm-4">Name</th>
-            <th className="text-center" scope="col-sm-4">Score</th>
+            <th className="text-left" scope="col-sm-4">Name</th>
+            <th className="text-left" scope="col-sm-4">Score</th>
           </tr>
         </thead>
 
         <tr >
-          <td className="text-center">{getUserList(users)}</td>
-          <td className="text-center">{getUserScoreList(users)}</td>
+          <td className="text-center m-0">{getUserList(users)}</td>
+          <td className="text-center m-0">{getUserScoreList(users)}</td>
         </tr>
 
 
