@@ -13,7 +13,8 @@ const {
   setCurrentWord,
   addScoreForUser,
   deleteRoom,
-  suffledUnPlayedWords
+  suffledUnPlayedWords,
+  setWordBankToUnPlayedWords
 } = require("./utilities/roomHelper")
 
 const router = require('./router');
@@ -122,6 +123,8 @@ io.on('connect', (socket) => {
     (async () => {
       try {
         const room = await getRoomByUserId(socket.id)
+        const wordBank = room.wordBank;
+        await setWordBankToUnPlayedWords(room.roomName, wordBank);
         await suffledUnPlayedWords(room.roomName);
         setCurrentWord(room.roomName, (newRoomData) => {
           io.to(room.roomName).emit('startGame', newRoomData)

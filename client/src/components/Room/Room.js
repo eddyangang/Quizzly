@@ -80,6 +80,7 @@ const Room = ({ location }) => {
             setMessage('')
             console.log("UPDATED SCORE:", roomData);
             setCurrentWord(roomData.currentWord)
+            setUsers(roomData.users)
           });
         } else{
           if(message) {
@@ -114,16 +115,21 @@ const Room = ({ location }) => {
 
     //Game container UI elements
     function returnGameContainer(){
-      if (currentWord.word) {
-        return <GameContainer /> 
+      if (currentWord !== null && currentWord.word) {
+        return (
+          <>
+          <GameContainer /> 
+          <ScoreContainer />
+          <button className="btn btn-danger m-1" onClick={handleCancelBtn}>Cancel</button>
+          </>
+          ) 
       }
       else {
         return (
-          // Change this to score board
+          <>
           <ScoreContainer />
-          // <div class="spinner-border text-secondary" role="status">
-          //   <span class="sr-only">Loading...</span>
-          // </div>
+          <button className="btn btn-success m-1" onClick={handleCancelBtn}>Return</button>
+          </>
         )
       }
     }
