@@ -61,12 +61,18 @@ const Room = ({ location }) => {
             }
         });
 
+        socket.on("endGame", () => {
+          console.log("SOMEONE ENDED THE GAME. DATA: ");
+            setGameState(false)
+      });
+
         socket.on("newWord", (data) => {
           setwordBank([...data.wordBank])
         });
 
         socket.on("correctAnswerSubmitted", (roomData) => {
           setCurrentWord(roomData.currentWord)
+          setUsers(roomData.users);
         })
 
     }, []);
@@ -80,6 +86,7 @@ const Room = ({ location }) => {
             setMessage('')
             console.log("UPDATED SCORE:", roomData);
             setCurrentWord(roomData.currentWord)
+            setUsers(roomData.users)
           });
         } else{
           if(message) {
@@ -89,13 +96,18 @@ const Room = ({ location }) => {
     }
 
     function handleStartBtn () {
+      console.log("gameState:", gameState);
+      socket.emit('startGame', () => {
+        console.log("You started a Game")
         setGameState(true)
-        console.log("gameState:", gameState);
-        socket.emit('startGame', () => {console.log("You started a Game")});
+      });
     }
 
     function handleCancelBtn(){
-      setGameState(false)
+      socket.emit('endGame', room, () => {
+        console.log("You ended the Game")
+        setGameState(false)
+      });
     }
 
     function addWord(word, subject, definition){
@@ -114,16 +126,21 @@ const Room = ({ location }) => {
 
     //Game container UI elements
     function returnGameContainer(){
-      if (currentWord.word) {
-        return <GameContainer /> 
+      if (currentWord !== null && currentWord.word) {
+        return (
+          <>
+          <GameContainer /> 
+          <ScoreContainer />
+          {isHost ? (<button className="btn btn-danger m-1" onClick={handleCancelBtn}>Cancel</button>) : null}
+          </>
+          ) 
       }
       else {
         return (
-          // Change this to score board
+          <>
           <ScoreContainer />
-          // <div class="spinner-border text-secondary" role="status">
-          //   <span class="sr-only">Loading...</span>
-          // </div>
+          {isHost ? (<button className="btn btn-success m-1" onClick={handleCancelBtn}>Return</button>) : null}
+          </>
         )
       }
     }
