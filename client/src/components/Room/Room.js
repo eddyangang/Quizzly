@@ -61,9 +61,10 @@ const Room = ({ location }) => {
             }
         });
 
-        socket.on("endGame", () => {
-          console.log("SOMEONE ENDED THE GAME. DATA: ");
+        socket.on("endGame", (roomData) => {
+          console.log("SOMEONE ENDED THE GAME. DATA: ", roomData);
             setGameState(false)
+            setUsers(roomData.users)
       });
 
         socket.on("newWord", (data) => {
@@ -128,7 +129,7 @@ const Room = ({ location }) => {
     function returnGameContainer(){
       if (currentWord !== null && currentWord.word) {
         return (
-          <div className="container">
+          <div className="container text-center">
           <GameContainer /> 
           <ScoreContainer />
           {isHost ? (<button className="btn btn-danger m-1" onClick={handleCancelBtn}>Cancel</button>) : null}

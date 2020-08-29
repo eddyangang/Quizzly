@@ -27,14 +27,12 @@ router.get("/api/rooms", (req, res) => {
   })
 })
 
-router.get("/api/quizletScrap/", (req, res) => {
-  const url = req.body
+router.post("/api/quizletScrap/", (req, res) => {
+  const{ url } = req.body
   console.log("URL:", url);
-  // quizletScrap(url).then((results) => {
-  //   res.send(results)
-  // }).catch(err => console.log(err))
-
-  res.send("done")
+  quizletScrap(url).then((results) => {
+    res.json(results)
+  }).catch(err => console.log(err))
 })
 
 
