@@ -1,0 +1,34 @@
+label {
+    color: #6558F5;
+    font-size: large;
+}
+
+.container, containter-fluid {
+    position: relative;
+}
+
+.form-control {
+    color: rgb(0, 0, 0);
+    border-bottom: 1px solid #3A3A3D;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    background-color: #ffffff;
+    text-shadow: blueviolet;
+    background-clip: padding-box;
+}
+
+.btn-primary {
+    color: #ffffff !important;
+    border-color: #6558F5;
+}
+
+button:hover {
+    color: #6558F5;
+    background-color: rgba(188, 188, 188, 0.674) !important;
+    transition-duration: .7s;
+}
+  
+a:hover {
+    color: #6558F5;
+    transition-duration: 1s;
+}

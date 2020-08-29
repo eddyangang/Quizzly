@@ -15,15 +15,15 @@ export default function SignIn() {
       console.log("FROM JOIN:", currentUser);
       setExistingRooms(data.data)
     })
+  }, [currentUser])
+
+  useEffect(() => {
+    const url = "https://quizlet.com/8775815/software-engineering-vocabulary-flash-cards/"
+
+    Axios.post("/api/quizletScrap/",{ url }).then((data) => {
+      console.log(data);
+    })
   }, [])
-
-  // useEffect(() => {
-  //   const url = "https://quizlet.com/8775815/software-engineering-vocabulary-flash-cards/"
-
-  //   Axios.get("/api/quizletScrap/", url).then((data) => {
-  //     console.log(data);
-  //   })
-  // }, [])
   return (
 
 
@@ -35,7 +35,7 @@ export default function SignIn() {
               <h4>{room.roomName}</h4>
               <hr />
               <Link to={`/room?name=${currentUser.displayName}&room=${room.roomName}`}>
-                <button type="submit" className="btn purple">Join</button>
+                <button type="submit" className="btn purple" disabled={room.currentWord !== null && room.currentWord.word ? true : false } >Join</button>
               </Link>
             </div>
           ))) : <h1>No Rooms</h1>}
