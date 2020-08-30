@@ -3,7 +3,7 @@
   flex-direction: column;
   flex-basis: 50vh;
   overflow-y: auto;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   background: #FFFFFF;
   border-radius: 8px;
   height: 100%;

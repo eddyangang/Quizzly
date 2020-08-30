@@ -21,7 +21,7 @@ const Room = ({ location }) => {
     const [gameState, setGameState] = useState(false);
     const [isHost, setisHost] = useState(false)
     const ENDPOINT = "http://localhost:5000";
-    // const ENDPOINT = 'https://quizzlyisawesnpmome.herokuapp.com/';
+    // const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
 
     useEffect(() => {
 
@@ -67,11 +67,6 @@ const Room = ({ location }) => {
       });
 
         socket.on("newWord", (data) => {
-          setwordBank([...data.wordBank])
-        });
-
-        socket.on("deleteWord", (data) => {
-          console.log("RECEIVED DATA WHEN DELETING WORDS");
           setwordBank([...data.wordBank])
         });
 
@@ -129,15 +124,6 @@ const Room = ({ location }) => {
       });
     }
 
-    function deleteWord(flashcard, room) {
-      console.log("DELTE BUTTUN PRESSED");
-
-      socket.emit('deleteWord', flashcard, room, data => {
-        console.log("Word Deleted", data);
-        setwordBank(data.wordBank)
-      });
-    }
-
     function quizletAddWords (words) {
       socket.emit('addWord', words, room, data => {
         console.log("sent new word", data);
@@ -166,7 +152,7 @@ const Room = ({ location }) => {
       }
     }
     return (
-      <GameContext.Provider value={{users, name, room, messages, message, isHost, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords, deleteWord}}>
+      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords}}>
           {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <div className="col-lg-8 col-md-8 col-sm-12"><WordBankContainer /></div>)}
             <Chat />
       </GameContext.Provider>
