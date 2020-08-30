@@ -131,7 +131,7 @@ const Room = ({ location }) => {
 
     function deleteWord(flashcard, room) {
       console.log("DELTE BUTTUN PRESSED");
-      
+
       socket.emit('deleteWord', flashcard, room, data => {
         console.log("Word Deleted", data);
         setwordBank(data.wordBank)
@@ -166,7 +166,7 @@ const Room = ({ location }) => {
       }
     }
     return (
-      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords, deleteWord}}>
+      <GameContext.Provider value={{users, name, room, messages, message, isHost, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords, deleteWord}}>
           {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <div className="col-lg-8 col-md-8 col-sm-12"><WordBankContainer /></div>)}
             <Chat />
       </GameContext.Provider>

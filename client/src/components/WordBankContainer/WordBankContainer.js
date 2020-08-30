@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext} from "react";
 import WordBankItem from "../WordBankItem/WordBankItem"
 import "./WordBankContainer.css";
-
+import GameContext from "../../utils/GameContext"
 const WordBankContainer = () => {
+  const { isHost } = useContext(GameContext)
   return (
     <div className="card container-fluid mt-5 py-3">
       <h2>Word Bank</h2>
@@ -18,9 +19,9 @@ const WordBankContainer = () => {
             <th className="text-center" scope="col-md-5">
               Definition
             </th>
-            <th className="text-center" scope="col-md-1">
+            {isHost ? (<th className="text-center" scope="col-md-1">
               Delete
-            </th>
+            </th>) : null}
           </tr>
         </thead>
         <WordBankItem/>
