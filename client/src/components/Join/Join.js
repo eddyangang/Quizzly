@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import './Join.css';
 import { AuthContext } from "../../utils/AuthContext"
 import API from "../../utils/API"
-import QuizletForm from "../QuizletForm/QuizletForm"
 export default function SignIn() {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
@@ -17,19 +16,10 @@ export default function SignIn() {
     })
   }, [])
 
-  // useEffect(() => {
-  //   const url = "https://quizlet.com/8775815/software-engineering-vocabulary-flash-cards/"
-
-  //   API.quizletScrap(url).then(data => {
-  //     console.log(data);
-  //   })
-  // }, [])
-
   return (
 
 
     <div className="container-fluid">
-      <QuizletForm/>
       <div className="row">
         <div className="col-sm-6"><h1 className="heading">Open Rooms</h1>
           {existingRooms.length > 0 ? (existingRooms.map((room, i) => (

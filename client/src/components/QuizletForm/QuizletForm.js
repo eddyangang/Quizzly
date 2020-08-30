@@ -40,13 +40,14 @@ export default function QuizletForm() {
         setWords(newWords)
         console.log(words)
     }
-
+    // https://quizlet.com/8775815/software-engineering-vocabulary-flash-cards/
     const handleDelete = (e, i) => {
       e.preventDefault()
       console.log("deleting", i);
-      // const newWords = [...words.slice(0, i), ...words.slice(i + 1)]
-      // console.log(newWords);
-      // setWords([...newWords])
+      const newWords = words;
+      newWords.splice(i, 1)
+      console.log(newWords);
+      setWords([...newWords])
     }
 
     const handleSave= () => {
@@ -87,7 +88,7 @@ export default function QuizletForm() {
                   </Button>
               </center>
                 {words.map((word, i) => (
-                  <Row className=" d-flex justify-content-center align-items-center mb-1" key={i}>
+                  <Row className=" d-flex justify-content-center align-items-center mb-1" key={i*Math.random()}>
                     <textarea name="word" id="word" cols="20" rows="5" onChange={(e) => handleWordUpdate(e, i)} defaultValue={word.word}></textarea>
                     <textarea name="definition" id="definition" cols="60" rows="5" onChange={(e) => handleDefinitionUpdate(e, i)} defaultValue={word.definition}></textarea>
                   <center>
