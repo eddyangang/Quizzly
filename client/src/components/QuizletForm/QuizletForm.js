@@ -5,9 +5,11 @@ import "./styles.css"
 import GameContext from "../../utils/GameContext"
 import { useContext } from 'react';
 export default function QuizletForm() {
+
     const url = useRef();
     const subject = useRef();
     const { quizletAddWords } = useContext(GameContext)
+
     const [show, setShow] = useState(false);
     const [words, setWords] = useState([])
 
@@ -88,7 +90,7 @@ export default function QuizletForm() {
                   </Button>
               </center>
                 {words.map((word, i) => (
-                  <Row className=" d-flex justify-content-center align-items-center mb-1" key={i*Math.random()}>
+                  <Row className=" d-flex justify-content-center align-items-center mb-1" key={word.word}>
                     <textarea name="word" id="word" cols="20" rows="5" onChange={(e) => handleWordUpdate(e, i)} defaultValue={word.word}></textarea>
                     <textarea name="definition" id="definition" cols="60" rows="5" onChange={(e) => handleDefinitionUpdate(e, i)} defaultValue={word.definition}></textarea>
                   <center>

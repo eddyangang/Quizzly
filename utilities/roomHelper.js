@@ -161,6 +161,21 @@ async function addWordBank(array, room) {
         new: true
     })
 }
+
+// Delete a word from the word Bank
+async function deleteWord(room, word) {
+    console.log("Deleting a word");
+    return Room.findOneAndUpdate({
+        roomName: room
+    }, {
+        $pull: {
+            wordBank: word
+        }
+    }, {
+        new: true
+    })
+}
+
 // create a function that will remove an element (the first or a random element) from the unpalyed word list and make it the current word
 async function setWordBankToUnPlayedWords(room, wordBank){
     const update = {
@@ -296,7 +311,8 @@ module.exports = {
     deleteRoom,
     suffledUnPlayedWords,
     setWordBankToUnPlayedWords,
-    resetScoreToZero
+    resetScoreToZero,
+    deleteWord
 }
 // create a new room with user 
 // function test() {
@@ -316,7 +332,11 @@ module.exports = {
 // }
 
 // async function test() {
-//     const results = await deleteRoom("24")
-//     console.log("DELTED ROOM: ", results);
+//     const results = await deleteWord("14", {
+//         "word" : "Algorithm",
+//         "definition" : "An effective method expressed as a finite list of well-defined instructions for solving a problem.",
+//         "subject" : "cs"
+//     })
+//     console.log("DELTED WORD: ", results);
 // }
 // test()
