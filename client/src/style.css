@@ -20,6 +20,10 @@ html {
   color: #848486 !important;
 }
 
+.green {
+  color: #80e76f !important ;
+}
+
 /* use as dark background or similiar */
 
 .dark-gray {
@@ -38,6 +42,28 @@ html {
   border-color: #6558F5 !important;
 }
 
+a {
+  color: #6558F5;
+}
+
+a :hover {
+  color: #b6bbae !important;
+}
+
+/* setting transition globally for consistent design */
+.btn-primary {
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1) !important;
+  transition-duration: .2s !important;
+}
+
+.btn {
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1) !important;
+  transition-duration: .2s !important;
+}
+
+/* Transitions and animations------------------------------------------------ */
+
+
 .transition1 {
   transition: transform .2s;
   /* Animation */
@@ -49,10 +75,18 @@ html {
   filter: saturate(2);
 }
 
-a {
-  color: #6558F5;
+.glowEffect {
+  animation: overSaturation 1.5s infinite ease-in !important;
 }
 
-a :hover {
-  color: #b6bbae !important;
+@keyframes overSaturation {
+  from {
+    filter: saturate(.75);
+  }
+  50% {
+    filter: saturate(1.5)
+  }
+  to {
+    filter: saturate(.75);
+  }
 }
