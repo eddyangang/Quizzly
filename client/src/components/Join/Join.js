@@ -1,33 +1,35 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom"; //links to our chat
+import { Link } from "react-router-dom";
 import './Join.css';
 import { AuthContext } from "../../utils/AuthContext"
-import Axios from 'axios';
+import API from "../../utils/API"
+import QuizletForm from "../QuizletForm/QuizletForm"
 export default function SignIn() {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [existingRooms, setExistingRooms] = useState([])
   const { currentUser } = useContext(AuthContext)
   useEffect(() => {
-    const url = "/api/rooms";
-    Axios.get(url).then((data) => {
-      console.log("ROOMS:", data);
-      console.log("FROM JOIN:", currentUser);
+    API.getRooms().then(data => {
       setExistingRooms(data.data)
-    })
-  }, [currentUser])
-
-  useEffect(() => {
-    const url = "https://quizlet.com/8775815/software-engineering-vocabulary-flash-cards/"
-
-    Axios.post("/api/quizletScrap/",{ url }).then((data) => {
-      console.log(data);
+    }).catch(err => {
+      throw err
     })
   }, [])
+
+  // useEffect(() => {
+  //   const url = "https://quizlet.com/8775815/software-engineering-vocabulary-flash-cards/"
+
+  //   API.quizletScrap(url).then(data => {
+  //     console.log(data);
+  //   })
+  // }, [])
+
   return (
 
 
     <div className="container-fluid">
+      <QuizletForm/>
       <div className="row">
         <div className="col-sm-6"><h1 className="heading">Open Rooms</h1>
           {existingRooms.length > 0 ? (existingRooms.map((room, i) => (

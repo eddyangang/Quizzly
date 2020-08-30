@@ -5,7 +5,6 @@ import WordBankContainer from "../WordBankContainer/WordBankContainer";
 import queryString from 'query-string';
 import io from "socket.io-client";
 import GameContext from "../../utils/GameContext";
-// import {AuthContext} from "../../utils/AuthContext"
 import GameContainer from "../GameContainer/GameContainer";
 import ScoreContainer from "../ScoreContainer/ScoreContainer";
 
@@ -125,6 +124,13 @@ const Room = ({ location }) => {
       });
     }
 
+    function quizletAddWords (words) {
+      socket.emit('addWord', words, room, data => {
+        console.log("sent new word", data);
+        setwordBank(data.wordBank)
+      });
+    }
+
     //Game container UI elements
     function returnGameContainer(){
       if (currentWord !== null && currentWord.word) {
@@ -146,7 +152,7 @@ const Room = ({ location }) => {
       }
     }
     return (
-      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord}}>
+      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords}}>
           {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <div className="col-lg-8 col-md-8 col-sm-12"><WordBankContainer /></div>)}
             <Chat />
       </GameContext.Provider>
