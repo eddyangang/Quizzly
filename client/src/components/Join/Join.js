@@ -1,29 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom"; //links to our chat
+import { Link } from "react-router-dom";
 import './Join.css';
 import { AuthContext } from "../../utils/AuthContext"
-import Axios from 'axios';
+import API from "../../utils/API"
 export default function SignIn() {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [existingRooms, setExistingRooms] = useState([])
   const { currentUser } = useContext(AuthContext)
   useEffect(() => {
-    const url = "/api/rooms";
-    Axios.get(url).then((data) => {
-      console.log("ROOMS:", data);
-      console.log("FROM JOIN:", currentUser);
+    API.getRooms().then(data => {
       setExistingRooms(data.data)
-    })
-  }, [currentUser])
-
-  useEffect(() => {
-    const url = "https://quizlet.com/8775815/software-engineering-vocabulary-flash-cards/"
-
-    Axios.post("/api/quizletScrap/",{ url }).then((data) => {
-      console.log(data);
+    }).catch(err => {
+      throw err
     })
   }, [])
+
   return (
 
 

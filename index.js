@@ -108,7 +108,7 @@ io.on('connect', (socket) => {
   socket.on('addWord', (flashCard, room, callback) => {
     (async () => {
       try {
-        const wordToAdd = [flashCard]
+        const wordToAdd = flashCard
         const newRoomData = await addWordBank(wordToAdd, room);
         socket.emit('newWord', newRoomData);
         socket.broadcast.to(room).emit('newWord', newRoomData);
