@@ -1,10 +1,11 @@
 import React, { useCallback, useContext } from "react";
+import { Link } from "react-router-dom";
 import { withRouter, Redirect } from "react-router";
 import { firebase, uiConfig } from "../firebaseConfig"
 import { AuthContext } from "../utils/AuthContext.js";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import InForm from "../components/InForm/InForm";
-import './Signup.css';
+import './Login.css';
 
 const Login = ({ history }) => {
   const handleLogin = useCallback(
@@ -37,26 +38,11 @@ const Login = ({ history }) => {
         <div className="row">
           <div className="col-lg-3"></div>
           <div className="col-lg-6">
-            <div className="jumbotron">
-
-
               <h1 className="text-center">Log In</h1>
               <InForm onSubmit={handleLogin} />
-              {/* <form onSubmit={handleLogin}>
-<label>
-Email
-<input name="email" type="email" placeholder="Email" />
-</label>
-<label>
-Password
-<input name="password" type="password" placeholder="Password" />
-</label>
-<button type="submit">Log in</button>
-</form> */}
               <br />
-              <center><a href="/signup">Create A New Account</a></center>
+              <center><Link to={"/signup"}>Create A New Account</Link></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-            </div>
           </div>
           <div className="col-lg-3"></div>
         </div>

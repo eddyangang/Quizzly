@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Quizzly", {
     useFindAndModify: false
 });
 
-function checkRoomNameExist(roomName) {
+async function checkRoomNameExist(roomName) {
     console.log("CHECKING IF ROOM NAME EXIST");
     return Room.find({}).then(allRooms => {
         let state = false;
@@ -26,7 +26,7 @@ function checkRoomNameExist(roomName) {
     })
 }
 // Creates a new room and makes the user host
-function createNewRoom(username, roomName, id) {
+async function createNewRoom(username, roomName, id) {
     console.log("CREATING A NEW ROOM");
     const newUser = new User(username, roomName, id);
 
@@ -99,7 +99,7 @@ function checkUsedUsername(usersList, username) {
     }
 }
 // Get all the users for a specific room
-function getUsersInRoom(room) {
+async function getUsersInRoom(room) {
     console.log("GETTING ALL USERS");
     return Room.findOne({
         roomName: room
@@ -127,7 +127,7 @@ async function getRoomByUserId(id) {
 }
 
 // Will remove a user from their room given theri ID
-function removeUserWithId(id) {
+async function removeUserWithId(id) {
     return Room.update({}, {
         $pull: {
             users: {
@@ -141,22 +141,20 @@ function removeUserWithId(id) {
     })
 }
 
+// deletes the room when the host leaves
+async function deleteRoom(roomName) {
+    return Room.deleteOne({roomName: roomName})
+}
 // More functions to create
 // create a function that will mix an array
-function shuffle(array) {
-    console.log("SHUFFLING ARRAY");
-    return array.sort(() => Math.random() - 0.5);
-}
+
 // add the word bank into unplayed words for a specific room.
 async function addWordBank(array, room) {
-    // shuffle the array before adding to word bank.
-    array = shuffle(array);
     console.log("ADDING WORDS");
     return Room.findOneAndUpdate({
         roomName: room
     }, {
         $push: {
-            unPlayedWords: array,
             wordBank: array
         }
     }, {
@@ -164,6 +162,15 @@ async function addWordBank(array, room) {
     })
 }
 // create a function that will remove an element (the first or a random element) from the unpalyed word list and make it the current word
+async function setWordBankToUnPlayedWords(room, wordBank){
+    const update = {
+        $set: {
+            unPlayedWords: wordBank
+        }
+    }
+    return Room.findOneAndUpdate({roomName: room}, update, {new: true})
+}
+
 async function setCurrentWord(room, callback) {
     Room.findOne({
         roomName: room
@@ -179,8 +186,12 @@ async function setCurrentWord(room, callback) {
         // If no more words in the array do some stuff
         if (!newCurrentWord) {
             console.log("NO MORE WORDS");
-            return null
+            setCurrentWordToNull(foundRoom).then( data => {
+                console.log("SET THE CURRENT WORD TO NULL");
+                return data
+            })
         };
+        console.log("SHOULD NOT SEE ME IF CURRENT WORD IS NULL");
         // update the unPlayedWords list for the room and the currentWord
         const update = {
             $set: {
@@ -209,6 +220,36 @@ async function setCurrentWord(room, callback) {
     })
 }
 
+async function setCurrentWordToNull(room) {
+    const currentWord ={
+        word: null,
+        definition: null,
+        subject: null
+    }
+
+    const update = {
+        $set: {
+            currentWord: currentWord
+        }
+    }
+    return Room.findOneAndUpdate({roomName: room}, update, {new: true})
+}
+function suffleArray(array) {
+    return array.sort(() => Math.random() - 0.5)
+}
+
+async function suffledUnPlayedWords(roomName) {
+    const room = await Room.findOne({roomName: roomName});
+    const unPlayedWords = room.unPlayedWords;
+    const suffledWords = suffleArray(unPlayedWords);
+    const update = {
+        $set: {
+            unPlayedWords: suffledWords
+        }
+    }
+    return Room.findOneAndUpdate({roomName: roomName}, update, {new: true})
+}
+
 // create a function that will add +1 to the score to a specific user given their ID  
 async function addScoreForUser(id) {
     console.log("HELPER: UPDATING SCORE");
@@ -223,8 +264,24 @@ async function addScoreForUser(id) {
     })
 }
 
-// Delete a room when the host leaves
-// 
+async function resetScoreToZero(room, users) {
+    console.log("Reset score to zero");
+
+    users.forEach(user => {
+        user.score = 0; 
+    })
+    return Room.findOneAndUpdate({
+        roomName: room
+    }, {
+        '$set': {
+            users
+        }
+    }, {
+        new: true
+    })
+}
+
+
 
 module.exports = {
     addUser,
@@ -234,7 +291,12 @@ module.exports = {
     removeUserWithId,
     addWordBank,
     setCurrentWord,
-    addScoreForUser
+    setCurrentWordToNull,
+    addScoreForUser,
+    deleteRoom,
+    suffledUnPlayedWords,
+    setWordBankToUnPlayedWords,
+    resetScoreToZero
 }
 // create a new room with user 
 // function test() {
@@ -249,16 +311,12 @@ module.exports = {
 
 
 // function test () {
-//     const results = setCurrentWord("myRoom")
+//     const results = await suffledUnPlayedWords("17")
 //     console.log("RESULTS:", results);
 // }
 
-// function test() {
-//     addScoreForUser("1")
+// async function test() {
+//     const results = await deleteRoom("24")
+//     console.log("DELTED ROOM: ", results);
 // }
 // test()
-
-// create a component that takes in a word
-// creates the word in _ (word: "hello" => _ _ _ _ _ )
-// another example "hello world!" => _ _ _ _ _   _ _ _ _ _!
-// after some time (say 5seconds) reveal a random letter if no one has guess it word yet => "hello world!" => _ e _ _ _   _ _ _ _ _!
