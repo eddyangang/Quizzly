@@ -5,7 +5,6 @@ import WordBankContainer from "../WordBankContainer/WordBankContainer";
 import queryString from 'query-string';
 import io from "socket.io-client";
 import GameContext from "../../utils/GameContext";
-// import {AuthContext} from "../../utils/AuthContext"
 import GameContainer from "../GameContainer/GameContainer";
 import ScoreContainer from "../ScoreContainer/ScoreContainer";
 
@@ -61,12 +60,19 @@ const Room = ({ location }) => {
             }
         });
 
+        socket.on("endGame", (roomData) => {
+          console.log("SOMEONE ENDED THE GAME. DATA: ", roomData);
+            setGameState(false)
+            setUsers(roomData.users)
+      });
+
         socket.on("newWord", (data) => {
           setwordBank([...data.wordBank])
         });
 
         socket.on("correctAnswerSubmitted", (roomData) => {
           setCurrentWord(roomData.currentWord)
+          setUsers(roomData.users);
         })
 
     }, []);
@@ -80,6 +86,7 @@ const Room = ({ location }) => {
             setMessage('')
             console.log("UPDATED SCORE:", roomData);
             setCurrentWord(roomData.currentWord)
+            setUsers(roomData.users)
           });
         } else{
           if(message) {
@@ -89,13 +96,18 @@ const Room = ({ location }) => {
     }
 
     function handleStartBtn () {
+      console.log("gameState:", gameState);
+      socket.emit('startGame', () => {
+        console.log("You started a Game")
         setGameState(true)
-        console.log("gameState:", gameState);
-        socket.emit('startGame', () => {console.log("You started a Game")});
+      });
     }
 
     function handleCancelBtn(){
-      setGameState(false)
+      socket.emit('endGame', room, () => {
+        console.log("You ended the Game")
+        setGameState(false)
+      });
     }
 
     function addWord(word, subject, definition){
@@ -112,23 +124,35 @@ const Room = ({ location }) => {
       });
     }
 
+    function quizletAddWords (words) {
+      socket.emit('addWord', words, room, data => {
+        console.log("sent new word", data);
+        setwordBank(data.wordBank)
+      });
+    }
+
     //Game container UI elements
     function returnGameContainer(){
-      if (currentWord.word) {
-        return <GameContainer /> 
+      if (currentWord !== null && currentWord.word) {
+        return (
+          <div className="container text-center">
+          <GameContainer /> 
+          <ScoreContainer />
+          {isHost ? (<button className="btn btn-danger m-1" onClick={handleCancelBtn}>Cancel</button>) : null}
+          </div>
+          ) 
       }
       else {
         return (
-          // Change this to score board
+          <div className="container">
           <ScoreContainer />
-          // <div class="spinner-border text-secondary" role="status">
-          //   <span class="sr-only">Loading...</span>
-          // </div>
+          {isHost ? (<button className="btn btn-success m-1" onClick={handleCancelBtn}>Return</button>) : null}
+          </div>
         )
       }
     }
     return (
-      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord}}>
+      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords}}>
           {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <div className="col-lg-8 col-md-8 col-sm-12"><WordBankContainer /></div>)}
             <Chat />
       </GameContext.Provider>

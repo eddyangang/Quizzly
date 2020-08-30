@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom"; //links to our chat
+import { Link } from "react-router-dom";
 import './Join.css';
 import { AuthContext } from "../../utils/AuthContext"
-import Axios from 'axios';
+import API from "../../utils/API"
 export default function SignIn() {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [existingRooms, setExistingRooms] = useState([])
   const { currentUser } = useContext(AuthContext)
   useEffect(() => {
-    const url = "/api/rooms";
-    Axios.get(url).then((data) => {
-      console.log("ROOMS:", data);
-      console.log("FROM JOIN:", currentUser);
+    API.getRooms().then(data => {
       setExistingRooms(data.data)
+    }).catch(err => {
+      throw err
     })
   }, [])
 
@@ -28,10 +27,10 @@ export default function SignIn() {
               <h4>{room.roomName}</h4>
               <hr />
               <Link to={`/room?name=${currentUser.displayName}&room=${room.roomName}`}>
-                <button type="submit" className="btn purple">Join</button>
+                <button type="submit" className="btn purple" disabled={room.currentWord !== null && room.currentWord.word ? true : false } >Join</button>
               </Link>
             </div>
-          ))) : <h1>Nothing to display</h1>}
+          ))) : <h1>No Rooms</h1>}
         </div>
 
         <div className="col-sm-1"></div>

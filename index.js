@@ -11,9 +11,12 @@ const {
   removeUserWithId,
   addWordBank,
   setCurrentWord,
+  setCurrentWordToNull,
   addScoreForUser,
   deleteRoom,
-  suffledUnPlayedWords
+  suffledUnPlayedWords,
+  setWordBankToUnPlayedWords,
+  resetScoreToZero
 } = require("./utilities/roomHelper")
 
 const router = require('./router');
@@ -60,12 +63,10 @@ io.on('connect', (socket) => {
     (async () => {
       try {
         const id = socket.id;
-        console.log("Given:", name, room, id);
         const {
           error,
           Room
         } = await addUser(name, room, id);
-        console.log("Room", Room);
         if (error) return callback(error);
         socket.join(Room.roomName);
 
@@ -107,7 +108,7 @@ io.on('connect', (socket) => {
   socket.on('addWord', (flashCard, room, callback) => {
     (async () => {
       try {
-        const wordToAdd = [flashCard]
+        const wordToAdd = flashCard
         const newRoomData = await addWordBank(wordToAdd, room);
         socket.emit('newWord', newRoomData);
         socket.broadcast.to(room).emit('newWord', newRoomData);
@@ -122,6 +123,8 @@ io.on('connect', (socket) => {
     (async () => {
       try {
         const room = await getRoomByUserId(socket.id)
+        const wordBank = room.wordBank;
+        await setWordBankToUnPlayedWords(room.roomName, wordBank);
         await suffledUnPlayedWords(room.roomName);
         setCurrentWord(room.roomName, (newRoomData) => {
           io.to(room.roomName).emit('startGame', newRoomData)
@@ -132,6 +135,22 @@ io.on('connect', (socket) => {
       }
 
     })()
+  });
+
+  socket.on("endGame", (room, callback) => {
+
+  (async () => {
+    try {
+      console.log("You ended the Game");
+      const roomData = await setCurrentWordToNull(room)
+      const newRoomData = await resetScoreToZero(roomData.roomName, roomData.users)
+      io.to(newRoomData.roomName).emit('endGame', newRoomData)
+      callback();
+    }
+    catch (err){
+      throw err
+    }
+  })();
   });
 
   socket.on("correctAnswerSubmitted", (message, name, room, callback) => {

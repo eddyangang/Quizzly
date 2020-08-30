@@ -8,25 +8,27 @@ label {
 }
 
 .form-control {
-    color: #0E0E10;
+    color: rgb(0, 0, 0);
     border-bottom: 1px solid #3A3A3D;
     padding: .375rem .75rem;
     border-radius: .25rem;
     background-color: #ffffff;
-    text-shadow: #6558F5;
+    text-shadow: blueviolet;
     background-clip: padding-box;
 }
 
 .btn-primary {
     color: #ffffff !important;
     border-color: #6558F5;
+    transition-duration: .2s !important;
+    transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }
 
 button:hover {
     color: #6558F5;
     background-color: #848486 !important;
-    transition: cubic-bezier(0.36, 0.4, 0.28, 1);
     transition-duration: .3s;
+    transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }
   
 a:hover {

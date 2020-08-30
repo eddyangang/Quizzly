@@ -1,25 +1,24 @@
 h1 {
-    color: #ffffff;
-    text-align: center;
+  color: #ffffff;
+  text-align: center;
 }
 
 body, html {
-    font-family: 'Roboto', sans-serif;
-    padding: 0;
-    margin: 0;
-    /* overflow: hidden; */
-    background-color: #0E0E10;
-    background-attachment: fixed;
-    image-orientation: inherit;
-    background-size:100% 100%;
-    border-radius: 4px 4px 4px 4px;
-    color: #ffffff;
-  }
-
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
+  /* overflow: hidden; */
+  background-color: #0E0E10;
+  background-attachment: fixed;
+  image-orientation: inherit;
+  background-size: 100% 100%;
+  border-radius: 4px 4px 4px 4px;
+  color: #ffffff;
+}
 
 .col-lg-6 {
   border: 6px solid #6A59FE;
-  background-color: rgb(24, 24, 24);
+  background-color: #0E0E10;
   /* opacity: 92%; */
   padding-left: 10%;
   padding-right: 10%;
@@ -28,7 +27,6 @@ body, html {
   border-radius: 5px 5px 5px 5px;
 }
 
-
 a {
   color: #ffffff;
   font-weight: bold;
@@ -36,18 +34,40 @@ a {
 
 a:hover {
   color: #ffffff !important;
-  transition-duration: 1s;
+  transition-duration: .3s;
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }
 
 .btn-primary {
   color: #6558F5 !important;
   border-color: #6558F5;
   background-color: white;
+  transition-duration: .2s !important;
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }
 
 button:hover {
   background-color: #DEDEE3;
-  transition-duration: .7s;
+  transition-duration: .3s;
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1);
   border-color: #6558F5;
 }
 
+.logoLogin {
+  max-width: 200px;
+  animation: overSaturation 1.5s infinite ease-in;
+}
+
+/* animation keyframes  */
+
+@keyframes overSaturation {
+  from {
+    filter: saturate(.55);
+  }
+  50% {
+    filter: saturate(1.5)
+  }
+  to {
+    filter: saturate(.55);
+  }
+}

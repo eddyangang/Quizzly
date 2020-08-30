@@ -30,7 +30,7 @@ const Chat = () => {
           </div>
 
           <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <div class="card-body rounded-0">
+            <div className="card-body rounded-0">
               <TextContainer users={users} />
 
             </div>
