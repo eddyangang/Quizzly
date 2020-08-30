@@ -28,7 +28,12 @@ const SignUp = ({ history }) => {
   return (
 
     <div>
-      <div className="container-fluid mt-5">
+      <div className="container-fluid mt-4">
+        <div className="row justify-content-center">
+          <div>
+            <img src="/img/Logo.png" alt="logo" className="logoLogin mb-4"/>
+          </div>
+        </div>
         <div className="row">
           <div className="col-lg-3"></div>
           <div className="col-lg-6">
