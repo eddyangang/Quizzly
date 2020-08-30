@@ -45,8 +45,8 @@ export default function QuizletForm() {
       e.preventDefault()
       console.log("deleting", i);
       // const newWords = [...words.slice(0, i), ...words.slice(i + 1)]
-      console.log(newWords);
-      setWords([...newWords])
+      // console.log(newWords);
+      // setWords([...newWords])
     }
 
     const handleSave= () => {
