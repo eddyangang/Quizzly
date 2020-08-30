@@ -9,14 +9,17 @@ const WordBankContainer = () => {
       <table className="table table-bordered border-bark">
         <thead>
           <tr >
-            <th className="text-center " scope="col-md-4">
+            <th className="text-center " scope="col-md-3">
               Subject
             </th>
-            <th className="text-center" scope="col-md-4">
+            <th className="text-center" scope="col-md-3">
               Word
             </th>
-            <th className="text-center" scope="col-md-4">
+            <th className="text-center" scope="col-md-5">
               Definition
+            </th>
+            <th className="text-center" scope="col-md-1">
+              Delete
             </th>
           </tr>
         </thead>
@@ -25,5 +28,4 @@ const WordBankContainer = () => {
     </div>
   );
 };
-
 export default WordBankContainer;

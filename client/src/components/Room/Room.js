@@ -70,6 +70,11 @@ const Room = ({ location }) => {
           setwordBank([...data.wordBank])
         });
 
+        socket.on("deleteWord", (data) => {
+          console.log("RECEIVED DATA WHEN DELETING WORDS");
+          setwordBank([...data.wordBank])
+        });
+
         socket.on("correctAnswerSubmitted", (roomData) => {
           setCurrentWord(roomData.currentWord)
           setUsers(roomData.users);
@@ -124,6 +129,15 @@ const Room = ({ location }) => {
       });
     }
 
+    function deleteWord(flashcard, room) {
+      console.log("DELTE BUTTUN PRESSED");
+      
+      socket.emit('deleteWord', flashcard, room, data => {
+        console.log("Word Deleted", data);
+        setwordBank(data.wordBank)
+      });
+    }
+
     function quizletAddWords (words) {
       socket.emit('addWord', words, room, data => {
         console.log("sent new word", data);
@@ -152,7 +166,7 @@ const Room = ({ location }) => {
       }
     }
     return (
-      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords}}>
+      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords, deleteWord}}>
           {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <div className="col-lg-8 col-md-8 col-sm-12"><WordBankContainer /></div>)}
             <Chat />
       </GameContext.Provider>
