@@ -1,6 +1,7 @@
 .logo {
     display: inline;
     max-width: 100px;
+    animation: overSaturation 1.5s infinite ease-in;
 }
 
 /* use as an accent color only */
@@ -42,7 +43,8 @@
 
 button:hover {
   background-color: #0E0E10  !important;
-  transition-duration: .7s;
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1);
+  transition-duration: .3s;
   border-color: #6558F5 !important;
 }
 
@@ -53,6 +55,7 @@ a {
 
 a:hover {
   color:#DEDEE3 !important;
-  transition-duration: 1s;
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1);
+  transition-duration: .3s;
   border-color: #DEDEE3;
 }
