@@ -162,7 +162,6 @@ async function addWordBank(array, room) {
     })
 }
 // create a function that will remove an element (the first or a random element) from the unpalyed word list and make it the current word
-
 async function setWordBankToUnPlayedWords(room, wordBank){
     const update = {
         $set: {
@@ -265,8 +264,24 @@ async function addScoreForUser(id) {
     })
 }
 
-// Delete a room when the host leaves
-// 
+async function resetScoreToZero(room, users) {
+    console.log("Reset score to zero");
+
+    users.forEach(user => {
+        user.score = 0; 
+    })
+    return Room.findOneAndUpdate({
+        roomName: room
+    }, {
+        '$set': {
+            users
+        }
+    }, {
+        new: true
+    })
+}
+
+
 
 module.exports = {
     addUser,
@@ -280,7 +295,8 @@ module.exports = {
     addScoreForUser,
     deleteRoom,
     suffledUnPlayedWords,
-    setWordBankToUnPlayedWords
+    setWordBankToUnPlayedWords,
+    resetScoreToZero
 }
 // create a new room with user 
 // function test() {

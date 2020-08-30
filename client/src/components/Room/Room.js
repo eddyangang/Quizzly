@@ -61,9 +61,10 @@ const Room = ({ location }) => {
             }
         });
 
-        socket.on("endGame", () => {
-          console.log("SOMEONE ENDED THE GAME. DATA: ");
+        socket.on("endGame", (roomData) => {
+          console.log("SOMEONE ENDED THE GAME. DATA: ", roomData);
             setGameState(false)
+            setUsers(roomData.users)
       });
 
         socket.on("newWord", (data) => {

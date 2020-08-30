@@ -10,8 +10,8 @@ const ScoreContainer = () => {
 
   const getUserList = (users) => {
     if (users) {
-      return users.map((user) => (
-        <li key={user.name} className="activeItem text-center">
+      return users.map((user, i) => (
+        <li key={i} className="activeItem text-center">
           <p className="purple-text">{user.name}</p>
         </li>
       ));
@@ -20,8 +20,8 @@ const ScoreContainer = () => {
 
   const getUserScoreList = (users) => {
     if (users) {
-      return users.map((user) => (
-        <li key={user.score} className="activeItem text-center">
+      return users.map((user, i) => (
+        <li key={i} className="activeItem text-center">
           <p className="purple-text">{user.score}</p>
         </li>
       ));

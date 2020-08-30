@@ -38,27 +38,11 @@ const Login = ({ history }) => {
         <div className="row">
           <div className="col-lg-3"></div>
           <div className="col-lg-6">
-            {/* <div className="jumbotron"> */}
-
-
               <h1 className="text-center">Log In</h1>
               <InForm onSubmit={handleLogin} />
-
-{/* <form onSubmit={handleLogin}>
-<label>
-Email
-<input name="email" type="email" placeholder="Email" />
-</label>
-<label>
-Password
-<input name="password" type="password" placeholder="Password" />
-</label>
-<button type="submit">Log in</button>
-</form> */}
               <br />
               <center><Link to={"/signup"}>Create A New Account</Link></center>
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-            {/* </div> */}
           </div>
           <div className="col-lg-3"></div>
         </div>
