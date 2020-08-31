@@ -1,13 +1,16 @@
-.container {
+.col-md-4 {
   display: flex;
   flex-direction: column;
-  flex-basis: 50vh;
+  flex-basis: 70vh; 
   overflow-y: auto;
   justify-content: space-between;
   background: #FFFFFF;
   border-radius: 8px;
   height: 100%;
-  margin-right:0px;  
+  margin-right:0px;   
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 5px 5px 5px 5px;
 } 
 
 

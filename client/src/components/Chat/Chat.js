@@ -14,7 +14,7 @@ const Chat = () => {
 
   return (
 
-    <div className="container p-0 mr-2">
+    <div className="col-md-4">
       {/* <div className="row">
         <TextContainer users={users} />
       </div> */}
@@ -51,7 +51,8 @@ const Chat = () => {
           sendMessage={sendMessage}
         />
       </div>
-    </div>
+    </div> 
+    
   );
 };
 

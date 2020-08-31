@@ -71,7 +71,7 @@ const AddWordContainer = () => {
         <div className="form-row">
           <div className="col">
             <button
-              style={{ background: "#605c55" }}
+              style={{ background: "#6558F5" }}
               type="submit"
               className="btn float-right text-white"
               onClick={(e) => handleAddBtn(e)}
@@ -81,7 +81,7 @@ const AddWordContainer = () => {
           </div>
           <div className="col">
             <button
-              style={{ background: "#605c55" }}
+              style={{ background: "#6558F5" }}
               type="submit"
               className="btn text-white float-left"
               onClick={(e) => clear(e)}
