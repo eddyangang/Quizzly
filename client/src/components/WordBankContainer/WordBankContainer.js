@@ -4,9 +4,9 @@ import "./WordBankContainer.css";
 
 const WordBankContainer = () => {
   return (
-    <div className="card container-fluid mt-5 py-3">
+    <div className="card container-fluid mt-5 py-3 scroll">
       <h2>Word Bank</h2>
-      <table className="table table-bordered border-bark">
+      <table className="table table-bordered table-striped">
         <thead>
           <tr >
             <th className="text-center " scope="col-md-4">
