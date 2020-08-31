@@ -40,10 +40,12 @@ const ScoreContainer = () => {
           </tr>
         </thead>
 
-        <tr >
-          <td className="text-center m-0">{getUserList(users)}</td>
-          <td className="text-center m-0">{getUserScoreList(users)}</td>
-        </tr>
+      <tbody>
+          <tr >
+            <td className="text-center m-0">{getUserList(users)}</td>
+            <td className="text-center m-0">{getUserScoreList(users)}</td>
+          </tr>
+      </tbody>
 
 
       </table>

@@ -20,8 +20,8 @@ const Room = ({ location }) => {
     const [currentWord, setCurrentWord] = useState({});
     const [gameState, setGameState] = useState(false);
     const [isHost, setisHost] = useState(false)
-    const ENDPOINT = "http://localhost:5000";
-    // const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
+    // const ENDPOINT = "http://localhost:5000";
+    const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
 
     useEffect(() => {
 
@@ -70,6 +70,11 @@ const Room = ({ location }) => {
           setwordBank([...data.wordBank])
         });
 
+        socket.on("deleteWord", (data) => {
+          console.log("RECEIVED DATA WHEN DELETING WORDS");
+          setwordBank([...data.wordBank])
+        });
+
         socket.on("correctAnswerSubmitted", (roomData) => {
           setCurrentWord(roomData.currentWord)
           setUsers(roomData.users);
@@ -82,8 +87,8 @@ const Room = ({ location }) => {
 
         if(gameState && currentWord.word.trim().toLowerCase() === message.trim().toLowerCase()){
           console.log("right answer");
+          socket.emit('sendMessage', message, name, room, () => setMessage(''));
           socket.emit('correctAnswerSubmitted', message, name, room, (roomData) => {
-            setMessage('')
             console.log("UPDATED SCORE:", roomData);
             setCurrentWord(roomData.currentWord)
             setUsers(roomData.users)
@@ -124,6 +129,15 @@ const Room = ({ location }) => {
       });
     }
 
+    function deleteWord(flashcard, room) {
+      console.log("DELTE BUTTUN PRESSED");
+
+      socket.emit('deleteWord', flashcard, room, data => {
+        console.log("Word Deleted", data);
+        setwordBank(data.wordBank)
+      });
+    }
+
     function quizletAddWords (words) {
       socket.emit('addWord', words, room, data => {
         console.log("sent new word", data);
@@ -152,7 +166,7 @@ const Room = ({ location }) => {
       }
     }
     return (
-      <GameContext.Provider value={{users, name, room, messages, message, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords}}>
+      <GameContext.Provider value={{users, name, room, messages, message, isHost, setMessage, sendMessage, handleStartBtn, handleCancelBtn, addWord, wordBank, currentWord, setwordBank, quizletAddWords, deleteWord}}>
           {gameState ? returnGameContainer() : ( isHost ? <SettingsContainer /> : <div className="col-lg-8 col-md-8 col-sm-12"><WordBankContainer /></div>)}
             <Chat />
       </GameContext.Provider>

@@ -16,7 +16,8 @@ const {
   deleteRoom,
   suffledUnPlayedWords,
   setWordBankToUnPlayedWords,
-  resetScoreToZero
+  resetScoreToZero,
+  deleteWord
 } = require("./utilities/roomHelper")
 
 const router = require('./router');
@@ -118,6 +119,21 @@ io.on('connect', (socket) => {
       }
     })();
   });
+
+  socket.on("deleteWord", (flashCard, room, callback) => {
+    (async () => {
+      try {
+        const wordToDelete = flashCard;
+        const newRoomData = await deleteWord(room, wordToDelete);
+        socket.emit('deleteWord', newRoomData);
+        socket.broadcast.to(room).emit('deleteWord', newRoomData);
+        callback(newRoomData)
+      }
+      catch(err) {
+        throw err
+      }
+    })();
+  })
 
   socket.on("startGame", (callback) => {
     (async () => {
