@@ -1,7 +1,7 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-// const cors = require('cors');
+const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
 const {
@@ -51,8 +51,11 @@ if (process.env.NODE_ENV === "production") {
   console.log("this is production")
   app.use(express.static("client/build"));
 }
-
-// app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+app.use(cors());
 app.use(router);
 
 //built in method, runs when we have an instance of client connection

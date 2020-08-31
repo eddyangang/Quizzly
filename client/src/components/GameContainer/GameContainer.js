@@ -9,7 +9,7 @@ const GameContainer = (props) => {
   const guessedWord =message;
   const defaultCharacterToBeDisplay = ['!',' ','?','-','_']
   const getUnqiueCharacterFromWord = () => {
-    const arr = Array.from(word).sort().filter(x=> !defaultCharacterToBeDisplay.includes(x));
+    const arr = Array.from(word.toLowerCase()).sort().filter(x=> !defaultCharacterToBeDisplay.includes(x));
     const result = [arr[0]];
     for(var v = 1; v < arr.length; v++)
     {
@@ -47,6 +47,11 @@ const GameContainer = (props) => {
   }, 
   [charactersAlreadyDisplay]);
 
+  useEffect(() => {
+    const newValue = [];
+    addNewCharacterToCharactersAlreadyDisplay(newValue);
+  }, [currentWord]);
+  
   let key= 0;
   const getSpan = (char, array) => {
     if (word.toLowerCase() === guessedWord.toLowerCase())
@@ -54,7 +59,7 @@ const GameContainer = (props) => {
         <span key={key++}>
           <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>{" "}
           <span
-            className="text-success"
+            className="text-success font-weight-bold"
             style={{ textDecoration: "underline" }}
           >
             &nbsp;&nbsp;{char}&nbsp;&nbsp;
@@ -65,17 +70,17 @@ const GameContainer = (props) => {
     return (
       <span key={key++}>
         <span>&nbsp;&nbsp;&nbsp;</span>{" "}
-        <span>
+        <span className="text-bold">
         &nbsp;&nbsp;{char}&nbsp;&nbsp;
         </span>
       </span>
     );
-    else if (array.some((x) => char === x) )
+    else if (array.some((x) => char.toLowerCase() === x) )
         return (
           <span key={key++}>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>{" "}
             <span
-              className="text-warning"
+              className="text-primary font-weight-bold"
               style={{ textDecoration: "underline" }}
             >
               &nbsp;&nbsp;{char}&nbsp;&nbsp;
