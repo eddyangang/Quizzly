@@ -20,9 +20,9 @@ const Room = ({ location }) => {
     const [currentWord, setCurrentWord] = useState({});
     const [gameState, setGameState] = useState(false);
     const [isHost, setisHost] = useState(false)
-    // const ENDPOINT = "http://localhost:5000";
+    const ENDPOINT = "http://localhost:5000";
     // const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
-    const ENDPOINT = "https://enigmatic-springs-12174.herokuapp.com/"
+    // const ENDPOINT = "https://enigmatic-springs-12174.herokuapp.com/"
 
     useEffect(() => {
 
