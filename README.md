@@ -33,8 +33,7 @@ This game allows users to chat in real-time to guess the definition of words. It
 ## Installation
  * Download the Repo URL
 
- * In Terminal/Bash:
-  * 'git clone' the URL 
+ * In Terminal/Bash: 'git clone' the URL 
 
  * npm install
 
