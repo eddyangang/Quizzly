@@ -87,8 +87,8 @@ const Room = ({ location }) => {
 
         if(gameState && currentWord.word.trim().toLowerCase() === message.trim().toLowerCase()){
           console.log("right answer");
+          socket.emit('sendMessage', message, name, room, () => setMessage(''));
           socket.emit('correctAnswerSubmitted', message, name, room, (roomData) => {
-            setMessage('')
             console.log("UPDATED SCORE:", roomData);
             setCurrentWord(roomData.currentWord)
             setUsers(roomData.users)
