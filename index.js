@@ -51,7 +51,10 @@ if (process.env.NODE_ENV === "production") {
   console.log("this is production")
   app.use(express.static("client/build"));
 }
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 app.use(cors());
 app.use(router);
 
