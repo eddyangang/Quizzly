@@ -7,6 +7,6 @@ export default {
     },
 
     quizletScrap: function(url) {
-        return axios.post("/api/quizletscrap", { url })
+        return axios.post("/api/quizletScrap", { url })
     }
   };

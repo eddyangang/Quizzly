@@ -21,7 +21,8 @@ const Room = ({ location }) => {
     const [gameState, setGameState] = useState(false);
     const [isHost, setisHost] = useState(false)
     // const ENDPOINT = "http://localhost:5000";
-    const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
+    // const ENDPOINT = 'https://quizzlyisawesome.herokuapp.com/';
+    const ENDPOINT = "https://enigmatic-springs-12174.herokuapp.com/"
 
     useEffect(() => {
 
@@ -149,10 +150,10 @@ const Room = ({ location }) => {
     function returnGameContainer(){
       if (currentWord !== null && currentWord.word) {
         return (
-          <div className="container text-center">
-          <GameContainer /> 
+          <div className="container">
+          <GameContainer /> <p></p>
           <ScoreContainer />
-          {isHost ? (<button className="btn btn-danger m-1" onClick={handleCancelBtn}>Cancel</button>) : null}
+          {isHost ? (<center><button className="btn btn-danger m-1" onClick={handleCancelBtn}>Cancel</button></center>) : null}
           </div>
           ) 
       }
@@ -160,7 +161,7 @@ const Room = ({ location }) => {
         return (
           <div className="container">
           <ScoreContainer />
-          {isHost ? (<button className="btn btn-success m-1" onClick={handleCancelBtn}>Return</button>) : null}
+          {isHost ? (<center><button className="btn btn-success m-1" onClick={handleCancelBtn}>Return</button></center>) : null}
           </div>
         )
       }

@@ -10,7 +10,7 @@ const SettingsContainer = () => {
       <div className="col-lg-8 col-md-8 col-sm-12"><center>
         <button type="button" className="btn m-3 startButton glowEffect green purple-text" onClick={handleStartBtn}>Start Game</button></center>
         <AddWordContainer />
-        <WordBankContainer />
+        <WordBankContainer /><p></p>
       </div>
 
     );
