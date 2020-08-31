@@ -1,12 +1,25 @@
 <img src="./assets/Logo.png" width="400"><br>
 
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+![GitHub repo size](https://img.shields.io/github/repo-size/cofchips/Quizzly)
+
 ## Quizzly
 Quizzly is a real-time game that allows users to create and join different chatrooms as they try and guess the word to definitions displayed on screen.
+
+## Table of Contents
+* [Description](#description)
+* [Technology](#technology)
+* [Screenshots](#screenshots)
+* [Approach](#approach)
+* [Installation](#installation)
+* [Deployment](#deployment)
+* [Issues](#issues)
+* [Authors](#authors)
 
 ## Description
 This game allows users to chat in real-time to guess the definition of words. It can be for students who want to study together, teachers who want to have a user-friendly interface to teach their students definitions, and also friends who simply want to play a guessing game!
 
-##  Utilities/Libraries Used
+##  Technology
 
 * ReactJS 
 
@@ -25,10 +38,24 @@ This game allows users to chat in real-time to guess the definition of words. It
 <img src="./assets/technologies-collage.png" width="400"><br>
 
 
-
-
 ## Screenshots
 
+![Image](./assets/p3_non-host_join.gif)
+![Image](./assets/p3_gameplay_non-host.gif)
+
+## Approach
+
+### UI Design
+![Image](./assets/wireframe.png)
+
+### Leveraging socket.io to send information bi-directionally
+![Image](./assets/socket.png)
+
+### Managing Users
+![Image](./assets/user_management.png)
+
+### Managing Rooms
+![Image](./assets/room_management.png)
 
 ## Installation
  * Download the Repo URL
@@ -45,6 +72,13 @@ This game allows users to chat in real-time to guess the definition of words. It
 ## Deployment
 [Quizzly](http://quizzlyisawesome.herokuapp.com/) is deployed using Heroku and MongoDb Atlas for database
 
+## Issues
+
+Upon initial deployment, the team discovered that certain elements were transparent, despite having opacity set at 92%.
+
+![Image](./assets/transparent.png)
+
+The above illustrates a known bug where opacity is set to 1% upon deployment. To workaround this issue, opacity can be set as a decimal instead of a percentage.
 
 ## Authors
 
