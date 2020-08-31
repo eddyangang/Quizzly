@@ -19,7 +19,10 @@ export default function QuizletForm() {
 
     const handleSearch = (e) => {
         e.preventDefault()
+        console.log("quizlet search")
+        console.log("url", url.current.value)
         API.quizletScrap(url.current.value).then(data => {
+          console.log("quizlet data: ", data)
             data.data.forEach(word => {
                 word["subject"] = subject.current.value
             });
