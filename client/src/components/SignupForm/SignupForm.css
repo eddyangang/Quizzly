@@ -20,15 +20,19 @@ label {
 .btn-primary {
     color: #ffffff !important;
     border-color: #6558F5;
+    transition-duration: .2s !important;
+    transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }
 
 button:hover {
     color: #6558F5;
-    background-color: rgba(188, 188, 188, 0.674) !important;
-    transition-duration: .7s;
+    background-color: #848486 !important;
+    transition-duration: .3s;
+    transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }
   
 a:hover {
     color: #6558F5;
-    transition-duration: 1s;
+    transition-duration: .3s;
+    transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }

@@ -1,3 +1,10 @@
 .card {
     color: #6558F5 !important;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.scroll {
+    overflow-y: scroll;
+    height:25rem;
 }

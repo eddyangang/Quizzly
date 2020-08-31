@@ -1,7 +1,7 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-// const cors = require('cors');
+const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
 const {
@@ -16,7 +16,8 @@ const {
   deleteRoom,
   suffledUnPlayedWords,
   setWordBankToUnPlayedWords,
-  resetScoreToZero
+  resetScoreToZero,
+  deleteWord
 } = require("./utilities/roomHelper")
 
 const router = require('./router');
@@ -50,8 +51,11 @@ if (process.env.NODE_ENV === "production") {
   console.log("this is production")
   app.use(express.static("client/build"));
 }
-
-// app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+app.use(cors());
 app.use(router);
 
 //built in method, runs when we have an instance of client connection
@@ -108,7 +112,7 @@ io.on('connect', (socket) => {
   socket.on('addWord', (flashCard, room, callback) => {
     (async () => {
       try {
-        const wordToAdd = [flashCard]
+        const wordToAdd = flashCard
         const newRoomData = await addWordBank(wordToAdd, room);
         socket.emit('newWord', newRoomData);
         socket.broadcast.to(room).emit('newWord', newRoomData);
@@ -118,6 +122,21 @@ io.on('connect', (socket) => {
       }
     })();
   });
+
+  socket.on("deleteWord", (flashCard, room, callback) => {
+    (async () => {
+      try {
+        const wordToDelete = flashCard;
+        const newRoomData = await deleteWord(room, wordToDelete);
+        socket.emit('deleteWord', newRoomData);
+        socket.broadcast.to(room).emit('deleteWord', newRoomData);
+        callback(newRoomData)
+      }
+      catch(err) {
+        throw err
+      }
+    })();
+  })
 
   socket.on("startGame", (callback) => {
     (async () => {

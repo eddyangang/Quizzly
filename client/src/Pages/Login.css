@@ -1,6 +1,6 @@
 .col-lg-4 {
   border: 6px solid #6A59FE;
-  background-color: rgb(62, 62, 62);
+  background-color: #0E0E10;
   /* opacity: 92%; */
 }
 
@@ -11,16 +11,20 @@ a {
 
 a:hover {
   color: #ffffff;
-  transition-duration: 1s;
+  transition-duration: .3s;
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }
 
 .btn-primary {
   color: #6558F5 !important;
   border-color: #6558F5;
   background-color: white;
+  transition-duration: .2s !important;
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }
 
 button:hover {
   background-color: #DEDEE3;
-  transition-duration: .7s;
+  transition-duration: .3s;
+  transition: cubic-bezier(0.36, 0.4, 0.28, 1);
 }

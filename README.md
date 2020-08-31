@@ -1,10 +1,10 @@
 <img src="./assets/Logo.png" width="400"><br>
 
-### Quizzly
+## Quizzly
 Quizzly is a real-time game that allows users to create and join different chatrooms as they try and guess the word to definitions displayed on screen.
 
 ## Description
-This game allows users to chat in real-time to guess the definition of words. It can be for students who want to study together, teachers who want to have a friendly-interface to teach their students definitions, and also friends who simply want to play a guessing game!
+This game allows users to chat in real-time to guess the definition of words. It can be for students who want to study together, teachers who want to have a user-friendly interface to teach their students definitions, and also friends who simply want to play a guessing game!
 
 ##  Utilities/Libraries Used
 
@@ -24,11 +24,27 @@ This game allows users to chat in real-time to guess the definition of words. It
 
 <img src="./assets/technologies-collage.png" width="400"><br>
 
+
+
+
 ## Screenshots
 
+
+## Installation
+ * Download the Repo URL
+
+ * In Terminal/Bash: 'git clone' the URL 
+
+ * npm install
+
+ * npm start
+
+ * View On 'localhost:3000'
+
+
 ## Deployment
-application is deployed using Heroku and MongoDb Atlas for database
-[Deployed link](http://quizzlyisawesome.herokuapp.com/)
+[Quizzly](http://quizzlyisawesome.herokuapp.com/) is deployed using Heroku and MongoDb Atlas for database
+
 
 ## Authors
 

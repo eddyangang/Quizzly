@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import GameContext from "../../utils/GameContext"
+import QuizletForm from "../QuizletForm/QuizletForm"
 const AddWordContainer = () => {
 
   const { addWord } = useContext(GameContext)
@@ -24,8 +25,11 @@ const AddWordContainer = () => {
   };
 
   return (
-      <form className="card container-fluid py-3">
-        <h3>Add a Word</h3>
+    <form className="card container-fluid py-3">
+        <div className="d-flex row justify-content-between m-2">
+          <h3>Add a Word</h3>
+          <QuizletForm/>
+        </div>
         <hr/>
         <div className="form-row">
           <div className="col">
@@ -67,7 +71,7 @@ const AddWordContainer = () => {
         <div className="form-row">
           <div className="col">
             <button
-              style={{ background: "#605c55" }}
+              style={{ background: "#6558F5" }}
               type="submit"
               className="btn float-right text-white"
               onClick={(e) => handleAddBtn(e)}
@@ -77,7 +81,7 @@ const AddWordContainer = () => {
           </div>
           <div className="col">
             <button
-              style={{ background: "#605c55" }}
+              style={{ background: "#6558F5" }}
               type="submit"
               className="btn text-white float-left"
               onClick={(e) => clear(e)}
