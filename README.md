@@ -34,7 +34,7 @@ This game allows users to chat in real-time to guess the definition of words. It
  * Download the Repo URL
 
  * In Terminal/Bash:
-  * 'git clone git@github.com:eddyangang/Quizzly.git'
+  * 'git clone' the URL 
 
  * npm install
 
