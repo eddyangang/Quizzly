@@ -15,9 +15,6 @@ const Chat = () => {
   return (
 
     <div className="col-md-4">
-      {/* <div className="row">
-        <TextContainer users={users} />
-      </div> */}
 
       <div className="accordion" id="accordionExample">
         <div className="card rounded-0">
@@ -32,7 +29,6 @@ const Chat = () => {
           <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div className="card-body rounded-0">
               <TextContainer users={users} />
-
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 // import Score from "../ScoreItem/ScoreItem" //might use this to display score
 import GameContext from "../../utils/GameContext"
-
+import "./ScoreContainer.css";
 
 
 const ScoreContainer = () => {
@@ -30,8 +30,8 @@ const ScoreContainer = () => {
 
   return (
     //holds the score table
-    <div className="card m-3">
-      <h2>Score Board</h2>
+    <div className="card">
+      <center><h2>Score Board</h2></center>
       <table className="table table-bordered border-purple">
         <thead>
           <tr >
