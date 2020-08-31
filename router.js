@@ -27,7 +27,7 @@ router.get("/api/rooms", (req, res) => {
   })
 })
 
-router.post("/api/quizletScrap/", (req, res) => {
+router.post("/api/quizletscrap", (req, res) => {
   const{ url } = req.body
   console.log("URL:", url);
   quizletScrap(url).then((results) => {
