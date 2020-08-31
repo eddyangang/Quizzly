@@ -33,11 +33,11 @@
   width: 100%;
 }
 
-@media (min-width: 320px) and (max-width: 1200px) {
+/* @media (min-width: 320px) and (max-width: 1200px) {
   .textContainer {
     display: none;
   }
-}
+} */
 
 .playername{
   color: black
